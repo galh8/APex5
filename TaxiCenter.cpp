@@ -207,9 +207,6 @@ void TaxiCenter::linkDriversTrips(int currentTime) {
  * running all the trips (that has a driver).
  */
 void TaxiCenter::runAllTrips(int currentTime) {
-        int i;
-        char buffer[1024];
-        int toMove ;
         for (int i = 0; i < driversList.size(); i++) {
             if (driversList[i]->isOccupied()) {
                 globalOperation[driversList[i]->getID()]->push(1);
