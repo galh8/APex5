@@ -168,7 +168,7 @@ int main(int argc, char *argv[])  {
                     s4(device2);
             boost::archive::binary_iarchive ib(s4);
             ib >> tripInfo;
-            cout<<"The second trip received and its starting point is: "<< tripInfo->getStartingPoint()->valueString()<<endl;
+//            cout<<"The second trip received and its starting point is: "<< tripInfo->getStartingPoint()->valueString()<<endl;
             //assigning the trip to the driver.
             if(tripInfo != NULL){
                 driver->setOccupied(true);

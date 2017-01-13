@@ -218,7 +218,7 @@ void* insertDriverSendCab(void *cArgs) {
     sleep(1);
     while (true) {
         if(globalOperation[driver->getID()]->size()!=0) {
-            cout<<"HALLELUYAH!" <<globalOperation[driver->getID()]->size()<<endl;
+//            cout<<"HALLELUYAH!" <<globalOperation[driver->getID()]->size()<<endl;
             int operToDo = globalOperation[driver->getID()]->front();
             globalOperation[driver->getID()]->pop();
             switch (operToDo) {
