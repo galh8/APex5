@@ -18,10 +18,16 @@ int ClientThreadArgs::getServerPort()  {
 }
 
 
-ClientThreadArgs::ClientThreadArgs(TaxiCenter *taxiCenter, int socketPort) : taxiCenter(taxiCenter),
-                                                                             serverPort(socketPort){}
+ClientThreadArgs::ClientThreadArgs(TaxiCenter *taxiCenter, int socketPort,int numberOfClients) :
+        taxiCenter(taxiCenter),
+        serverPort(socketPort),
+        numberOfClients(numberOfClients){}
 
 void ClientThreadArgs::setSocket(Socket *socket) {
     ClientThreadArgs::server = socket;
+}
+
+int ClientThreadArgs::getNumberOfClients(){
+    return numberOfClients;
 }
 

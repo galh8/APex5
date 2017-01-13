@@ -62,9 +62,10 @@ int main(int argc,char* argv[]) {
 
         switch (command) {
             case 1: {
-
+                int numberOfClients;
+                cin >> numberOfClients;
                 int port = atoi(argv[1]);
-                ClientThreadArgs *cArgs = new ClientThreadArgs(taxiCenter, port);
+                ClientThreadArgs *cArgs = new ClientThreadArgs(taxiCenter, port, numberOfClients);
                 int status = pthread_create(&clientsReceiver, NULL, getNewClients, (void *) cArgs);
 
                 break;
@@ -140,8 +141,9 @@ void* getNewClients(void* cArgs) {
     server->initialize();
     clientArgs->setSocket(server);
     int goodReception;
+    int numberOfClients = clientArgs->getNumberOfClients();
 //    cout << "Connection with " << server->getSocketDescriptor() << " established!" << endl;
-    for(int i=0;i<3;++i) {
+    for(int i=0; i < numberOfClients ;++i) {
         goodReception= server->acceptClient();
         if (goodReception < 0) {
             //return an error represent error at this method

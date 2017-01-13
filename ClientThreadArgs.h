@@ -14,16 +14,19 @@ class ClientThreadArgs {
     TaxiCenter *taxiCenter;
     Socket *server;
     int serverPort;
+    int numberOfClients;
 public:
+    int getNumberOfClients();
+
     void setSocket(Socket *socket);
 
     int getServerPort() ;
 
-    ClientThreadArgs(TaxiCenter *taxiCenter, int socketPort);
+    ClientThreadArgs(TaxiCenter *taxiCenter, int socketPort,int numberOfClients);
 
-    TaxiCenter *getTaxiCenter() ;
+    TaxiCenter *getTaxiCenter();
 
-    Socket *getServer() ;
+    Socket *getServer();
 
 
 };
