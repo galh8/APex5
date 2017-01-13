@@ -247,7 +247,8 @@ void* insertDriverSendCab(void *cArgs) {
                 }
                 case 2: {
                     socket->sendData(std::to_string(operToDo));
-                    usleep(1);
+                    //dummy receive..
+                    socket->reciveData(buffer, sizeof(buffer));
                     TripInfo *tripToSend = globalTripsMap[driver->getID()];
 
                     //serialize the trip info
@@ -256,6 +257,7 @@ void* insertDriverSendCab(void *cArgs) {
                     boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> >
                             s1(inserter1);
                     boost::archive::binary_oarchive oa(s1);
+
 
                     oa << tripToSend;
                     s1.flush();
