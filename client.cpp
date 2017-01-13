@@ -129,8 +129,8 @@ int main(int argc, char *argv[])  {
         //reicives a command to server operation variable.
         int dummy = 10;
         client->reciveData(buffer, sizeof(buffer));
-        client->sendData(std::to_string(dummy));
-        //usleep(1);
+        //client->sendData(std::to_string(dummy));
+        sleep(1);
         serverOperation = atoi(buffer);
 
 
@@ -155,7 +155,7 @@ int main(int argc, char *argv[])  {
                     s6.flush();
                     //sending the location of the driver after moving
                     client->sendData(serial_str3);
-                    //usleep(1);
+                    sleep(1);
 
                 }else {
                     delete(driver->getCurrentTrip());
@@ -167,7 +167,7 @@ int main(int argc, char *argv[])  {
         } else if(serverOperation==2) { //we need to set a new trip info.
             //expecting a tripInfo.
             client->reciveData(buffer, sizeof(buffer));
-            client->sendData(std::to_string(dummy));
+            //client->sendData(std::to_string(dummy));
 
             string str2(buffer, sizeof(buffer));
             TripInfo* tripInfo;
