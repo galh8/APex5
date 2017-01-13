@@ -248,7 +248,7 @@ void* insertDriverSendCab(void *cArgs) {
                 case 2: {
                     socket->sendData(std::to_string(operToDo));
                     //dummy receive..
-                    socket->reciveData(buffer, sizeof(buffer));
+                    socket->reciveData(emptyBuffer, sizeof(emptyBuffer));
                     TripInfo *tripToSend = globalTripsMap[driver->getID()];
 
                     //serialize the trip info
@@ -265,7 +265,7 @@ void* insertDriverSendCab(void *cArgs) {
                     socket->sendData(serial_str1);
                     //usleep(1);
                     //dummy receive..
-                    socket->reciveData(buffer, sizeof(buffer));
+                    socket->reciveData(emptyBuffer, sizeof(emptyBuffer));
 
                     break;
                 }
