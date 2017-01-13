@@ -185,7 +185,6 @@ void* insertDriverSendCab(void *cArgs) {
     socket->reciveData(buffer, sizeof(buffer));
     usleep(1);
     driverVehicleID = atoi(buffer);
-    //cout << "AFTER SECOND RECEIVE! "<<endl;
     //TODO lock this with mutex.
     globalOperation[driver->getID()] =new queue<int>;
     taxiCenter->addDriver(driver,driverVehicleID);
@@ -226,6 +225,7 @@ void* insertDriverSendCab(void *cArgs) {
                     usleep(1);
                     //receiving the new location of the driver.
                     socket->reciveData(buffer, sizeof(buffer));
+                    usleep(1);
                     string str(buffer, sizeof(buffer));
                     Node *newLocation;
                     boost::iostreams::basic_array_source<char> device1(str.c_str(),
@@ -259,6 +259,7 @@ void* insertDriverSendCab(void *cArgs) {
                     s1.flush();
                     //sending the trip info
                     socket->sendData(serial_str1);
+                    usleep(1);
 
                     break;
                 }
