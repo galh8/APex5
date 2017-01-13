@@ -224,10 +224,10 @@ void* insertDriverSendCab(void *cArgs) {
             switch (operToDo) {
                 case 1: {
                     socket->sendData(std::to_string(operToDo));
-                    //usleep(1);
+                    sleep(1);
                     //receiving the new location of the driver.
                     socket->reciveData(buffer, sizeof(buffer));
-                    //usleep(1);
+                    sleep(1);
                     string str(buffer, sizeof(buffer));
                     Node *newLocation;
                     boost::iostreams::basic_array_source<char> device1(str.c_str(),
@@ -248,7 +248,8 @@ void* insertDriverSendCab(void *cArgs) {
                 case 2: {
                     socket->sendData(std::to_string(operToDo));
                     //dummy receive..
-                    socket->reciveData(emptyBuffer, sizeof(emptyBuffer));
+                    socket->reciveData(buffer, sizeof(buffer));
+                    sleep(1);
                     TripInfo *tripToSend = globalTripsMap[driver->getID()];
 
                     //serialize the trip info
@@ -263,9 +264,8 @@ void* insertDriverSendCab(void *cArgs) {
                     s1.flush();
                     //sending the trip info
                     socket->sendData(serial_str1);
-                    //usleep(1);
-                    //dummy receive..
-                    socket->reciveData(emptyBuffer, sizeof(emptyBuffer));
+                    sleep(1);
+
 
                     break;
                 }
