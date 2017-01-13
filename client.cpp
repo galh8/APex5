@@ -156,7 +156,6 @@ int main(int argc, char *argv[])  {
                     //sending the location of the driver after moving
                     client->sendData(serial_str3);
                     //usleep(1);
-                    client->reciveData(dummyBuffer, sizeof(dummyBuffer));
 
                 }else {
                     delete(driver->getCurrentTrip());
