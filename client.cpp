@@ -44,7 +44,6 @@ int main(int argc, char *argv[])  {
     char buffer[1024]="";
     char emptyBuffer[1024]="";
     char emptyBuffer2[1024]="";
-    char dummyBuffer[1024]="";
 
     //indicates if the drivers needs to move
     int serverOperation;
@@ -127,14 +126,9 @@ int main(int argc, char *argv[])  {
  */
     while (true){
         //reicives a command to server operation variable.
-        int dummy = 10;
         client->reciveData(buffer, sizeof(buffer));
-        //client->sendData(std::to_string(dummy));
         sleep(1);
         serverOperation = atoi(buffer);
-
-
-
 
         // 1 means - move!
         if (serverOperation == 1) {
@@ -156,7 +150,6 @@ int main(int argc, char *argv[])  {
                     //sending the location of the driver after moving
                     client->sendData(serial_str3);
                     sleep(1);
-
                 }else {
                     delete(driver->getCurrentTrip());
                     driver->setOccupied(false);
@@ -167,8 +160,7 @@ int main(int argc, char *argv[])  {
         } else if(serverOperation==2) { //we need to set a new trip info.
             //expecting a tripInfo.
             client->reciveData(buffer, sizeof(buffer));
-            //client->sendData(std::to_string(dummy));
-
+            sleep(1);
             string str2(buffer, sizeof(buffer));
             TripInfo* tripInfo;
             boost::iostreams::basic_array_source<char> device2(str2.c_str(), str2.size());
@@ -176,7 +168,6 @@ int main(int argc, char *argv[])  {
                     s4(device2);
             boost::archive::binary_iarchive ib(s4);
             ib >> tripInfo;
-//            cout<<"The second trip received and its starting point is: "<< tripInfo->getStartingPoint()->valueString()<<endl;
             //assigning the trip to the driver.
             if(tripInfo != NULL){
                 driver->setOccupied(true);

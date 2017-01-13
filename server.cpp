@@ -62,10 +62,9 @@ int main(int argc,char* argv[]) {
 
         switch (command) {
             case 1: {
-                int numberOfClients;
-                cin >> numberOfClients;
+
                 int port = atoi(argv[1]);
-                ClientThreadArgs *cArgs = new ClientThreadArgs(taxiCenter, port, numberOfClients);
+                ClientThreadArgs *cArgs = new ClientThreadArgs(taxiCenter, port);
                 int status = pthread_create(&clientsReceiver, NULL, getNewClients, (void *) cArgs);
 
                 break;
@@ -141,9 +140,8 @@ void* getNewClients(void* cArgs) {
     server->initialize();
     clientArgs->setSocket(server);
     int goodReception;
-    int numberOfClients = clientArgs->getNumberOfClients();
 //    cout << "Connection with " << server->getSocketDescriptor() << " established!" << endl;
-    for(int i=0; i < numberOfClients ;++i) {
+    for(int i=0;i<3;++i) {
         goodReception= server->acceptClient();
         if (goodReception < 0) {
             //return an error represent error at this method
@@ -215,10 +213,10 @@ void* insertDriverSendCab(void *cArgs) {
     s1.flush();
     //sending the cab
     socket->sendData(serial_str1);
-    usleep(1);
+    usleep(200);
     while (true) {
         if(globalOperation[driver->getID()]->size()!=0) {
-//            cout<<"HALLELUYAH!" <<globalOperation[driver->getID()]->size()<<endl;
+            cout<<"HALLELUYAH!" <<globalOperation[driver->getID()]->size()<<endl;
             int operToDo = globalOperation[driver->getID()]->front();
             globalOperation[driver->getID()]->pop();
             switch (operToDo) {
@@ -247,8 +245,6 @@ void* insertDriverSendCab(void *cArgs) {
                 }
                 case 2: {
                     socket->sendData(std::to_string(operToDo));
-                    //dummy receive..
-                    socket->reciveData(buffer, sizeof(buffer));
                     sleep(1);
                     TripInfo *tripToSend = globalTripsMap[driver->getID()];
 
@@ -258,7 +254,6 @@ void* insertDriverSendCab(void *cArgs) {
                     boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> >
                             s1(inserter1);
                     boost::archive::binary_oarchive oa(s1);
-
 
                     oa << tripToSend;
                     s1.flush();
