@@ -12,18 +12,18 @@
 class ClientThreadArgs {
     private:
     TaxiCenter *taxiCenter;
-    Socket *socket;
-    int socketPort;
+    Socket *server;
+    int serverPort;
 public:
     void setSocket(Socket *socket);
 
-    int getSocketPort() ;
+    int getServerPort() ;
 
     ClientThreadArgs(TaxiCenter *taxiCenter, int socketPort);
 
     TaxiCenter *getTaxiCenter() ;
 
-    Socket *getSocket() ;
+    Socket *getServer() ;
 
 
 };

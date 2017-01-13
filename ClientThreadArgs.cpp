@@ -8,20 +8,20 @@ TaxiCenter *ClientThreadArgs::getTaxiCenter()  {
     return taxiCenter;
 }
 
-Socket *ClientThreadArgs::getSocket()  {
-    return socket;
+Socket *ClientThreadArgs::getServer()  {
+    return server;
 }
 
 
-int ClientThreadArgs::getSocketPort()  {
-    return socketPort;
+int ClientThreadArgs::getServerPort()  {
+    return serverPort;
 }
 
 
 ClientThreadArgs::ClientThreadArgs(TaxiCenter *taxiCenter, int socketPort) : taxiCenter(taxiCenter),
-                                                                                             socketPort(socketPort){}
+                                                                             serverPort(socketPort){}
 
 void ClientThreadArgs::setSocket(Socket *socket) {
-    ClientThreadArgs::socket = socket;
+    ClientThreadArgs::server = socket;
 }
 

@@ -136,7 +136,7 @@ int main(int argc,char* argv[]) {
 //Main thread for receiving new client connections.
 void* getNewClients(void* cArgs) {
     ClientThreadArgs *clientArgs = ((ClientThreadArgs*)cArgs);
-    Socket *server = new Tcp(1, clientArgs->getSocketPort());
+    Socket *server = new Tcp(1, clientArgs->getServerPort());
     server->initialize();
     clientArgs->setSocket(server);
     int goodReception;
@@ -153,9 +153,9 @@ void* getNewClients(void* cArgs) {
             if(status) {
                 cout<<"ERROR! ";
             }
-            sockThreads[clientArgs->getSocket()->getSocketDescriptor()] = myThread ;
+            sockThreads[clientArgs->getServer()->getSocketDescriptor()] = myThread ;
             pthread_join(myThread,NULL);
-            //delete (clientArgs->getSocket());
+            //delete (clientArgs->getServer());
             //cout << "Connection with " << server->getSocketDescriptor() << " established!" << endl;
         }
     }
@@ -166,7 +166,7 @@ void* insertDriverSendCab(void *cArgs) {
     TaxiCenter *taxiCenter = clientArgs->getTaxiCenter();
     int driverVehicleID;
     Driver *driver;
-    Socket *socket = clientArgs->getSocket();
+    Socket *socket = clientArgs->getServer();
     char buffer[1024]="";
     char emptyBuffer[1024]="";
 
