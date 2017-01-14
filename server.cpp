@@ -135,6 +135,7 @@ int main(int argc,char* argv[]) {
                 ++timePassed;
                 mtx.unlock();
                 break;
+
             }
 
             }
@@ -185,6 +186,7 @@ void* getNewClients(void* cArgs) {
 
 void* insertDriverSendCab(void *cArgs) {
     ClientThreadArgs *clientArgs = ((ClientThreadArgs*)cArgs);
+
     TaxiCenter *taxiCenter = clientArgs->getTaxiCenter();
     int driverVehicleID;
     Driver *driver;
@@ -210,10 +212,13 @@ void* insertDriverSendCab(void *cArgs) {
     driverVehicleID = atoi(buffer);
     //TODO lock this with mutex.
     globalOperation[driver->getID()] =new queue<int>;
+    mtx.lock();
     taxiCenter->addDriver(driver,driverVehicleID);
+    mtx.unlock();
     cout << "the driver is "<<driver->getID()<<" added successfully to our station! "<<endl;
-
+    mtx.lock();
     Node* driverLocation = taxiCenter->getDriverLocation(driver->getID());
+    mtx.unlock();
     //serialize the location of the driver on the grid.
     std::string serial_str3;
     boost::iostreams::back_insert_device<std::string> inserter7(serial_str3);
@@ -240,8 +245,10 @@ void* insertDriverSendCab(void *cArgs) {
     while (true) {
         if(globalOperation[driver->getID()]->size()!=0) {
             cout<<"HALLELUYAH!" <<globalOperation[driver->getID()]->size()<<endl;
+            mtx.lock();
             int operToDo = globalOperation[driver->getID()]->front();
             globalOperation[driver->getID()]->pop();
+            mtx.unlock();
             switch (operToDo) {
                 case 1: {
                     socket->sendData(std::to_string(operToDo),socketDes);
@@ -258,33 +265,33 @@ void* insertDriverSendCab(void *cArgs) {
                     boost::archive::binary_iarchive ia(s2);
                     ia >> newLocation;
                     //Setting the new location of the driver.
+                    mtx.lock();
                     driver->setLocation(newLocation);
                     if ((*((Point *) driver->getLocation()->getValue())) ==
                         *((Point *) (driver->getCurrentTrip()->getEndingPoint()->getValue()))) {
                         driver->setOccupied(false);
                         driver->setTripInfo(NULL);
                     }
+                    mtx.unlock();
                     break;
                 }
                 case 2: {
                     socket->sendData(std::to_string(operToDo),socketDes);
                     sleep(1);
+                    mtx.lock();
                     TripInfo *tripToSend = globalTripsMap[driver->getID()];
-
+                    mtx.unlock();
                     //serialize the trip info
                     std::string serial_str1;
                     boost::iostreams::back_insert_device<std::string> inserter1(serial_str1);
                     boost::iostreams::stream<boost::iostreams::back_insert_device<std::string> >
                             s1(inserter1);
                     boost::archive::binary_oarchive oa(s1);
-
                     oa << tripToSend;
                     s1.flush();
                     //sending the trip info
                     socket->sendData(serial_str1,socketDes);
                     sleep(1);
-
-
                     break;
                 }
             }
