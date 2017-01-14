@@ -31,7 +31,10 @@ BOOST_CLASS_EXPORT_GUID(StandardCab,"StandardCab")
 
 int main(int argc, char *argv[])  {
     Socket* client = new Tcp(0, atoi(argv[1]));
+    int dummyNum = 0;
     client->initialize();
+
+
 
     //Dummy variable for getting the ',' and '_'
     char dummy;
@@ -73,15 +76,15 @@ int main(int argc, char *argv[])  {
     s1.flush();
 
     //sending the driver
-    client->sendData(serial_str1);
+    client->sendData(serial_str1,dummyNum);
     usleep(1);
     //cout<<"After first send! "<<endl;
     //sending the vehicleID
-    client->sendData(std::to_string(driverVehicleID));
+    client->sendData(std::to_string(driverVehicleID),dummyNum);
     usleep(1);
     //cout<<"After second send! "<<endl;
     //expecting a location
-    client->reciveData(emptyBuffer, sizeof(emptyBuffer));
+    client->reciveData(emptyBuffer, sizeof(emptyBuffer),dummyNum);
     usleep(1);
     //cout<<"After first receive! "<<endl;
     //receiving his location
@@ -99,7 +102,7 @@ int main(int argc, char *argv[])  {
 
 
     //expecting a taxi
-    client->reciveData(emptyBuffer2, sizeof(emptyBuffer2));
+    client->reciveData(emptyBuffer2, sizeof(emptyBuffer2),dummyNum);
     usleep(1);
     //cout<<"After second receive! "<<endl;
     //receiving the taxi cab of the driver.
@@ -126,7 +129,7 @@ int main(int argc, char *argv[])  {
  */
     while (true){
         //reicives a command to server operation variable.
-        client->reciveData(buffer, sizeof(buffer));
+        client->reciveData(buffer, sizeof(buffer),dummyNum);
         sleep(1);
         serverOperation = atoi(buffer);
 
@@ -148,7 +151,7 @@ int main(int argc, char *argv[])  {
                     ob << driverLocation;
                     s6.flush();
                     //sending the location of the driver after moving
-                    client->sendData(serial_str3);
+                    client->sendData(serial_str3,dummyNum);
                     sleep(1);
                 }else {
                     delete(driver->getCurrentTrip());
@@ -159,7 +162,7 @@ int main(int argc, char *argv[])  {
             //if server operation = 2 the program expecting to get new trip
         } else if(serverOperation==2) { //we need to set a new trip info.
             //expecting a tripInfo.
-            client->reciveData(buffer, sizeof(buffer));
+            client->reciveData(buffer, sizeof(buffer),dummyNum);
             sleep(1);
             string str2(buffer, sizeof(buffer));
             TripInfo* tripInfo;

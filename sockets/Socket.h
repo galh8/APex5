@@ -14,6 +14,7 @@
 #include <cstring>
 #include <iostream>
 #include <string>
+
 using namespace std;
 
 //return values to each function if error happened
@@ -32,7 +33,6 @@ using namespace std;
 
 class Socket {
 protected:
-
 	//true is the socket is for a server, false if for a client
 	bool isServer;
 	//the socket descriptor return from sock()
@@ -50,6 +50,7 @@ public:
 	* The Function operation: creating new Socket object			       *
 	***********************************************************************/
 	Socket();
+
 	/***********************************************************************
 	* function name: ~Socket											   *
 	* The Input: none													   *
@@ -72,7 +73,7 @@ public:
 	* The Function operation: sending the input data to the socket         *
 	* who connect to this socket. pure virtual method					   *
 	***********************************************************************/
-	virtual int sendData(string data) = 0;
+	virtual int sendData(string data, int clientDescriptor) = 0;
 	/***********************************************************************
 	* function name: recive	`											   *
 	* The Input: none										               *
@@ -80,7 +81,7 @@ public:
 	* The Function operation: getting data from the other socket and print *
 	* the data															   *
 	***********************************************************************/
-	virtual int reciveData(char* buffer, int size) = 0;
+	virtual int reciveData(char* buffer, int size, int clientDescriptor) = 0;
 
     /***********************************************************************
     * function name: getSocketDescriptor	`											   *
@@ -88,9 +89,7 @@ public:
     * The output: int number representing the socket descriptor            *
     * The Function operation: returning the socket descriptor (integer).									   *
     ***********************************************************************/
-    virtual int getSocketDescriptor() = 0;
-
-    virtual int acceptClient() = 0;
+    virtual int acceptOneClient() = 0;
 
 };
 

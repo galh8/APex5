@@ -14,6 +14,7 @@
 #include "LuxuryCab.h"
 #include "StandardCab.h"
 #include "ClientThreadArgs.h"
+
 //declerations:
 
 //declerations:
@@ -140,22 +141,25 @@ void* getNewClients(void* cArgs) {
     Socket *server = new Tcp(1, clientArgs->getServerPort());
     int numberOfClients = clientArgs->getNumberOfClients();
     server->initialize();
-    clientArgs->setSocket(server);
+    clientArgs->setServer(server);
     int goodReception;
 //    cout << "Connection with " << server->getSocketDescriptor() << " established!" << endl;
     for(int i=0; i<numberOfClients ;++i) {
-        goodReception= server->acceptClient();
+        goodReception= server->acceptOneClient();
+
+        //clones the original ClientThreadArgs and set a new socketDescriptor.
+
         if (goodReception < 0) {
             //return an error represent error at this method
             cout << "Connection not established!" << endl;
         }else {
             pthread_t myThread;
-
-            int status = pthread_create(&myThread, NULL, insertDriverSendCab, (void *) cArgs);
+            ClientThreadArgs *newClient = new ClientThreadArgs(clientArgs,goodReception);
+            int status = pthread_create(&myThread, NULL, insertDriverSendCab, (void *) newClient);
             if(status) {
                 cout<<"ERROR! ";
             }
-            sockThreads[clientArgs->getServer()->getSocketDescriptor()] = myThread ;
+            sockThreads[newClient->getSocketDes()] = myThread ;
             pthread_join(myThread,NULL);
             //delete (clientArgs->getServer());
             //cout << "Connection with " << server->getSocketDescriptor() << " established!" << endl;
@@ -169,11 +173,12 @@ void* insertDriverSendCab(void *cArgs) {
     int driverVehicleID;
     Driver *driver;
     Socket *socket = clientArgs->getServer();
+    int socketDes = clientArgs->getSocketDes();
     char buffer[1024]="";
     char emptyBuffer[1024]="";
 
     //receive the serialized driver from the client.
-    socket->reciveData(buffer, sizeof(buffer));
+    socket->reciveData(buffer, sizeof(buffer),socketDes);
 
     usleep(1);
     string str2(buffer, sizeof(buffer));
@@ -184,7 +189,7 @@ void* insertDriverSendCab(void *cArgs) {
     ib >> driver;
 
     //receive the serialized vehicleID from the client.
-    socket->reciveData(buffer, sizeof(buffer));
+    socket->reciveData(buffer, sizeof(buffer),socketDes);
     usleep(1);
     driverVehicleID = atoi(buffer);
     //TODO lock this with mutex.
@@ -202,7 +207,7 @@ void* insertDriverSendCab(void *cArgs) {
     o << driverLocation;
     s4.flush();
     //sending the location
-    socket->sendData(serial_str3);
+    socket->sendData(serial_str3,socketDes);
     usleep(1);
     //serialize the info of the driver(the client).
     std::string serial_str1;
@@ -214,7 +219,7 @@ void* insertDriverSendCab(void *cArgs) {
     oa << taxiCab;
     s1.flush();
     //sending the cab
-    socket->sendData(serial_str1);
+    socket->sendData(serial_str1,socketDes);
     usleep(200);
     while (true) {
         if(globalOperation[driver->getID()]->size()!=0) {
@@ -223,10 +228,10 @@ void* insertDriverSendCab(void *cArgs) {
             globalOperation[driver->getID()]->pop();
             switch (operToDo) {
                 case 1: {
-                    socket->sendData(std::to_string(operToDo));
+                    socket->sendData(std::to_string(operToDo),socketDes);
                     sleep(1);
                     //receiving the new location of the driver.
-                    socket->reciveData(buffer, sizeof(buffer));
+                    socket->reciveData(buffer, sizeof(buffer),socketDes);
                     sleep(1);
                     string str(buffer, sizeof(buffer));
                     Node *newLocation;
@@ -246,7 +251,7 @@ void* insertDriverSendCab(void *cArgs) {
                     break;
                 }
                 case 2: {
-                    socket->sendData(std::to_string(operToDo));
+                    socket->sendData(std::to_string(operToDo),socketDes);
                     sleep(1);
                     TripInfo *tripToSend = globalTripsMap[driver->getID()];
 
@@ -260,7 +265,7 @@ void* insertDriverSendCab(void *cArgs) {
                     oa << tripToSend;
                     s1.flush();
                     //sending the trip info
-                    socket->sendData(serial_str1);
+                    socket->sendData(serial_str1,socketDes);
                     sleep(1);
 
 

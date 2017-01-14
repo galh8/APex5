@@ -27,7 +27,7 @@ set(SOURCE_FILES Driver.cpp Driver.h DriverSatisfaction.cpp DriverSatisfaction.h
 
 
 add_executable(server  server.cpp ${SOURCE_FILES} ClientThreadArgs.cpp ClientThreadArgs.h)
-add_executable(client client.cpp ${SOURCE_FILES})
+add_executable(client client.cpp ${SOURCE_FILES}  ClientThreadArgs.cpp ClientThreadArgs.h)
 target_link_libraries(server ${Boost_LIBRARIES})
 target_link_libraries(client ${Boost_LIBRARIES})
 target_link_libraries(server Threads::Threads)

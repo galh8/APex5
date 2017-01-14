@@ -8,6 +8,7 @@
 
 #include "Socket.h"
 
+
 class Tcp: public Socket {
 private:
 	int descriptorCommunicateClient;
@@ -19,6 +20,7 @@ public:
 	* The Function operation: creating new Tcp						       *
 	***********************************************************************/
 	Tcp(bool isServers, int port_num);
+
 	/***********************************************************************
 	* function name: ~Tcp												   *
 	* The Input: none													   *
@@ -41,7 +43,7 @@ public:
 	* The Function operation: sending the input data to the socket         *
 	* who connect to this socket. 										   *
 	***********************************************************************/
-	int sendData(string data);
+	int sendData(string data, int clientDescriptor);
 	/***********************************************************************
 	* function name: recive	`											   *
 	* The Input: none										               *
@@ -49,7 +51,7 @@ public:
 	* The Function operation: getting data from the other socket and print *
 	* the data															   *
 	***********************************************************************/
-	int reciveData(char* buffer, int size);
+	int reciveData(char* buffer, int size, int clientDescriptor);
 
     /***********************************************************************
     * function name: getSocketDescriptor	`											   *
@@ -57,9 +59,8 @@ public:
     * The output: int number representing the socket descriptor            *
     * The Function operation: returning the socket descriptor (integer).									   *
     ***********************************************************************/
-    int getSocketDescriptor();
 
-    int acceptClient();
+    int acceptOneClient();
 };
 
 #endif /* TCP_H_ */
