@@ -14,6 +14,9 @@
 #include "LuxuryCab.h"
 #include "StandardCab.h"
 #include "ClientThreadArgs.h"
+#include <mutex>
+
+std::mutex mtx;           // mutex for critical sectio
 
 //declerations:
 
@@ -74,6 +77,7 @@ int main(int argc,char* argv[]) {
 
 
             case 2: {
+                mtx.lock();
                 cin >> tripID;
                 cin >> dummy;
                 cin >> tripStart_x;
@@ -91,10 +95,12 @@ int main(int argc,char* argv[]) {
                 cin >> tripStartTime;
                 taxiCenter->receiveTripInfo(tripID, tripStart_x, tripStart_y, tripEnd_x,
                                             tripEnd_y, tripNumPassengers, tripTariff, tripStartTime);
+                mtx.unlock();
                 break;
             }
 
             case 3: {
+                mtx.lock();
                 cin >> vehicleID;
                 cin >> dummy;
                 cin >> vehicleType;
@@ -103,24 +109,34 @@ int main(int argc,char* argv[]) {
                 cin >> dummy;
                 cin >> vehicleColor;
                 taxiCenter->addTaxi(vehicleID, vehicleType, vehicleManufacturer, vehicleColor);
+                mtx.unlock();
                 break;
+
             }
             case 4: {
+                mtx.lock();
                 //the id of the driver we want to find.
                 cin >> driverID_toFind;
                 cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
+                mtx.unlock();
                 break;
             }
             case 7: {
+                mtx.lock();
                 for(int i=0;i<taxiCenter->getDriversList().size(); i++) {
                     globalOperation[taxiCenter->getDriversList()[i]->getID()]->push(4);
                 }
-                case 9: {
-                    taxiCenter->linkDriversTrips(timePassed);
-                    taxiCenter->runAllTrips(timePassed);
-                    ++timePassed;
-                    break;
-                }
+                mtx.unlock();
+
+            case 9: {
+                mtx.lock();
+                taxiCenter->linkDriversTrips(timePassed);
+                taxiCenter->runAllTrips(timePassed);
+                ++timePassed;
+                mtx.unlock();
+                break;
+            }
+
             }
 
 
