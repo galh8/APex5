@@ -214,9 +214,7 @@ void* BFS_calculator(void *cArgs) {
     globalOperation[driver->getID()] =new queue<int>;
     mtx.lock();
     taxiCenter->addDriver(driver,driverVehicleID);
-    mtx.unlock();
     cout << "the driver is "<<driver->getID()<<" added successfully to our station! "<<endl;
-    mtx.lock();
     Node* driverLocation = taxiCenter->getDriverLocation(driver->getID());
     mtx.unlock();
     //serialize the location of the driver on the grid.
