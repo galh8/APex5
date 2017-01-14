@@ -23,7 +23,7 @@ std::mutex mtx;           // mutex for critical sectio
 //declerations:
 std::map <int, pthread_t > sockThreads;
 void* getNewClients(void* port);
-void* insertDriverSendCab(void *clientSocketID);
+void* BFS_calculator(void *clientSocketID);
 
 BOOST_CLASS_EXPORT_GUID(LuxuryCab,"LuxuryCab")
 BOOST_CLASS_EXPORT_GUID(GridNode,"GridNode")
@@ -172,19 +172,19 @@ void* getNewClients(void* cArgs) {
         }else {
             pthread_t myThread;
             ClientThreadArgs *newClient = new ClientThreadArgs(clientArgs,goodReception);
-            int status = pthread_create(&myThread, NULL, insertDriverSendCab, (void *) newClient);
+            int status = pthread_create(&myThread, NULL, BFS_calculator, (void *) newClient);
             if(status) {
                 cout<<"ERROR! ";
             }
             sockThreads[newClient->getSocketDes()] = myThread ;
-            pthread_join(myThread,NULL);
+            //pthread_join(myThread,NULL);
             //delete (clientArgs->getServer());
             //cout << "Connection with " << server->getSocketDescriptor() << " established!" << endl;
         }
     }
 }
 
-void* insertDriverSendCab(void *cArgs) {
+void* BFS_calculator(void *cArgs) {
     ClientThreadArgs *clientArgs = ((ClientThreadArgs*)cArgs);
 
     TaxiCenter *taxiCenter = clientArgs->getTaxiCenter();

@@ -157,6 +157,7 @@ void TaxiCenter::receiveTripInfo(int tripId, int xStart, int yStart, int xEnd,
                                       map->getGridNode(Point(xStart,yStart)),
                                       map->getGridNode(Point(xEnd,yEnd)),
                     numPassengers, tariff,timeOfTrip);
+//    newTrip->calculateRoute();
     listOfTrips.push_back(newTrip);
 }
 
@@ -186,6 +187,7 @@ void TaxiCenter::linkDriversTrips(int currentTime) {
 
     for (i = 0; i < listOfTrips.size(); i++) {
         if(listOfTrips[i]!=NULL) {
+                    pthread_join(listOfTrips[i]->getBfsThread(),NULL);
                     if (((listOfTrips[i]->getTimeOfTrip() == currentTime)) && (!(listOfTrips[i]->IsAssigned()))) {
                         currentDriver = findClosestDriver(listOfTrips[i]);
                         if(currentDriver==NULL) {

@@ -35,6 +35,7 @@ private:
     int rideID;
     //Driver* tripDriver;
     double totalMeters;
+    pthread_t Bfs_thread;
     Node* startingPoint;
     Node* endingPoint;
     vector<Node*> tripRoute;
@@ -46,10 +47,12 @@ private:
     bool firstTime;
 public:
     bool IsAssigned() const;
-
+    pthread_t getBfsThread();
     void setIsAssigned(bool isAssigned);
+//    void calculateRoute();
 
 private:
+//    void* BFS_calculator(void *bfs_args);
     bool isAssigned;
 public:
     bool isFirstTime();

@@ -3,7 +3,9 @@
 //
 
 #include "TripInfo.h"
+#include "BfsThreadArgs.h"
 #include "BFS.h"
+static void* BFS_calculator(void *bfs_args);
 
 /**
  * the constructor.
@@ -13,11 +15,21 @@
  * @param currentNumOfPassengers - the number of passengers.
  * @param currentTariff - the tarrif of the trip.
  */
+
+
 TripInfo::TripInfo(int tripId,Node *start, Node *dest,
                    int currentNumOfPassengers,
                    double currentTariff,
                    int time) {
-    tripRoute = BFS::BFS_Navigate(start,dest);
+    //tripRoute = BFS::BFS_Navigate(start,dest);
+    //********
+    BfsThreadArgs *bfs_args = new BfsThreadArgs(start,dest,&tripRoute);
+    int status = pthread_create(&Bfs_thread, NULL, BFS_calculator, (void *) bfs_args);
+    if(status) {
+        cout<<"ERROR! ";
+    }
+    //**********
+
     totalMeters = tripRoute.size();
     ratesReceived = 0;
     rideID = tripId;
@@ -30,6 +42,17 @@ TripInfo::TripInfo(int tripId,Node *start, Node *dest,
     timeOfTrip = time;
     firstTime = true;
     isAssigned = false;
+}
+
+
+void* BFS_calculator(void *bfs_args) {
+    BfsThreadArgs* args = ((BfsThreadArgs*)bfs_args);
+    vector<Node*> route = BFS::BFS_Navigate(args->getStart(),args->getDest());
+    args->setTripRoute(route);
+}
+
+pthread_t TripInfo::getBfsThread(){
+    return Bfs_thread;
 }
 
 TripInfo::TripInfo(){};
