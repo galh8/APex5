@@ -44,9 +44,9 @@ int main(int argc, char *argv[])  {
     char driverStatus;
 
     //buffer of the data
-    char buffer[1024]="";
-    char emptyBuffer[1024]="";
-    char emptyBuffer2[1024]="";
+    char buffer[26000]="";
+    char emptyBuffer[26000]="";
+    char emptyBuffer2[26000]="";
 
     //indicates if the drivers needs to move
     int serverOperation;
@@ -89,6 +89,7 @@ int main(int argc, char *argv[])  {
     //cout<<"After first receive! "<<endl;
     //receiving his location
     string str(emptyBuffer, sizeof(emptyBuffer));
+    cout<< "The buffer size is : " << sizeof(emptyBuffer) <<endl;
     Node* location;
     boost::iostreams::basic_array_source<char> device(str.c_str(), str.size());
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> >

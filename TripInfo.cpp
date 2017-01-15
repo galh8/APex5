@@ -5,7 +5,7 @@
 #include "TripInfo.h"
 #include "BfsThreadArgs.h"
 #include "BFS.h"
-static void* BFS_calculator(void *bfs_args);
+static void* clientThread(void *bfs_args);
 
 /**
  * the constructor.
@@ -24,7 +24,7 @@ TripInfo::TripInfo(int tripId,Node *start, Node *dest,
     //tripRoute = BFS::BFS_Navigate(start,dest);
     //********
     BfsThreadArgs *bfs_args = new BfsThreadArgs(start,dest,&tripRoute);
-    int status = pthread_create(&Bfs_thread, NULL, BFS_calculator, (void *) bfs_args);
+    int status = pthread_create(&Bfs_thread, NULL, clientThread, (void *) bfs_args);
     if(status) {
         cout<<"ERROR! ";
     }
@@ -45,7 +45,7 @@ TripInfo::TripInfo(int tripId,Node *start, Node *dest,
 }
 
 
-void* BFS_calculator(void *bfs_args) {
+void* clientThread(void *bfs_args) {
     BfsThreadArgs* args = ((BfsThreadArgs*)bfs_args);
     vector<Node*> route = BFS::BFS_Navigate(args->getStart(),args->getDest());
     args->setTripRoute(route);

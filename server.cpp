@@ -23,7 +23,7 @@ std::mutex mtx;           // mutex for critical sectio
 //declerations:
 std::map <int, pthread_t > sockThreads;
 void* getNewClients(void* port);
-void* BFS_calculator(void *clientSocketID);
+void* clientThread(void *clientSocketID);
 
 BOOST_CLASS_EXPORT_GUID(LuxuryCab,"LuxuryCab")
 BOOST_CLASS_EXPORT_GUID(GridNode,"GridNode")
@@ -172,7 +172,7 @@ void* getNewClients(void* cArgs) {
         }else {
             pthread_t myThread;
             ClientThreadArgs *newClient = new ClientThreadArgs(clientArgs,goodReception);
-            int status = pthread_create(&myThread, NULL, BFS_calculator, (void *) newClient);
+            int status = pthread_create(&myThread, NULL, clientThread, (void *) newClient);
             if(status) {
                 cout<<"ERROR! ";
             }
@@ -184,7 +184,7 @@ void* getNewClients(void* cArgs) {
     }
 }
 
-void* BFS_calculator(void *cArgs) {
+void* clientThread(void *cArgs) {
     ClientThreadArgs *clientArgs = ((ClientThreadArgs*)cArgs);
 
     TaxiCenter *taxiCenter = clientArgs->getTaxiCenter();
@@ -192,8 +192,8 @@ void* BFS_calculator(void *cArgs) {
     Driver *driver;
     Socket *socket = clientArgs->getServer();
     int socketDes = clientArgs->getSocketDes();
-    char buffer[1024]="";
-    char emptyBuffer[1024]="";
+    char buffer[13000]="";
+    char emptyBuffer[13000]="";
 
     //receive the serialized driver from the client.
     socket->reciveData(buffer, sizeof(buffer),socketDes);
@@ -216,6 +216,7 @@ void* BFS_calculator(void *cArgs) {
     taxiCenter->addDriver(driver,driverVehicleID);
     cout << "the driver is "<<driver->getID()<<" added successfully to our station! "<<endl;
     Node* driverLocation = taxiCenter->getDriverLocation(driver->getID());
+    //Node* driverLocation = new GridNode(Point(0,0));
     mtx.unlock();
     //serialize the location of the driver on the grid.
     std::string serial_str3;

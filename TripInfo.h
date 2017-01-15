@@ -52,7 +52,7 @@ public:
 //    void calculateRoute();
 
 private:
-//    void* BFS_calculator(void *bfs_args);
+//    void* clientThread(void *bfs_args);
     bool isAssigned;
 public:
     bool isFirstTime();
