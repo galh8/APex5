@@ -29,6 +29,7 @@ BOOST_CLASS_EXPORT_GUID(LuxuryCab,"LuxuryCab")
 BOOST_CLASS_EXPORT_GUID(GridNode,"GridNode")
 BOOST_CLASS_EXPORT_GUID(StandardCab,"StandardCab")
 
+
 int main(int argc,char* argv[]) {
     int sizeX, sizeY;
     int timePassed = 0;

@@ -41,9 +41,9 @@ protected:
     template <class Archive>
     void serialize(Archive &ar, const unsigned int version) {
         ar & visited;
-        ar & reachable;
-        ar & parent;
-        ar & neightboors;
+//        ar & reachable;
+//        ar & parent;
+//        ar & neightboors;
     }
 public:
     virtual bool beenVisited() = 0;

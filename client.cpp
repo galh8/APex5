@@ -44,9 +44,9 @@ int main(int argc, char *argv[])  {
     char driverStatus;
 
     //buffer of the data
-    char buffer[26000]="";
-    char emptyBuffer[26000]="";
-    char emptyBuffer2[26000]="";
+    char buffer[42000]="";
+    char emptyBuffer[42000]="";
+    char emptyBuffer2[42000]="";
 
     //indicates if the drivers needs to move
     int serverOperation;
