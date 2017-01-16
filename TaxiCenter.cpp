@@ -196,6 +196,9 @@ void TaxiCenter::linkDriversTrips(int currentTime) {
                         listOfTrips[i]->setIsAssigned(true);
                         currentDriver->setTripInfo(listOfTrips[i]);
                         currentDriver->setOccupied(true);
+                        if(listOfTrips.size()==2){
+                            cout<<"YES, the second trip sent! "<<endl;
+                        }
                         globalTripsMap[currentDriver->getID()] = listOfTrips[i];
                         globalOperation[currentDriver->getID()]->push(2);
 
