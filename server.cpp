@@ -16,7 +16,7 @@
 #include "ClientThreadArgs.h"
 #include <mutex>
 
-std::mutex mtx;           // mutex for critical sectio
+std::mutex mtx;           // mutex for critical section
 
 //declerations:
 

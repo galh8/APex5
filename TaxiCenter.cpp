@@ -6,6 +6,7 @@
 #include "TaxiFactory.h"
 #include "BFS.h"
 
+
 #include <cstdlib>
 map<int,TripInfo*> globalTripsMap;
 map<int, queue<int>* > globalOperation;
