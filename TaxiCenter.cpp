@@ -30,16 +30,19 @@ TaxiCenter::~TaxiCenter() {
     for (i=0;i < driversList.size();i++) {
         if(driversList[i]!=NULL) {
             delete (driversList[i]);
+            driversList[i]=NULL;
         }
     }
     for (i=0;i < taxisList.size();i++) {
         if(taxisList[i]!=NULL) {
             delete (taxisList[i]);
+            taxisList[i]=NULL;
         }
     }
     for (i=0;i < listOfTrips.size();i++) {
         if(listOfTrips[i]!=NULL) {
             delete (listOfTrips[i]);
+            listOfTrips[i]=NULL;
         }
     }
 };

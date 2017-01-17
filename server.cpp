@@ -157,13 +157,13 @@ int main(int argc,char* argv[]) {
                 delete(taxiCenter);
                 //deletes the server.
                 delete(server);
-//                //deletes clientArgs.
-//                delete(cArgs);
-//
-//                for(int i=0;i<globalOperation.size();i++){
-//                    queue<int> *queueToDel = globalOperation.at(i);
-//                    delete(queueToDel);
-//                }
+                //deletes clientArgs.
+                delete(cArgs);
+
+                for(int i=0;i<globalOperation.size();i++){
+                    queue<int> *queueToDel = globalOperation.at(i);
+                    delete(queueToDel);
+                }
 
                 return 0;
             }
