@@ -160,6 +160,11 @@ int main(int argc,char* argv[]) {
                 //deletes clientArgs.
                 delete(cArgs);
 
+                for(int i=0;i<globalOperation.size();i++){
+                    queue *queueToDel = globalOperation.at(i);
+                    delete(queueToDel);
+                }
+
                 return 0;
             }
             case 9: {
@@ -367,10 +372,6 @@ void* clientThread(void *cArgs) {
                     //deleting the clientsArgs of this specific client.
                     delete(clientArgs);
 
-                    mtx.lock();
-                    delete(globalOperation[driver->getID()]);
-                    globalOperation[driver->getID()]->pop();
-                    mtx.unlock();
 
                     //terminate the thread
                     keepMovin = false;
