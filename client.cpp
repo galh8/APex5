@@ -153,7 +153,7 @@ int main(int argc, char *argv[])  {
                     s6.flush();
                     //sending the location of the driver after moving
                     client->sendData(serial_str3,dummyNum);
-                    //sleep(1);
+;
                 }else {
                     delete(driver->getCurrentTrip());
                     driver->setOccupied(false);

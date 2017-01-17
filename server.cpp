@@ -161,7 +161,6 @@ int main(int argc,char* argv[]) {
                 delete(cArgs);
 
                 return 0;
-
             }
             case 9: {
                 mtx.lock();
