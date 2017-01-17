@@ -367,8 +367,6 @@ void* clientThread(void *cArgs) {
                     //deleting the clientsArgs of this specific client.
                     delete(clientArgs);
 
-
-
                     mtx.lock();
                     delete(globalOperation[driver->getID()]);
                     globalOperation[driver->getID()]->pop();
