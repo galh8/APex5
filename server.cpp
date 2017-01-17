@@ -320,9 +320,8 @@ void* clientThread(void *cArgs) {
 
                     Point newPoint = (*((Point *) driver->getLocation()->getValue()));
                     driver->setLocation(taxiCenter->getMap()->getGridNode(newPoint));
-                    driver->setLocation(newLocation);
 
-                    delete(newLocation);
+                    //delete(newLocation);
 
                     if ((*((Point *) driver->getLocation()->getValue())) ==
                         *((Point *) (driver->getCurrentTrip()->getEndingPoint()->getValue()))) {
