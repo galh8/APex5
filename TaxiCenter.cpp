@@ -25,7 +25,7 @@ TaxiCenter::TaxiCenter(int rows,int columns) {
  */
 TaxiCenter::~TaxiCenter() {
 
-    int i;
+    int i=0;
     delete(map);
     for (i=0;i < driversList.size();i++) {
         if(driversList[i]!=NULL) {
