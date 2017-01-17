@@ -22,7 +22,6 @@ std::mutex mtx;           // mutex for critical section
 //declerations:
 
 //declerations:
-std::map <int, pthread_t > sockThreads;
 void* getNewClients(void* port);
 void* clientThread(void *clientSocketID);
 
@@ -199,7 +198,6 @@ void* getNewClients(void* cArgs) {
             if(status) {
                 cout<<"ERROR! ";
             }
-            sockThreads[newClient->getSocketDes()] = myThread ;
         }
     }
 }
