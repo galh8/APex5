@@ -158,6 +158,7 @@ int main(int argc,char* argv[]) {
                     for(int i=0;i< globalOperation.size(); i++) {
                         if (globalOperation.at(i)->size() != 0){
                             everyClientFinished = false;
+                            break;
                         }
                     }
                 }
