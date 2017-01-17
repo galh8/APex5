@@ -31,8 +31,6 @@ BOOST_CLASS_EXPORT_GUID(LuxuryCab,"LuxuryCab")
 BOOST_CLASS_EXPORT_GUID(GridNode,"GridNode")
 BOOST_CLASS_EXPORT_GUID(StandardCab,"StandardCab")
 
-//pthread_mutex_t threadMutex;
-
 int main(int argc,char* argv[]) {
     int sizeX, sizeY;
 
@@ -77,19 +75,13 @@ int main(int argc,char* argv[]) {
                 ClientThreadArgs *cArgs = new ClientThreadArgs(taxiCenter, port,numberOfClients);
                 int status = pthread_create(&clientsReceiver, NULL, getNewClients, (void *) cArgs);
                 pthread_join(clientsReceiver,NULL);
-
                 while (true) {
-//                    mtx.lock();
                     if(numberOfClients==taxiCenter->getDriversList().size()) {
                         break;
                     }
-//                    mtx.unlock();
                 }
-
                 break;
             }
-
-
             case 2: {
                 mtx.lock();
                 cin >> tripID;
@@ -110,10 +102,8 @@ int main(int argc,char* argv[]) {
                 taxiCenter->receiveTripInfo(tripID, tripStart_x, tripStart_y, tripEnd_x,
                                             tripEnd_y, tripNumPassengers, tripTariff, tripStartTime);
                 mtx.unlock();
-
                 break;
             }
-
             case 3: {
                 mtx.lock();
                 cin >> vehicleID;
@@ -126,21 +116,17 @@ int main(int argc,char* argv[]) {
                 taxiCenter->addTaxi(vehicleID, vehicleType, vehicleManufacturer, vehicleColor);
                 mtx.unlock();
                 break;
-
             }
             case 4: {
                 //the id of the driver we want to find.
                 cin >> driverID_toFind;
                 //printing the driver location just when the driver finished to move
                 while (true) {
-//                    mtx.lock();
                     //can print just if the printing flg is true.
                     if ((globalOperation[driverID_toFind]->size() == 0)) {
                         cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
-//                        mtx.unlock();
                         break;
                     }
-//                    mtx.unlock();
                 }
                 break;
             }
@@ -151,7 +137,6 @@ int main(int argc,char* argv[]) {
                 }
                 mtx.unlock();
                 break;
-
             case 9: {
                 mtx.lock();
                 taxiCenter->linkDriversTrips(timePassed);
@@ -159,9 +144,7 @@ int main(int argc,char* argv[]) {
                 mtx.unlock();
                 ++timePassed;
                 bool everyClientFinished = false;
-
                 while(!everyClientFinished){
-//                    mtx.lock();
                     everyClientFinished = true;
                     for(int i=0;i< globalOperation.size(); i++) {
                         if (globalOperation.at(i)->size() != 0){
@@ -169,23 +152,13 @@ int main(int argc,char* argv[]) {
                             break;
                         }
                     }
-//                    mtx.unlock();
                 }
-
                 break;
-
             }
-
             }
-
-
-
-
-
         }
     }while (command!=7);
 
-    //pthread_join(clientsReceiver,NULL);
 
 }
 
@@ -198,12 +171,10 @@ void* getNewClients(void* cArgs) {
     server->initialize();
     clientArgs->setServer(server);
     int goodReception;
-//    cout << "Connection with " << server->getSocketDescriptor() << " established!" << endl;
     for(int i=0; i<numberOfClients ;++i) {
         goodReception= server->acceptOneClient();
 
         //clones the original ClientThreadArgs and set a new socketDescriptor.
-
         if (goodReception < 0) {
             //return an error represent error at this method
             cout << "Connection not established!" << endl;
@@ -215,9 +186,6 @@ void* getNewClients(void* cArgs) {
                 cout<<"ERROR! ";
             }
             sockThreads[newClient->getSocketDes()] = myThread ;
-            //pthread_join(myThread,NULL);
-            //delete (clientArgs->getServer());
-            //cout << "Connection with " << server->getSocketDescriptor() << " established!" << endl;
         }
     }
 }
@@ -258,10 +226,8 @@ void* clientThread(void *cArgs) {
     globalOperation[driver->getID()] =new queue<int>;
     mtx.lock();
     taxiCenter->addDriver(driver,driverVehicleID);
-    cout << "the driver is "<<driver->getID()<<" added successfully to our station! "<<endl;
 
     Node* driverLocation = taxiCenter->getDriverLocation(driver->getID());
-    //Node* driverLocation = new GridNode(Point(0,0));
     mtx.unlock();
     //serialize the location of the driver on the grid.
     std::string serial_str3;
@@ -294,17 +260,7 @@ void* clientThread(void *cArgs) {
 
     while (true) {
         if(globalOperation[driver->getID()]->size()!=0) {
-            //cout<<"HALLELUYAH!" <<globalOperation[driver->getID()]->size()<<endl;
-            //mtx.lock();
             int operToDo = globalOperation[driver->getID()]->front();
-            //if operation to do is 1, we have to move. thus, we can't print the
-            //location of the driver yet. so the print flg is changing to flase.
-//            if (operToDo == 1){
-//                printingFlg = false;
-//            }
-//            globalOperation[driver->getID()]->pop();
-            //mtx.unlock();
-
             switch (operToDo) {
                 case 1: {
                     //getting the dummy - needed in order to solve TCP problems
@@ -313,10 +269,8 @@ void* clientThread(void *cArgs) {
 
                     //sends the client what to do
                     socket->sendData(std::to_string(operToDo),socketDes);
-                    //sleep(1);
                     //receiving the new location of the driver.
                     socket->reciveData(buffer, sizeof(buffer),socketDes);
-                    //sleep(1);
                     string str(buffer, sizeof(buffer));
                     Node *newLocation;
                     boost::iostreams::basic_array_source<char> device1(str.c_str(),
@@ -335,10 +289,6 @@ void* clientThread(void *cArgs) {
                     }
                     globalOperation[driver->getID()]->pop();
                     mtx.unlock();
-
-                    //after the driver moved we can print his location
-//                    printingFlg = true;
-
                     break;
                 }
                 case 2: {
@@ -348,15 +298,11 @@ void* clientThread(void *cArgs) {
 
                     //sends the client what to do
                     socket->sendData(std::to_string(operToDo),socketDes);
-                    //sleep(1);
 
                     //getting the dummy - needed in order to solve TCP problems
                     socket->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
                     //after receiving the dummy we can send the tripToSend
-
-                    //mtx.lock();
                     TripInfo *tripToSend = globalTripsMap[driver->getID()];
-                    //mtx.unlock();
                     //serialize the trip info
                     std::string serial_str1;
                     boost::iostreams::back_insert_device<std::string> inserter1(serial_str1);
@@ -371,13 +317,9 @@ void* clientThread(void *cArgs) {
                     globalOperation[driver->getID()]->pop();
                     mtx.unlock();
                     break;
-
                 }
-
             }
         }
     }
-
-
 }
 
