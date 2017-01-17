@@ -318,10 +318,10 @@ void* clientThread(void *cArgs) {
                     //Setting the new location of the driver.
                     mtx.lock();
 
-                    Point newPoint = (*((Point *) driver->getLocation()->getValue()));
+                    Point newPoint = (*((Point *) newLocation->getValue()));
                     driver->setLocation(taxiCenter->getMap()->getGridNode(newPoint));
 
-                    //delete(newLocation);
+                    delete(newLocation);
 
                     if ((*((Point *) driver->getLocation()->getValue())) ==
                         *((Point *) (driver->getCurrentTrip()->getEndingPoint()->getValue()))) {
