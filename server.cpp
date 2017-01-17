@@ -269,7 +269,6 @@ void* clientThread(void *cArgs) {
             //cout<<"HALLELUYAH!" <<globalOperation[driver->getID()]->size()<<endl;
             mtx.lock();
             int operToDo = globalOperation[driver->getID()]->front();
-            globalOperation[driver->getID()]->pop();
             mtx.unlock();
 
             switch (operToDo) {
@@ -301,6 +300,10 @@ void* clientThread(void *cArgs) {
                         driver->setTripInfo(NULL);
                     }
                     mtx.unlock();
+
+                    mtx.lock();
+                    globalOperation[driver->getID()]->pop();
+                    mtx.unlock();
                     break;
                 }
                 case 2: {
@@ -329,8 +332,13 @@ void* clientThread(void *cArgs) {
                     s1.flush();
                     //sending the trip info
                     socket->sendData(serial_str1,socketDes);
-                    //sleep(1);
+
+                    mtx.lock();
+                    globalOperation[driver->getID()]->pop();
+                    mtx.unlock();
+
                     break;
+
                 }
 
             }
