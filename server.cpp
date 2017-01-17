@@ -124,7 +124,7 @@ int main(int argc,char* argv[]) {
                 while (true) {
                     mtx.lock();
                     //can print just if the printing flg is true.
-                    if ((globalOperation[driverID_toFind]->size() == 0) && printingFlg) {
+                    if ((globalOperation[driverID_toFind]->size() == 0)) {
                         cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
                         mtx.unlock();
                         break;
