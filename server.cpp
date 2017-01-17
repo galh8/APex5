@@ -79,11 +79,11 @@ int main(int argc,char* argv[]) {
                 pthread_join(clientsReceiver,NULL);
 
                 while (true) {
-                    mtx.lock();
+//                    mtx.lock();
                     if(numberOfClients==taxiCenter->getDriversList().size()) {
                         break;
                     }
-                    mtx.unlock();
+//                    mtx.unlock();
                 }
 
                 break;
@@ -133,14 +133,14 @@ int main(int argc,char* argv[]) {
                 cin >> driverID_toFind;
                 //printing the driver location just when the driver finished to move
                 while (true) {
-                    mtx.lock();
+//                    mtx.lock();
                     //can print just if the printing flg is true.
                     if ((globalOperation[driverID_toFind]->size() == 0)) {
                         cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
-                        mtx.unlock();
+//                        mtx.unlock();
                         break;
                     }
-                    mtx.unlock();
+//                    mtx.unlock();
                 }
                 break;
             }
@@ -156,11 +156,12 @@ int main(int argc,char* argv[]) {
                 mtx.lock();
                 taxiCenter->linkDriversTrips(timePassed);
                 taxiCenter->runAllTrips(timePassed);
+                mtx.unlock();
                 ++timePassed;
                 bool everyClientFinished = false;
 
                 while(!everyClientFinished){
-                    mtx.lock();
+//                    mtx.lock();
                     everyClientFinished = true;
                     for(int i=0;i< globalOperation.size(); i++) {
                         if (globalOperation.at(i)->size() != 0){
@@ -168,7 +169,7 @@ int main(int argc,char* argv[]) {
                             break;
                         }
                     }
-                    mtx.unlock();
+//                    mtx.unlock();
                 }
 
                 break;
@@ -294,7 +295,7 @@ void* clientThread(void *cArgs) {
     while (true) {
         if(globalOperation[driver->getID()]->size()!=0) {
             //cout<<"HALLELUYAH!" <<globalOperation[driver->getID()]->size()<<endl;
-            mtx.lock();
+            //mtx.lock();
             int operToDo = globalOperation[driver->getID()]->front();
             //if operation to do is 1, we have to move. thus, we can't print the
             //location of the driver yet. so the print flg is changing to flase.
@@ -302,7 +303,7 @@ void* clientThread(void *cArgs) {
 //                printingFlg = false;
 //            }
 //            globalOperation[driver->getID()]->pop();
-            mtx.unlock();
+            //mtx.unlock();
 
             switch (operToDo) {
                 case 1: {
@@ -353,9 +354,9 @@ void* clientThread(void *cArgs) {
                     socket->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
                     //after receiving the dummy we can send the tripToSend
 
-                    mtx.lock();
+                    //mtx.lock();
                     TripInfo *tripToSend = globalTripsMap[driver->getID()];
-                    mtx.unlock();
+                    //mtx.unlock();
                     //serialize the trip info
                     std::string serial_str1;
                     boost::iostreams::back_insert_device<std::string> inserter1(serial_str1);
