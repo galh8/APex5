@@ -77,13 +77,15 @@ int main(int argc,char* argv[]) {
                 ClientThreadArgs *cArgs = new ClientThreadArgs(taxiCenter, port,numberOfClients);
                 int status = pthread_create(&clientsReceiver, NULL, getNewClients, (void *) cArgs);
                 pthread_join(clientsReceiver,NULL);
-                mtx.lock();
+
                 while (true) {
+                    mtx.lock();
                     if(numberOfClients==taxiCenter->getDriversList().size()) {
                         break;
                     }
+                    mtx.unlock();
                 }
-                mtx.unlock();
+
                 break;
             }
 
