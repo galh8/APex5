@@ -307,14 +307,11 @@ void* clientThread(void *cArgs) {
                         driver->setOccupied(false);
                         driver->setTripInfo(NULL);
                     }
+                    globalOperation[driver->getID()]->pop();
                     mtx.unlock();
 
                     //after the driver moved we can print his location
 //                    printingFlg = true;
-
-                    mtx.lock();
-                    globalOperation[driver->getID()]->pop();
-                    mtx.unlock();
 
                     break;
                 }
@@ -344,11 +341,9 @@ void* clientThread(void *cArgs) {
                     s1.flush();
                     //sending the trip info
                     socket->sendData(serial_str1,socketDes);
-
                     mtx.lock();
                     globalOperation[driver->getID()]->pop();
                     mtx.unlock();
-
                     break;
 
                 }
