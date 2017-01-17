@@ -136,7 +136,21 @@ int main(int argc,char* argv[]) {
                     globalOperation[taxiCenter->getDriversList()[i]->getID()]->push(4);
                 }
                 mtx.unlock();
-                break;
+
+                bool everyClientFinished = false;
+
+                while(!everyClientFinished){
+                    everyClientFinished = true;
+                    for(int i=0;i< globalOperation.size(); i++) {
+                        if (globalOperation.at(i)->size() != 0){
+                            everyClientFinished = false;
+                            break;
+                        }
+                    }
+                }
+
+                return 0;
+
             }
             case 9: {
                 mtx.lock();
@@ -327,6 +341,13 @@ void* clientThread(void *cArgs) {
 
                     //sends the client what to do
                     socket->sendData(std::to_string(operToDo),socketDes);
+
+                    mtx.lock();
+                    globalOperation[driver->getID()]->pop();
+                    mtx.unlock();
+
+                    return 0;
+
                 }
             }
         }
