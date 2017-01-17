@@ -124,7 +124,7 @@ int main(int argc,char* argv[]) {
                 while (true) {
                     mtx.lock();
                     //can print just if the printing flg is true.
-                    if ((globalOperation[driverID_toFind]->size() == 0) && printingFlg) {
+                    if ((globalOperation[driverID_toFind]->size() == 0)) {
                         cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
                         mtx.unlock();
                         break;
@@ -274,10 +274,10 @@ void* clientThread(void *cArgs) {
             int operToDo = globalOperation[driver->getID()]->front();
             //if operation to do is 1, we have to move. thus, we can't print the
             //location of the driver yet. so the print flg is changing to flase.
-            if (operToDo == 1){
-                printingFlg = false;
-            }
-            globalOperation[driver->getID()]->pop();
+//            if (operToDo == 1){
+//                printingFlg = false;
+//            }
+//            globalOperation[driver->getID()]->pop();
             mtx.unlock();
 
             switch (operToDo) {
@@ -311,7 +311,11 @@ void* clientThread(void *cArgs) {
                     mtx.unlock();
 
                     //after the driver moved we can print his location
-                    printingFlg = true;
+//                    printingFlg = true;
+
+                    mtx.lock();
+                    globalOperation[driver->getID()]->pop();
+                    mtx.unlock();
 
                     break;
                 }
@@ -341,6 +345,10 @@ void* clientThread(void *cArgs) {
                     s1.flush();
                     //sending the trip info
                     socket->sendData(serial_str1,socketDes);
+
+                    mtx.lock();
+                    globalOperation[driver->getID()]->pop();
+                    mtx.unlock();
 
                     break;
 
