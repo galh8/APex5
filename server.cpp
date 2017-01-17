@@ -154,7 +154,7 @@ int main(int argc,char* argv[]) {
                 //frees everything
 
                 //deletes the taxiCenter.
-//                delete(taxiCenter);
+                delete(taxiCenter);
                 //deletes the server.
                 delete(server);
 //                //deletes clientArgs.
