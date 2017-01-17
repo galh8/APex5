@@ -75,7 +75,7 @@ int main(int argc,char* argv[]) {
                 int port = atoi(argv[1]);
                 ClientThreadArgs *cArgs = new ClientThreadArgs(taxiCenter, port,numberOfClients);
                 int status = pthread_create(&clientsReceiver, NULL, getNewClients, (void *) cArgs);
-
+                pthread_join(clientsReceiver,NULL);
                 break;
             }
 
