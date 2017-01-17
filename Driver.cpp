@@ -37,7 +37,9 @@ Driver::Driver() {
  */
 Driver::~Driver() {
     delete(averageSatisfaction);
-    delete(driverLocation);
+    if (driverLocation != NULL) {
+        delete(driverLocation);
+    }
     if (currentTrip != NULL) {
         delete(currentTrip);
     }

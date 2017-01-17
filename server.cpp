@@ -312,6 +312,10 @@ void* clientThread(void *cArgs) {
                     ia >> newLocation;
                     //Setting the new location of the driver.
                     mtx.lock();
+                    Node* lastLocation = driver->getLocation();
+                    if (lastLocation != NULL) {
+                        delete(lastLocation);
+                    }
                     driver->setLocation(newLocation);
                     if ((*((Point *) driver->getLocation()->getValue())) ==
                         *((Point *) (driver->getCurrentTrip()->getEndingPoint()->getValue()))) {
