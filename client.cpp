@@ -47,7 +47,7 @@ int main(int argc, char *argv[])  {
     char buffer[42000] = "";
     char emptyBuffer[42000] = "";
     char emptyBuffer2[42000] = "";
-    char dummyBuffer[100] = "";
+    char dummyBuffer[42000] = "";
     int dummyInteger = 1;
 
     //indicates if the drivers needs to move

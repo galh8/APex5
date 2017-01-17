@@ -77,6 +77,9 @@ int main(int argc,char* argv[]) {
                 ClientThreadArgs *cArgs = new ClientThreadArgs(taxiCenter, port,numberOfClients);
                 int status = pthread_create(&clientsReceiver, NULL, getNewClients, (void *) cArgs);
                 pthread_join(clientsReceiver,NULL);
+                mtx.lock();
+                while (numberOfClients!=taxiCenter->getDriversList().size()){}
+                mtx.unlock();
                 break;
             }
 
@@ -141,12 +144,22 @@ int main(int argc,char* argv[]) {
                     globalOperation[taxiCenter->getDriversList()[i]->getID()]->push(4);
                 }
                 mtx.unlock();
+                break;
 
             case 9: {
                 mtx.lock();
                 taxiCenter->linkDriversTrips(timePassed);
                 taxiCenter->runAllTrips(timePassed);
                 ++timePassed;
+                bool everyClientFinished = false;
+                while(!everyClientFinished){
+                    for(int i=0;i< globalOperation.size(); i++) {
+                        if(globalOperation.at(i)->size()!=0){
+                            break;
+                        }
+                    }
+                    everyClientFinished=true;
+                }
                 mtx.unlock();
                 break;
 
@@ -161,7 +174,7 @@ int main(int argc,char* argv[]) {
         }
     }while (command!=7);
 
-    pthread_join(clientsReceiver,NULL);
+    //pthread_join(clientsReceiver,NULL);
 
 }
 
