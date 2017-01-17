@@ -28,13 +28,19 @@ TaxiCenter::~TaxiCenter() {
     int i;
     delete(map);
     for (i=0;i < driversList.size();i++) {
-        delete(driversList[i]);
+        if(driversList[i]!=NULL) {
+            delete (driversList[i]);
+        }
     }
     for (i=0;i < taxisList.size();i++) {
-        delete(taxisList[i]);
+        if(taxisList[i]!=NULL) {
+            delete (taxisList[i]);
+        }
     }
     for (i=0;i < listOfTrips.size();i++) {
-        delete(listOfTrips[i]);
+        if(listOfTrips[i]!=NULL) {
+            delete (listOfTrips[i]);
+        }
     }
 };
 
