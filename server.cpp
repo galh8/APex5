@@ -17,6 +17,7 @@
 #include <mutex>
 
 std::mutex mtx;           // mutex for critical section
+std::mutex mtx2;
 
 //declerations:
 
@@ -117,7 +118,7 @@ int main(int argc,char* argv[]) {
 
             }
             case 4: {
-
+                mtx2.lock();
                 //the id of the driver we want to find.
                 cin >> driverID_toFind;
                 //printing the driver location just when the driver finished to move
@@ -130,7 +131,7 @@ int main(int argc,char* argv[]) {
                     }
                     mtx.unlock();
                 }
-
+                mtx2.unlock();
                 break;
             }
             case 7: {
