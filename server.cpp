@@ -377,7 +377,6 @@ void* clientThread(void *cArgs) {
 
                     //terminate the thread
                     keepMovin = false;
-                    cout<<"AKOL TOV!!! "<<endl;
                 }
             }
         }
