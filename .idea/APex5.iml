@@ -5,6 +5,7 @@
       <sourceFolder url="file://$MODULE_DIR$/Node.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/client.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/LuxuryCabFactory.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GridNode.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Point.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/LuxuryCabFactory.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/LuxuryCab.cpp" isTestSource="false" />
@@ -12,40 +13,39 @@
       <sourceFolder url="file://$MODULE_DIR$/server.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/StandardCab.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Grid.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GridNode.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/TaxiFactory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TaxiCenter.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ClientThreadArgs.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Passenger.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/StandardCab.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/Driver.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TaxiFac.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/CMakeLists.txt" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TaxiFactory.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BFS.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TripInfo.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TaxiFac.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/DriverSatisfaction.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/Driver.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/BFS.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Point.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/StandardCab.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/DriverSatisfaction.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/StandardCabFactory.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/GridNode.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Passenger.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TaxiCab.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/StandardCabFactory.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/StandardCabFactory.h" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/BFS.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/Driver.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TaxiCab.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/ClientThreadArgs.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BfsThreadArgs.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TaxiCenter.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/TripInfo.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/GridNode.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/LuxuryCab.h" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/TaxiFactory.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/BfsThreadArgs.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/DriverSatisfaction.cpp" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sockets/Socket.cpp" isTestSource="false" />
+      <sourceFolder url="file://$MODULE_DIR$/sockets/Socket.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sockets/Tcp.h" isTestSource="false" />
       <sourceFolder url="file://$MODULE_DIR$/sockets/Tcp.cpp" isTestSource="false" />
-      <sourceFolder url="file://$MODULE_DIR$/sockets/Socket.h" isTestSource="false" />
     </content>
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module-library">
