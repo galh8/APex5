@@ -34,8 +34,6 @@ int main(int argc, char *argv[])  {
     int dummyNum = 0;
     client->initialize();
 
-
-
     //Dummy variable for getting the ',' and '_'
     char dummy;
 
@@ -90,16 +88,11 @@ int main(int argc, char *argv[])  {
 
     //sending the vehicleID
     client->sendData(std::to_string(driverVehicleID),dummyNum);
-    //cout<<"After second send! "<<endl;
-
-
-
 
     //expecting a location
     client->reciveData(emptyBuffer, sizeof(emptyBuffer),dummyNum);
     //receiving his location
     string str(emptyBuffer, sizeof(emptyBuffer));
-    cout<< "The buffer size is : " << sizeof(emptyBuffer) <<endl;
     Node* location;
     boost::iostreams::basic_array_source<char> device(str.c_str(), str.size());
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> >
@@ -109,15 +102,11 @@ int main(int argc, char *argv[])  {
 
     //set location
     driver->setLocation(location);
-    cout<<"Driver location setted successfully! his location is: "<< driver->getLocation()->valueString() <<endl;
-
     //dummy send before receiving data(taxiCab object).
     client->sendData(std::to_string(dummyInteger),dummyNum);
 
     //expecting a taxi
     client->reciveData(emptyBuffer2, sizeof(emptyBuffer2),dummyNum);
-
-    //cout<<"After second receive! "<<endl;
     //receiving the taxi cab of the driver.
     string str1(emptyBuffer2, sizeof(emptyBuffer2));
     TaxiCab* taxiCab;
@@ -129,9 +118,6 @@ int main(int argc, char *argv[])  {
 
     //setting the taxi to the driver.
     driver->setTaxiCabInfo(taxiCab);
-
-    cout << "The driver got the taxi cab (id = " <<driver->getTaxiCabInfo()->getCabID() <<") added successfully!"<<endl;
-//    delete(client);
 
     /**
  * loop that reicives 1 or 2.
@@ -146,7 +132,6 @@ int main(int argc, char *argv[])  {
 
         //reicives a command to server operation variable.
         client->reciveData(buffer, sizeof(buffer),dummyNum);
-        //sleep(1);
         serverOperation = atoi(buffer);
 
         // 1 means - move!
