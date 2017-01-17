@@ -115,12 +115,21 @@ int main(int argc,char* argv[]) {
 
             }
             case 4: {
-                mtx.lock();
+
                 //the id of the driver we want to find.
                 cin >> driverID_toFind;
-                while(globalOperation[driverID_toFind]->size()!=0) {}
-                cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
-                mtx.unlock();
+                while (true) {
+                    mtx.lock();
+                    if (globalOperation[driverID_toFind]->size() == 0) {
+
+                        cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
+                        mtx.unlock();
+                        break;
+                    }
+                    mtx.unlock();
+                }
+
+
                 break;
             }
             case 7: {
