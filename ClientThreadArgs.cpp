@@ -12,15 +12,9 @@ Socket *ClientThreadArgs::getServer()  {
     return server;
 }
 
-
-int ClientThreadArgs::getServerPort()  {
-    return serverPort;
-}
-
-
-ClientThreadArgs::ClientThreadArgs(TaxiCenter *taxiCenter, int serverPort,int numberOfClients) :
+ClientThreadArgs::ClientThreadArgs(TaxiCenter *taxiCenter,Socket* serverSocket,int numberOfClients) :
         taxiCenter(taxiCenter),
-        serverPort(serverPort),
+        server(serverSocket),
         numberOfClients(numberOfClients){}
 
 void ClientThreadArgs::setServer(Socket *socket) {
@@ -38,7 +32,6 @@ int ClientThreadArgs::getSocketDes(){
 ClientThreadArgs::ClientThreadArgs(ClientThreadArgs* ClientToCopy,int socketDS) {
     taxiCenter = ClientToCopy->getTaxiCenter();
     numberOfClients = ClientToCopy->numberOfClients;
-    serverPort = ClientToCopy->getServerPort();
     socketDes = socketDS;
     server = ClientToCopy->getServer();
 }

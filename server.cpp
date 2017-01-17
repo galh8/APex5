@@ -49,6 +49,11 @@ int main(int argc,char* argv[]) {
     cin >> sizeY;
     //creating the taxi center with it's grid.
     TaxiCenter *taxiCenter = new TaxiCenter(sizeX, sizeY);
+    //initializing the server
+    int port = atoi(argv[1]);
+    Socket *server = new Tcp(1,port);
+    //defining ClientThreadArgs
+    ClientThreadArgs *cArgs;
 
 
     cin >> numOfObstacles;
@@ -69,8 +74,7 @@ int main(int argc,char* argv[]) {
             case 1: {
                 int numberOfClients;
                 cin>>numberOfClients;
-                int port = atoi(argv[1]);
-                ClientThreadArgs *cArgs = new ClientThreadArgs(taxiCenter, port,numberOfClients);
+                cArgs = new ClientThreadArgs(taxiCenter, server,numberOfClients);
                 int status = pthread_create(&clientsReceiver, NULL, getNewClients, (void *) cArgs);
                 pthread_join(clientsReceiver,NULL);
                 while (true) {
@@ -147,6 +151,15 @@ int main(int argc,char* argv[]) {
                     }
                 }
 
+                //frees everything
+
+                //deletes the taxiCenter.
+                delete(taxiCenter);
+                //deletes the server.
+                delete(server);
+                //deletes clientArgs.
+                delete(cArgs);
+
                 return 0;
 
             }
@@ -168,6 +181,10 @@ int main(int argc,char* argv[]) {
                 }
                 break;
             }
+
+            default:{
+                break;
+            }
         }
 
     }while (command!=7);
@@ -179,7 +196,7 @@ int main(int argc,char* argv[]) {
 //Main thread for receiving new client connections.
 void* getNewClients(void* cArgs) {
     ClientThreadArgs *clientArgs = ((ClientThreadArgs*)cArgs);
-    Socket *server = new Tcp(1, clientArgs->getServerPort());
+    Socket *server = clientArgs->getServer();
     int numberOfClients = clientArgs->getNumberOfClients();
     server->initialize();
     clientArgs->setServer(server);
@@ -200,6 +217,7 @@ void* getNewClients(void* cArgs) {
             }
         }
     }
+
 }
 
 void* clientThread(void *cArgs) {
@@ -207,8 +225,10 @@ void* clientThread(void *cArgs) {
 
     TaxiCenter *taxiCenter = clientArgs->getTaxiCenter();
     int driverVehicleID;
+    //while keepMovin is true the client is still in the game.
+    bool keepMovin = true;
     Driver *driver;
-    Socket *socket = clientArgs->getServer();
+    Socket *server = clientArgs->getServer();
     int socketDes = clientArgs->getSocketDes();
     char buffer[13000]="";
     char emptyBuffer[13000]="";
@@ -216,10 +236,10 @@ void* clientThread(void *cArgs) {
     int dummyInteger = 1;
 
     //dummy send before receiving data(driver object).
-    socket->sendData(std::to_string(dummyInteger),socketDes);
+    server->sendData(std::to_string(dummyInteger),socketDes);
 
     //receive the serialized driver from the client.
-    socket->reciveData(buffer, sizeof(buffer),socketDes);
+    server->reciveData(buffer, sizeof(buffer),socketDes);
 
     string str2(buffer, sizeof(buffer));
     //Deserialize the driver received from the client.
@@ -229,10 +249,10 @@ void* clientThread(void *cArgs) {
     ib >> driver;
 
     //dummy send before receiving data(vehicleID object).
-    socket->sendData(std::to_string(dummyInteger),socketDes);
+    server->sendData(std::to_string(dummyInteger),socketDes);
 
     //receive the serialized vehicleID from the client.
-    socket->reciveData(buffer, sizeof(buffer),socketDes);
+    server->reciveData(buffer, sizeof(buffer),socketDes);
     driverVehicleID = atoi(buffer);
     //TODO lock this with mutex.
     globalOperation[driver->getID()] =new queue<int>;
@@ -250,12 +270,12 @@ void* clientThread(void *cArgs) {
     o << driverLocation;
     s4.flush();
     //sending the location
-    socket->sendData(serial_str3,socketDes);
+    server->sendData(serial_str3,socketDes);
 
 
 
     //getting the dummy - needed in order to solve TCP problems
-    socket->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
+    server->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
     //after receiving the dummy we can send our taxiCab
 
     //serialize the info of the driver(the client).
@@ -268,21 +288,21 @@ void* clientThread(void *cArgs) {
     oa << taxiCab;
     s1.flush();
     //sending the cab
-    socket->sendData(serial_str1,socketDes);
+    server->sendData(serial_str1,socketDes);
 
-    while (true) {
+    while (keepMovin) {
         if(globalOperation[driver->getID()]->size()!=0) {
             int operToDo = globalOperation[driver->getID()]->front();
             switch (operToDo) {
                 case 1: {
                     //getting the dummy - needed in order to solve TCP problems
-                    socket->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
+                    server->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
                     //after receiving the dummy we can send the operToDo
 
                     //sends the client what to do
-                    socket->sendData(std::to_string(operToDo),socketDes);
+                    server->sendData(std::to_string(operToDo),socketDes);
                     //receiving the new location of the driver.
-                    socket->reciveData(buffer, sizeof(buffer),socketDes);
+                    server->reciveData(buffer, sizeof(buffer),socketDes);
                     string str(buffer, sizeof(buffer));
                     Node *newLocation;
                     boost::iostreams::basic_array_source<char> device1(str.c_str(),
@@ -305,14 +325,14 @@ void* clientThread(void *cArgs) {
                 }
                 case 2: {
                     //getting the dummy - needed in order to solve TCP problems
-                    socket->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
+                    server->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
                     //after receiving the dummy we can send the operToDo
 
                     //sends the client what to do
-                    socket->sendData(std::to_string(operToDo),socketDes);
+                    server->sendData(std::to_string(operToDo),socketDes);
 
                     //getting the dummy - needed in order to solve TCP problems
-                    socket->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
+                    server->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
                     //after receiving the dummy we can send the tripToSend
                     TripInfo *tripToSend = globalTripsMap[driver->getID()];
                     //serialize the trip info
@@ -324,7 +344,7 @@ void* clientThread(void *cArgs) {
                     oa << tripToSend;
                     s1.flush();
                     //sending the trip info
-                    socket->sendData(serial_str1,socketDes);
+                    server->sendData(serial_str1,socketDes);
                     mtx.lock();
                     globalOperation[driver->getID()]->pop();
                     mtx.unlock();
@@ -333,16 +353,21 @@ void* clientThread(void *cArgs) {
 
                 case 4: {
                     //getting the dummy - needed in order to solve TCP problems
-                    socket->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
+                    server->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
                     //after receiving the dummy we can send the operToDo
 
                     //sends the client what to do
-                    socket->sendData(std::to_string(operToDo),socketDes);
+                    server->sendData(std::to_string(operToDo),socketDes);
+
                     mtx.lock();
                     globalOperation[driver->getID()]->pop();
                     mtx.unlock();
-                    return 0;
 
+                    //deleting the clientsArgs of this specific client.
+                    delete(clientArgs);
+
+                    //terminate the thread
+                    keepMovin = false;
                 }
             }
         }

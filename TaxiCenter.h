@@ -31,7 +31,7 @@ private:
     void sendTaxi(Node* location);
 
 public:
-    const vector<Driver *> &getDriversList() const;
+    const vector<Driver *> &getDriversList();
 
     TaxiCenter(int rows,int columns);
 

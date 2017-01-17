@@ -13,7 +13,6 @@ class ClientThreadArgs {
     private:
     TaxiCenter *taxiCenter;
     Socket *server;
-    int serverPort;
     int numberOfClients;
     int socketDes;
 
@@ -24,9 +23,7 @@ public:
 
     int getSocketDes();
 
-    int getServerPort() ;
-
-    ClientThreadArgs(TaxiCenter *taxiCenter, int socketPort,int numberOfClients);
+    ClientThreadArgs(TaxiCenter *taxiCenter, Socket* serverSocket,int numberOfClients);
 
     ClientThreadArgs(ClientThreadArgs* ClientToCopy,int socketDS);
 
