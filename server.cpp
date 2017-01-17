@@ -118,8 +118,8 @@ int main(int argc,char* argv[]) {
                 mtx.lock();
                 //the id of the driver we want to find.
                 cin >> driverID_toFind;
-//                cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
-                globalOperation[driverID_toFind]->push(4);
+                while(globalOperation[driverID_toFind]->size()!=0) {}
+                cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
                 mtx.unlock();
                 break;
             }
@@ -324,10 +324,7 @@ void* clientThread(void *cArgs) {
                     //sleep(1);
                     break;
                 }
-                case 4: {
-                    cout << driver->getLocation()->valueString();
-                    break;
-                }
+
             }
         }
     }
