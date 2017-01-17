@@ -22,6 +22,7 @@ std::mutex mtx;           // mutex for critical section
 
 //declerations:
 std::map <int, pthread_t > sockThreads;
+bool flg = true;
 void* getNewClients(void* port);
 void* clientThread(void *clientSocketID);
 
@@ -32,6 +33,7 @@ BOOST_CLASS_EXPORT_GUID(StandardCab,"StandardCab")
 
 int main(int argc,char* argv[]) {
     int sizeX, sizeY;
+
     int timePassed = 0;
     pthread_t clientsReceiver;
     int numOfObstacles, obs_x, obs_y;
@@ -121,7 +123,7 @@ int main(int argc,char* argv[]) {
                 //printing the driver location just when the driver finished to move
                 while (true) {
                     mtx.lock();
-                    if (globalOperation[driverID_toFind]->size() == 0) {
+                    if ((globalOperation[driverID_toFind]->size() == 0) && flg) {
                         cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
                         mtx.unlock();
                         break;
@@ -269,6 +271,10 @@ void* clientThread(void *cArgs) {
             //cout<<"HALLELUYAH!" <<globalOperation[driver->getID()]->size()<<endl;
             mtx.lock();
             int operToDo = globalOperation[driver->getID()]->front();
+            if (operToDo == 1){
+                flg = false;
+            }
+            globalOperation[driver->getID()]->pop();
             mtx.unlock();
 
             switch (operToDo) {
@@ -301,9 +307,9 @@ void* clientThread(void *cArgs) {
                     }
                     mtx.unlock();
 
-                    mtx.lock();
-                    globalOperation[driver->getID()]->pop();
-                    mtx.unlock();
+                    flg = true;
+
+
                     break;
                 }
                 case 2: {
@@ -332,10 +338,6 @@ void* clientThread(void *cArgs) {
                     s1.flush();
                     //sending the trip info
                     socket->sendData(serial_str1,socketDes);
-
-                    mtx.lock();
-                    globalOperation[driver->getID()]->pop();
-                    mtx.unlock();
 
                     break;
 
