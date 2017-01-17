@@ -158,8 +158,9 @@ int main(int argc,char* argv[]) {
                 taxiCenter->runAllTrips(timePassed);
                 ++timePassed;
                 bool everyClientFinished = false;
-                mtx.lock();
+
                 while(!everyClientFinished){
+                    mtx.lock();
                     everyClientFinished = true;
                     for(int i=0;i< globalOperation.size(); i++) {
                         if (globalOperation.at(i)->size() != 0){
@@ -167,8 +168,9 @@ int main(int argc,char* argv[]) {
                             break;
                         }
                     }
+                    mtx.unlock();
                 }
-                mtx.unlock();
+
                 break;
 
             }
