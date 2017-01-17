@@ -22,7 +22,7 @@ std::mutex mtx;           // mutex for critical section
 
 //declerations:
 std::map <int, pthread_t > sockThreads;
-bool flg = true;
+bool printingFlg = true;
 void* getNewClients(void* port);
 void* clientThread(void *clientSocketID);
 
@@ -123,7 +123,8 @@ int main(int argc,char* argv[]) {
                 //printing the driver location just when the driver finished to move
                 while (true) {
                     mtx.lock();
-                    if ((globalOperation[driverID_toFind]->size() == 0) && flg) {
+                    //can print just if the printing flg is true.
+                    if ((globalOperation[driverID_toFind]->size() == 0) && printingFlg) {
                         cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
                         mtx.unlock();
                         break;
@@ -271,8 +272,10 @@ void* clientThread(void *cArgs) {
             //cout<<"HALLELUYAH!" <<globalOperation[driver->getID()]->size()<<endl;
             mtx.lock();
             int operToDo = globalOperation[driver->getID()]->front();
+            //if operation to do is 1, we have to move. thus, we can't print the
+            //location of the driver yet. so the print flg is changing to flase.
             if (operToDo == 1){
-                flg = false;
+                printingFlg = false;
             }
             globalOperation[driver->getID()]->pop();
             mtx.unlock();
@@ -307,8 +310,8 @@ void* clientThread(void *cArgs) {
                     }
                     mtx.unlock();
 
-                    flg = true;
-
+                    //after the driver moved we can print his location
+                    printingFlg = true;
 
                     break;
                 }
