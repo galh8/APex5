@@ -173,7 +173,7 @@ vector<TripInfo *> &TaxiCenter::getListOfTrips() {
 /**
  * @return list of drivers.
  */
-const vector<Driver *> &TaxiCenter::getDriversList() {
+vector<Driver *> &TaxiCenter::getDriversList() {
     return driversList;
 }
 
