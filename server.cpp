@@ -132,11 +132,12 @@ int main(int argc,char* argv[]) {
             }
             case 7: {
                 mtx.lock();
-                for(int i=0;i<taxiCenter->getDriversList().size(); i++) {
+                for (int i = 0; i < taxiCenter->getDriversList().size(); i++) {
                     globalOperation[taxiCenter->getDriversList()[i]->getID()]->push(4);
                 }
                 mtx.unlock();
                 break;
+            }
             case 9: {
                 mtx.lock();
                 taxiCenter->linkDriversTrips(timePassed);
