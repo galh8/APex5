@@ -161,7 +161,7 @@ int main(int argc,char* argv[]) {
                 delete(cArgs);
 
                 for(int i=0;i<globalOperation.size();i++){
-                    queue *queueToDel = globalOperation.at(i);
+                    queue<int> *queueToDel = globalOperation.at(i);
                     delete(queueToDel);
                 }
 
