@@ -152,13 +152,14 @@ int main(int argc,char* argv[]) {
                 taxiCenter->runAllTrips(timePassed);
                 ++timePassed;
                 bool everyClientFinished = false;
+
                 while(!everyClientFinished){
+                    everyClientFinished = true;
                     for(int i=0;i< globalOperation.size(); i++) {
-                        if(globalOperation.at(i)->size()!=0){
-                            break;
+                        if (globalOperation.at(i)->size() != 0){
+                            everyClientFinished = false;
                         }
                     }
-                    everyClientFinished=true;
                 }
                 mtx.unlock();
                 break;
