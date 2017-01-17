@@ -195,11 +195,15 @@ void* clientThread(void *cArgs) {
     int socketDes = clientArgs->getSocketDes();
     char buffer[13000]="";
     char emptyBuffer[13000]="";
+    char dummyBuffer[100]= "";
+    int dummyInteger = 1;
+
+    //dummy send before receiving data(driver object).
+    socket->sendData(std::to_string(dummyInteger),socketDes);
 
     //receive the serialized driver from the client.
     socket->reciveData(buffer, sizeof(buffer),socketDes);
 
-    usleep(1);
     string str2(buffer, sizeof(buffer));
     //Deserialize the driver received from the client.
     boost::iostreams::basic_array_source<char> device2(str2.c_str(), str2.size());
@@ -207,15 +211,18 @@ void* clientThread(void *cArgs) {
     boost::archive::binary_iarchive ib(s3);
     ib >> driver;
 
+    //dummy send before receiving data(vehicleID object).
+    socket->sendData(std::to_string(dummyInteger),socketDes);
+
     //receive the serialized vehicleID from the client.
     socket->reciveData(buffer, sizeof(buffer),socketDes);
-    usleep(1);
     driverVehicleID = atoi(buffer);
     //TODO lock this with mutex.
     globalOperation[driver->getID()] =new queue<int>;
     mtx.lock();
     taxiCenter->addDriver(driver,driverVehicleID);
     cout << "the driver is "<<driver->getID()<<" added successfully to our station! "<<endl;
+
     Node* driverLocation = taxiCenter->getDriverLocation(driver->getID());
     //Node* driverLocation = new GridNode(Point(0,0));
     mtx.unlock();
@@ -229,7 +236,13 @@ void* clientThread(void *cArgs) {
     s4.flush();
     //sending the location
     socket->sendData(serial_str3,socketDes);
-    usleep(1);
+
+
+
+    //getting the dummy - needed in order to solve TCP problems
+    socket->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
+    //after receiving the dummy we can send our taxiCab
+
     //serialize the info of the driver(the client).
     std::string serial_str1;
     TaxiCab *taxiCab = driver->getTaxiCabInfo();
@@ -241,21 +254,27 @@ void* clientThread(void *cArgs) {
     s1.flush();
     //sending the cab
     socket->sendData(serial_str1,socketDes);
-    usleep(200);
+
     while (true) {
         if(globalOperation[driver->getID()]->size()!=0) {
-            cout<<"HALLELUYAH!" <<globalOperation[driver->getID()]->size()<<endl;
+            //cout<<"HALLELUYAH!" <<globalOperation[driver->getID()]->size()<<endl;
             mtx.lock();
             int operToDo = globalOperation[driver->getID()]->front();
             globalOperation[driver->getID()]->pop();
             mtx.unlock();
+
             switch (operToDo) {
                 case 1: {
+                    //getting the dummy - needed in order to solve TCP problems
+                    socket->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
+                    //after receiving the dummy we can send the operToDo
+
+                    //sends the client what to do
                     socket->sendData(std::to_string(operToDo),socketDes);
-                    sleep(1);
+                    //sleep(1);
                     //receiving the new location of the driver.
                     socket->reciveData(buffer, sizeof(buffer),socketDes);
-                    sleep(1);
+                    //sleep(1);
                     string str(buffer, sizeof(buffer));
                     Node *newLocation;
                     boost::iostreams::basic_array_source<char> device1(str.c_str(),
@@ -276,8 +295,18 @@ void* clientThread(void *cArgs) {
                     break;
                 }
                 case 2: {
+                    //getting the dummy - needed in order to solve TCP problems
+                    socket->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
+                    //after receiving the dummy we can send the operToDo
+
+                    //sends the client what to do
                     socket->sendData(std::to_string(operToDo),socketDes);
-                    sleep(1);
+                    //sleep(1);
+
+                    //getting the dummy - needed in order to solve TCP problems
+                    socket->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
+                    //after receiving the dummy we can send the tripToSend
+
                     mtx.lock();
                     TripInfo *tripToSend = globalTripsMap[driver->getID()];
                     mtx.unlock();
@@ -291,7 +320,7 @@ void* clientThread(void *cArgs) {
                     s1.flush();
                     //sending the trip info
                     socket->sendData(serial_str1,socketDes);
-                    sleep(1);
+                    //sleep(1);
                     break;
                 }
             }

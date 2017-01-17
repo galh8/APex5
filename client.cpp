@@ -44,9 +44,11 @@ int main(int argc, char *argv[])  {
     char driverStatus;
 
     //buffer of the data
-    char buffer[42000]="";
-    char emptyBuffer[42000]="";
-    char emptyBuffer2[42000]="";
+    char buffer[42000] = "";
+    char emptyBuffer[42000] = "";
+    char emptyBuffer2[42000] = "";
+    char dummyBuffer[100] = "";
+    int dummyInteger = 1;
 
     //indicates if the drivers needs to move
     int serverOperation;
@@ -66,6 +68,10 @@ int main(int argc, char *argv[])  {
     Driver *driver = new Driver(driverID, driverAge, driverStatus,
                                 driverExperience);
 
+    //getting the dummy - needed in order to solve TCP problems
+    client->reciveData(dummyBuffer, sizeof(dummyBuffer),dummyNum);
+    //after receiving the dummy we can send our driver
+
     //serialize the info of the driver(the client).
     std::string serial_str1;
     boost::iostreams::back_insert_device<std::string> inserter1(serial_str1);
@@ -77,16 +83,20 @@ int main(int argc, char *argv[])  {
 
     //sending the driver
     client->sendData(serial_str1,dummyNum);
-    usleep(1);
-    //cout<<"After first send! "<<endl;
+
+    //getting the dummy - needed in order to solve TCP problems
+    client->reciveData(dummyBuffer, sizeof(dummyBuffer),dummyNum);
+    //after receiving the dummy we can send our vehicleId
+
     //sending the vehicleID
     client->sendData(std::to_string(driverVehicleID),dummyNum);
-    usleep(1);
     //cout<<"After second send! "<<endl;
+
+
+
+
     //expecting a location
     client->reciveData(emptyBuffer, sizeof(emptyBuffer),dummyNum);
-    usleep(1);
-    //cout<<"After first receive! "<<endl;
     //receiving his location
     string str(emptyBuffer, sizeof(emptyBuffer));
     cout<< "The buffer size is : " << sizeof(emptyBuffer) <<endl;
@@ -101,10 +111,12 @@ int main(int argc, char *argv[])  {
     driver->setLocation(location);
     cout<<"Driver location setted successfully! his location is: "<< driver->getLocation()->valueString() <<endl;
 
+    //dummy send before receiving data(taxiCab object).
+    client->sendData(std::to_string(dummyInteger),dummyNum);
 
     //expecting a taxi
     client->reciveData(emptyBuffer2, sizeof(emptyBuffer2),dummyNum);
-    usleep(1);
+
     //cout<<"After second receive! "<<endl;
     //receiving the taxi cab of the driver.
     string str1(emptyBuffer2, sizeof(emptyBuffer2));
@@ -120,7 +132,7 @@ int main(int argc, char *argv[])  {
 
     cout << "The driver got the taxi cab (id = " <<driver->getTaxiCabInfo()->getCabID() <<") added successfully!"<<endl;
 //    delete(client);
-    //sleep(60);
+
     /**
  * loop that reicives 1 or 2.
  * 1 - move the driver.
@@ -129,9 +141,12 @@ int main(int argc, char *argv[])  {
  * 4 - exit.(realise memory).
  */
     while (true){
+        //dummy send before receiving data(serverOperation).
+        client->sendData(std::to_string(dummyInteger),dummyNum);
+
         //reicives a command to server operation variable.
         client->reciveData(buffer, sizeof(buffer),dummyNum);
-        sleep(1);
+        //sleep(1);
         serverOperation = atoi(buffer);
 
         // 1 means - move!
@@ -153,7 +168,7 @@ int main(int argc, char *argv[])  {
                     s6.flush();
                     //sending the location of the driver after moving
                     client->sendData(serial_str3,dummyNum);
-                    sleep(1);
+                    //sleep(1);
                 }else {
                     delete(driver->getCurrentTrip());
                     driver->setOccupied(false);
@@ -162,9 +177,12 @@ int main(int argc, char *argv[])  {
             }
             //if server operation = 2 the program expecting to get new trip
         } else if(serverOperation==2) { //we need to set a new trip info.
+            //dummy send before receiving data(tripInfo).
+            client->sendData(std::to_string(dummyInteger),dummyNum);
+
             //expecting a tripInfo.
             client->reciveData(buffer, sizeof(buffer),dummyNum);
-            sleep(1);
+            //sleep(1);
             string str2(buffer, sizeof(buffer));
             TripInfo* tripInfo;
             boost::iostreams::basic_array_source<char> device2(str2.c_str(), str2.size());
