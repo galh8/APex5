@@ -10,6 +10,7 @@
 #include <cstdlib>
 map<int,TripInfo*> globalTripsMap;
 map<int, queue<int>* > globalOperation;
+
 /**
  * the consturctor.
  * @param rows - the number of the rows of the grid.

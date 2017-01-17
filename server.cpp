@@ -359,12 +359,17 @@ void* clientThread(void *cArgs) {
                     //sends the client what to do
                     server->sendData(std::to_string(operToDo),socketDes);
 
-                    mtx.lock();
-                    globalOperation[driver->getID()]->pop();
-                    mtx.unlock();
+
 
                     //deleting the clientsArgs of this specific client.
                     delete(clientArgs);
+
+
+
+                    mtx.lock();
+                    delete(globalOperation[driver->getID()]);
+                    globalOperation[driver->getID()]->pop();
+                    mtx.unlock();
 
                     //terminate the thread
                     keepMovin = false;
