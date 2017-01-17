@@ -243,4 +243,8 @@ void TaxiCenter::runAllTrips(int currentTime) {
 
     }
 
+Grid *TaxiCenter::getMap() {
+    return map;
+}
+
 

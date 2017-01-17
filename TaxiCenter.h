@@ -37,6 +37,8 @@ public:
 
     ~TaxiCenter();
 
+    Grid *getMap();
+
     vector<TripInfo*> &getListOfTrips();
 
     const vector<TaxiCab*> &getTaxisList() const;
