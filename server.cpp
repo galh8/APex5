@@ -23,7 +23,6 @@ std::mutex mtx;           // mutex for critical section
 
 //declerations:
 std::map <int, pthread_t > sockThreads;
-bool printingFlg = true;
 void* getNewClients(void* port);
 void* clientThread(void *clientSocketID);
 
