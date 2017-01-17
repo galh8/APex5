@@ -78,8 +78,8 @@ int main(int argc,char* argv[]) {
                 int status = pthread_create(&clientsReceiver, NULL, getNewClients, (void *) cArgs);
                 pthread_join(clientsReceiver,NULL);
                 mtx.lock();
-                while (true){
-                    if(numberOfClients!=taxiCenter->getDriversList().size()){
+                while (true) {
+                    if(numberOfClients==taxiCenter->getDriversList().size()) {
                         break;
                     }
                 }
@@ -156,7 +156,7 @@ int main(int argc,char* argv[]) {
                 taxiCenter->runAllTrips(timePassed);
                 ++timePassed;
                 bool everyClientFinished = false;
-
+                mtx.lock();
                 while(!everyClientFinished){
                     everyClientFinished = true;
                     for(int i=0;i< globalOperation.size(); i++) {
