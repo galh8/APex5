@@ -319,6 +319,15 @@ void* clientThread(void *cArgs) {
                     mtx.unlock();
                     break;
                 }
+
+                case 4: {
+                    //getting the dummy - needed in order to solve TCP problems
+                    socket->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
+                    //after receiving the dummy we can send the operToDo
+
+                    //sends the client what to do
+                    socket->sendData(std::to_string(operToDo),socketDes);
+                }
             }
         }
     }

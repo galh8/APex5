@@ -167,7 +167,7 @@ int main(int argc, char *argv[])  {
 
             //expecting a tripInfo.
             client->reciveData(buffer, sizeof(buffer),dummyNum);
-            //sleep(1);
+
             string str2(buffer, sizeof(buffer));
             TripInfo* tripInfo;
             boost::iostreams::basic_array_source<char> device2(str2.c_str(), str2.size());
@@ -183,8 +183,7 @@ int main(int argc, char *argv[])  {
             }
 
         }else if(serverOperation == 4) {
-
-            //deletes everything and exit client.
+           //deletes everything and exit client.
             delete(client);
             delete(driver->getTaxiCabInfo());
             delete(driver);
