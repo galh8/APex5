@@ -49,6 +49,7 @@ void* clientThread(void *bfs_args) {
     BfsThreadArgs* args = ((BfsThreadArgs*)bfs_args);
     vector<Node*> route = BFS::BFS_Navigate(args->getStart(),args->getDest());
     args->setTripRoute(route);
+    delete(bfs_args);
 }
 
 pthread_t TripInfo::getBfsThread(){

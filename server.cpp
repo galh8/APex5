@@ -341,11 +341,9 @@ void* clientThread(void *cArgs) {
 
                     //sends the client what to do
                     socket->sendData(std::to_string(operToDo),socketDes);
-
                     mtx.lock();
                     globalOperation[driver->getID()]->pop();
                     mtx.unlock();
-
                     return 0;
 
                 }
