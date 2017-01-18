@@ -28,7 +28,7 @@ using namespace std;
 #define ERROR_ACCEPT 7
 #define CONNECTION_CLOSED 8
 
-#define IP "127.0.0.1"
+//#define IP "127.0.0.1"
 
 
 class Socket {
@@ -90,6 +90,8 @@ public:
     * The Function operation: returning the socket descriptor (integer).									   *
     ***********************************************************************/
     virtual int acceptOneClient() = 0;
+
+    void setIp_address(const string &ip_address);
 
 };
 

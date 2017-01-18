@@ -19,7 +19,6 @@
 * ip, and no port number and socket descriptor, 0 backlogs.			   *
 ***********************************************************************/
 Socket::Socket() {
-	this->ip_address = IP;
 	this->backLog = NONE;
 	this->socketDescriptor = NONE;
 	this->isServer = true;
@@ -34,6 +33,10 @@ Socket::Socket() {
 ***********************************************************************/
 Socket::~Socket() {
 	close(this->socketDescriptor);
+}
+
+void Socket::setIp_address(const string &ip_address) {
+    Socket::ip_address = ip_address;
 }
 
 

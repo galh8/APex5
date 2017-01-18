@@ -30,7 +30,8 @@ BOOST_CLASS_EXPORT_GUID(GridNode,"GridNode")
 BOOST_CLASS_EXPORT_GUID(StandardCab,"StandardCab")
 
 int main(int argc, char *argv[])  {
-    Socket* client = new Tcp(0, atoi(argv[1]));
+    Socket* client = new Tcp(0, atoi(argv[2]));
+    client->setIp_address(argv[1]);
     int dummyNum = 0;
     client->initialize();
 
