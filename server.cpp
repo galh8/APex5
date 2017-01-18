@@ -258,7 +258,6 @@ void* clientThread(void *cArgs) {
     //receive the serialized vehicleID from the client.
     server->reciveData(buffer, sizeof(buffer),socketDes);
     driverVehicleID = atoi(buffer);
-    //TODO lock this with mutex.
     globalOperation[driver->getID()] =new queue<int>;
     mtx.lock();
     taxiCenter->addDriver(driver,driverVehicleID);
