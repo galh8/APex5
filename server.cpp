@@ -52,7 +52,6 @@ int main(int argc,char* argv[]) {
     //initializing the server
     int port = atoi(argv[1]);
     Socket *server = new Tcp(1,port);
-    server->setIp_address("127.0.0.1");
     //defining ClientThreadArgs
     ClientThreadArgs *cArgs;
 

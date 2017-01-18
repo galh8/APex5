@@ -19,7 +19,8 @@
 * ip, and no port number and socket descriptor, 0 backlogs.			   *
 ***********************************************************************/
 Socket::Socket() {
-	this->backLog = NONE;
+	this->ip_address = IP;
+    this->backLog = NONE;
 	this->socketDescriptor = NONE;
 	this->isServer = true;
 	this->port_number = NONE;
