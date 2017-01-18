@@ -38,7 +38,8 @@ int main(int argc, char *argv[])  {
     char dummy;
 
     //Driver variables
-    int driverID, driverAge, driverExperience, driverVehicleID;
+    int driverID, driverAge, driverExperience;
+    long long driverVehicleID;
     char driverStatus;
 
     //buffer of the data
@@ -46,7 +47,7 @@ int main(int argc, char *argv[])  {
     char emptyBuffer[42000] = "";
     char emptyBuffer2[42000] = "";
     char dummyBuffer[42000] = "";
-    int dummyInteger = 1;
+    long long dummyInteger = 1;
 
     //indicates if the drivers needs to move
     int serverOperation;

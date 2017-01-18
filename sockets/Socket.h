@@ -5,8 +5,8 @@
 * inherit from Socket class									*
 ************************************************************/
 
-#ifndef SOCKET_H_
-#define SOCKET_H_
+#ifndef PLAYWITHSOCKETS_SOCKET_H_
+#define PLAYWITHSOCKETS_SOCKET_H_
 
 #include <sys/socket.h>
 #include <netinet/in.h>

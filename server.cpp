@@ -237,7 +237,7 @@ void* clientThread(void *cArgs) {
     char buffer[13000]="";
     char emptyBuffer[13000]="";
     char dummyBuffer[100]= "";
-    int dummyInteger = 1;
+    long long dummyInteger = 1;
 
     //dummy send before receiving data(driver object).
     server->sendData(std::to_string(dummyInteger),socketDes);
@@ -296,7 +296,7 @@ void* clientThread(void *cArgs) {
 
     while (keepMovin) {
         if(globalOperation[driver->getID()]->size()!=0) {
-            int operToDo = globalOperation[driver->getID()]->front();
+            long long operToDo = globalOperation[driver->getID()]->front();
             switch (operToDo) {
                 case 1: {
                     //getting the dummy - needed in order to solve TCP problems

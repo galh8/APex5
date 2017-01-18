@@ -3,8 +3,8 @@
 * socket. methods of tcp socket type						*
 ************************************************************/
 
-#ifndef TCP_H_
-#define TCP_H_
+#ifndef PLAYWITHSOCKETS_TCP_H_
+#define PLAYWITHSOCKETS_TCP_H_
 
 #include "Socket.h"
 
@@ -63,4 +63,4 @@ public:
     int acceptOneClient();
 };
 
-#endif /* TCP_H_ */
+#endif /* PLAYWITHSOCKETS_TCP_H_ */
