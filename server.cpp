@@ -310,7 +310,7 @@ void* clientThread(void *cArgs) {
     //sending the cab
     server->sendData(serial_str1,socketDes);
     LINFO<<"The cab "<<taxiCab->getCabID()<<" sent to driver "<<driver->getID();
-
+    LINFO<<"Infinite while of thread (of driverID "<<driver->getID()<<") started...";
     while (keepMovin) {
         if(globalOperation[driver->getID()]->size()!=0) {
             long long operToDo = globalOperation[driver->getID()]->front();
@@ -319,9 +319,9 @@ void* clientThread(void *cArgs) {
                     //getting the dummy - needed in order to solve TCP problems
                     server->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
                     //after receiving the dummy we can send the operToDo
-
                     //sends the client what to do
                     server->sendData(std::to_string(operToDo),socketDes);
+                    LINFO<<"The operation "<<operToDo<<" sent to client";
                     //receiving the new location of the driver.
                     server->reciveData(buffer, sizeof(buffer),socketDes);
                     string str(buffer, sizeof(buffer));
@@ -334,7 +334,7 @@ void* clientThread(void *cArgs) {
                     ia >> newLocation;
                     //Setting the new location of the driver.
                     mtx.lock();
-
+                    LINFO<<"The new location of driver "<<driver->getID()<< " is "<< newLocation->valueString();
                     Point newPoint = (*((Point *) newLocation->getValue()));
                     driver->setLocation(taxiCenter->getMap()->getGridNode(newPoint));
 
