@@ -215,6 +215,7 @@ void* getNewClients(void* cArgs) {
     Socket *server = clientArgs->getServer();
     int numberOfClients = clientArgs->getNumberOfClients();
     server->initialize();
+    LINFO<<"Server socket initialized ";
     clientArgs->setServer(server);
     int goodReception;
     for(int i=0; i<numberOfClients ;++i) {
@@ -231,12 +232,14 @@ void* getNewClients(void* cArgs) {
             if(status) {
                 cout<<"ERROR! ";
             }
+            LINFO<<"The thread of the client "<<i+1<<"  created successfuly!";
         }
     }
 
 }
 
 void* clientThread(void *cArgs) {
+
     ClientThreadArgs *clientArgs = ((ClientThreadArgs*)cArgs);
 
     TaxiCenter *taxiCenter = clientArgs->getTaxiCenter();
@@ -246,6 +249,7 @@ void* clientThread(void *cArgs) {
     Driver *driver;
     Socket *server = clientArgs->getServer();
     int socketDes = clientArgs->getSocketDes();
+    LINFO<<"The thread of the client "<<socketDes<<"  (socket descriptor) started !";
     char buffer[13000]="";
     char emptyBuffer[13000]="";
     char dummyBuffer[100]= "";
@@ -256,21 +260,22 @@ void* clientThread(void *cArgs) {
 
     //receive the serialized driver from the client.
     server->reciveData(buffer, sizeof(buffer),socketDes);
-
     string str2(buffer, sizeof(buffer));
     //Deserialize the driver received from the client.
     boost::iostreams::basic_array_source<char> device2(str2.c_str(), str2.size());
     boost::iostreams::stream<boost::iostreams::basic_array_source<char> > s3(device2);
     boost::archive::binary_iarchive ib(s3);
     ib >> driver;
-
+    LINFO<<"The serialized driver received successfuly, his ID is "<<driver->getID();
     //dummy send before receiving data(vehicleID object).
     server->sendData(std::to_string(dummyInteger),socketDes);
 
     //receive the serialized vehicleID from the client.
     server->reciveData(buffer, sizeof(buffer),socketDes);
     driverVehicleID = atoi(buffer);
+    LINFO<<"The vehicle ID received from client is: "<<driverVehicleID;
     globalOperation[driver->getID()] =new queue<int>;
+    LINFO<<"The global map of driver "<<driver->getID()<<" Initialized!";
     mtx.lock();
     taxiCenter->addDriver(driver,driverVehicleID);
 
@@ -286,7 +291,7 @@ void* clientThread(void *cArgs) {
     s4.flush();
     //sending the location
     server->sendData(serial_str3,socketDes);
-
+    LINFO<<"The first location sent ["<<driverLocation->valueString()<<"]";
 
 
     //getting the dummy - needed in order to solve TCP problems
@@ -304,6 +309,7 @@ void* clientThread(void *cArgs) {
     s1.flush();
     //sending the cab
     server->sendData(serial_str1,socketDes);
+    LINFO<<"The cab "<<taxiCab->getCabID()<<" sent to driver "<<driver->getID();
 
     while (keepMovin) {
         if(globalOperation[driver->getID()]->size()!=0) {
