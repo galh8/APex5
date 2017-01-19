@@ -76,8 +76,10 @@ int main(int argc,char* argv[]) {
                 int numberOfClients;
                 cin>>numberOfClients;
                 cArgs = new ClientThreadArgs(taxiCenter, server,numberOfClients);
+                LINFO<<"Creating the thread for getting new clients! ";
                 int status = pthread_create(&clientsReceiver, NULL, getNewClients, (void *) cArgs);
                 pthread_join(clientsReceiver,NULL);
+                LINFO<<"Finished to accept clients, waiting for receiving all the drivers! ";
                 while (true) {
                     if(numberOfClients==taxiCenter->getDriversList().size()) {
                         break;
@@ -123,6 +125,7 @@ int main(int argc,char* argv[]) {
             case 4: {
                 //the id of the driver we want to find.
                 cin >> driverID_toFind;
+                LINFO<<"Waiting that the driver will finish all his steps before printing his location. ";
                 //printing the driver location just when the driver finished to move
                 while (true) {
                     //can print just if the printing flg is true.
@@ -135,13 +138,14 @@ int main(int argc,char* argv[]) {
             }
             case 7: {
                 mtx.lock();
+                LINFO<<"Send the thread a sign that the program finishing. ";
                 for (int i = 0; i < taxiCenter->getDriversList().size(); i++) {
                     globalOperation[taxiCenter->getDriversList()[i]->getID()]->push(4);
                 }
                 mtx.unlock();
 
                 bool everyClientFinished = false;
-
+                LINFO<<"Waiting for all the clients to finish their work ";
                 while(!everyClientFinished){
                     everyClientFinished = true;
                     for(int i=0;i< globalOperation.size(); i++) {
@@ -151,7 +155,7 @@ int main(int argc,char* argv[]) {
                         }
                     }
                 }
-
+                LINFO<<"All the clients finished their work. starting to free memory. ";
                 //frees everything
 
                 //deletes the taxiCenter.
@@ -165,7 +169,7 @@ int main(int argc,char* argv[]) {
                     queue<int> *queueToDel = globalOperation.at(i);
                     delete(queueToDel);
                 }
-
+                LINFO<<"All the memory released ";
                 return 0;
             }
             case 9: {
