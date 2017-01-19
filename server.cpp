@@ -15,7 +15,7 @@
 #include "StandardCab.h"
 #include "ClientThreadArgs.h"
 #include <mutex>
-
+#include "easylogging++.h"
 std::mutex mtx;           // mutex for critical section
 
 
@@ -28,6 +28,7 @@ void* clientThread(void *clientSocketID);
 BOOST_CLASS_EXPORT_GUID(LuxuryCab,"LuxuryCab")
 BOOST_CLASS_EXPORT_GUID(GridNode,"GridNode")
 BOOST_CLASS_EXPORT_GUID(StandardCab,"StandardCab")
+_INITIALIZE_EASYLOGGINGPP
 
 int main(int argc,char* argv[]) {
     int sizeX, sizeY;

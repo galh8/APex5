@@ -22,12 +22,14 @@
 #include <boost/serialization/assume_abstract.hpp>
 #include <boost/serialization/export.hpp>
 #include "sockets/Tcp.h"
+#include "easylogging++.h"
 
 using namespace std;
 
 BOOST_CLASS_EXPORT_GUID(LuxuryCab,"LuxuryCab")
 BOOST_CLASS_EXPORT_GUID(GridNode,"GridNode")
 BOOST_CLASS_EXPORT_GUID(StandardCab,"StandardCab")
+_INITIALIZE_EASYLOGGINGPP
 
 int main(int argc, char *argv[])  {
     Socket* client = new Tcp(0, atoi(argv[2]));
@@ -160,7 +162,7 @@ int main(int argc, char *argv[])  {
                 }else {
                     delete(driver->getCurrentTrip());
                     int routeSize = driver->getTripRoute().size();
-                    for(int j=0;i<routeSize;j++){
+                    for(int j=0;j<routeSize;j++){
                         delete(driver->getTripRoute()[j]);
                     }
                     driver->setOccupied(false);
