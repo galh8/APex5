@@ -321,7 +321,7 @@ void* clientThread(void *cArgs) {
                     //after receiving the dummy we can send the operToDo
                     //sends the client what to do
                     server->sendData(std::to_string(operToDo),socketDes);
-                    LINFO<<"The operation "<<operToDo<<" sent to client";
+                    LINFO<<"The operation "<<operToDo<<" sent to client (DriverID "<<driver->getID()<<")";
                     //receiving the new location of the driver.
                     server->reciveData(buffer, sizeof(buffer),socketDes);
                     string str(buffer, sizeof(buffer));
@@ -339,9 +339,10 @@ void* clientThread(void *cArgs) {
                     driver->setLocation(taxiCenter->getMap()->getGridNode(newPoint));
 
                     delete(newLocation);
-
+                    LINFO<<"The temp location deleted successfully!";
                     if ((*((Point *) driver->getLocation()->getValue())) ==
                         *((Point *) (driver->getCurrentTrip()->getEndingPoint()->getValue()))) {
+                        LINFO<<"The driver "<<driver->getID()<< " arrived to his destination";
                         driver->setOccupied(false);
                         driver->setTripInfo(NULL);
                     }
@@ -356,7 +357,7 @@ void* clientThread(void *cArgs) {
 
                     //sends the client what to do
                     server->sendData(std::to_string(operToDo),socketDes);
-
+                    LINFO<<"The operation "<<operToDo<<" sent to client (DriverID "<<driver->getID()<<")";
                     //getting the dummy - needed in order to solve TCP problems
                     server->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
                     //after receiving the dummy we can send the tripToSend
@@ -371,6 +372,9 @@ void* clientThread(void *cArgs) {
                     s1.flush();
                     //sending the trip info
                     server->sendData(serial_str1,socketDes);
+                    LINFO<<"The trip from "<<tripToSend->getStartingPoint()->valueString() <<
+                                               " to "<<tripToSend->getEndingPoint()->valueString()<<" sent to driver "<<
+                            driver->getID();
                     mtx.lock();
                     globalOperation[driver->getID()]->pop();
                     mtx.unlock();
@@ -384,11 +388,12 @@ void* clientThread(void *cArgs) {
 
                     //sends the client what to do
                     server->sendData(std::to_string(operToDo),socketDes);
-
+                    LINFO<<"The operation "<<operToDo<<" sent to client (DriverID "<<driver->getID()<<")";
 
 
                     //deleting the clientsArgs of this specific client.
                     delete(clientArgs);
+                    LINFO<<"Client args released.";
                     mtx.lock();
                     globalOperation[driver->getID()]->pop();
                     mtx.unlock();
