@@ -159,7 +159,10 @@ int main(int argc, char *argv[])  {
 
                 }else {
                     delete(driver->getCurrentTrip());
-
+                    int routeSize = driver->getTripRoute().size();
+                    for(int j=0;i<routeSize;j++){
+                        delete(driver->getTripRoute()[j]);
+                    }
                     driver->setOccupied(false);
                     driver->setTripInfo(NULL);
                 }

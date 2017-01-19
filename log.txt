@@ -1,0 +1,568 @@
+* commit 409f41cb3025a334d17ba112f0e464718b0aab75
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Wed Jan 18 13:43:36 2017 +0200
+| 
+|     removing todo
+|  
+* commit 0a378a3ed8a080552ff0e28f8d675cae35cee0ef
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Wed Jan 18 13:29:05 2017 +0200
+| 
+|     inserting ip address version 2
+|  
+* commit b6ad9234175d3896ed8b5f976aa1bd582b082732
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Wed Jan 18 13:20:26 2017 +0200
+| 
+|     inserting ip address
+|  
+* commit 55e3385e68327ed4dd40728b5a329d604c2c0c33
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Wed Jan 18 11:57:16 2017 +0200
+| 
+|     updating the int of the to_string to long long
+|  
+* commit 7d379137e9cd4f1cefd4c36ae277ae5f244d76d5
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 23:28:24 2017 +0200
+| 
+|     playing with the serializtion
+|  
+* commit befdd05b5a6dacd82534e46ae7be8286fe0f26e7
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 23:26:09 2017 +0200
+| 
+|     playing with the serializtion
+|  
+* commit 5367c2ed1e758b850a07ccac7d6c710867dcc958
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 23:21:27 2017 +0200
+| 
+|     playing with the serializtion
+|  
+* commit c03d24676c4d78e441b117f6304ef4f67efdda67
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 23:01:34 2017 +0200
+| 
+|     releases finished!!!
+|  
+* commit b50f4cce0e0dae1c8fbf016af075652c7af177e3
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 22:52:09 2017 +0200
+| 
+|     releases finished!!!
+|  
+* commit 457b4b29d7c3bdbab97e7e8998e3c5118d65983a
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 22:51:36 2017 +0200
+| 
+|     releases finished!!!
+|  
+* commit a7402de6bac83704c50bc4f26a668d599eb6b145
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 22:48:29 2017 +0200
+| 
+|     releases finished!!!
+|  
+* commit 547b8d405186a390be0623eda87819318fda9220
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 22:35:45 2017 +0200
+| 
+|     releases finished!!!
+|  
+* commit 939466fe69de01b4e02a335836d80ff57a617fde
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 22:29:21 2017 +0200
+| 
+|     releases finished!!!
+|  
+* commit c93c8b64014c474a2da022377c861a1feee78e97
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 22:19:03 2017 +0200
+| 
+|     releases finished!!!
+|  
+* commit 3c60f954d030bd155f736890108a3468d5183f68
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 22:17:23 2017 +0200
+| 
+|     Release Queue
+|  
+* commit 1b787cd87840fddcc4ce9c95bf1615ea770eed59
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 22:15:24 2017 +0200
+| 
+|     fuck the mutex version2
+|  
+* commit 0a6f10a225222e7fcf6a4668bdbaa5b765bd46e3
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 22:12:09 2017 +0200
+| 
+|     fuck the mutex
+|  
+* commit 75a741fdc75d58fcd1aae64c8b45911f59f62e3d
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 22:08:26 2017 +0200
+| 
+|     Release Queue
+|  
+* commit 395950a5f15e563c555b5a5064c332f02c87ef84
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 22:04:34 2017 +0200
+| 
+|     Release Queue
+|  
+* commit 231204e31ead13ca4ef9bc1df5d99dd6e0049109
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 22:03:02 2017 +0200
+| 
+|     Release Queue
+|  
+* commit 5b9a19c6e6bee2d4fbef4700f9000583cf57cb8c
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 21:39:45 2017 +0200
+| 
+|     server -  deleting the last node after current node was updated
+|  
+* commit 538f292a61d49e5b795b7f8c3d3b95278eeba8fa
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 21:36:34 2017 +0200
+| 
+|     server -  deleting the last node after current node was updated
+|  
+* commit 525d351df183c6155ba62e1ab7ef8f94ac73a591
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 21:27:34 2017 +0200
+| 
+|     tring to realise the queue in the univrasal map
+|  
+* commit 3547c7ddee3b89ba6c6a1169709225c287af9835
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 21:24:50 2017 +0200
+| 
+|     tring to realise the queue in the univrasal map
+|  
+* commit 59c5cac8bed23c7aff23808633f6d21a25e6c52a
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 21:07:34 2017 +0200
+| 
+|     exiting the program completed. memcheck needed
+|  
+* commit ff00cdb985249306ae4276b2961ce8ba190adc14
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 20:07:52 2017 +0200
+| 
+|     Starting to release memory
+|  
+* commit 3a4d24697bd44c2a09f811b4b5657410c7e6a858
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 20:06:16 2017 +0200
+| 
+|     Starting to release memory
+|  
+* commit f675b2247ddfc71a12f2a0c86b52546611c0f335
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 20:02:18 2017 +0200
+| 
+|     Starting to release memory
+|  
+* commit ff19ee7783808b9943333f30a7db9e99fd5c6a24
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 20:00:27 2017 +0200
+| 
+|     Starting to release memory
+|  
+* commit d4b624e9552668191435dbd482a5d0d06d7450e4
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 19:47:23 2017 +0200
+| 
+|     trying to end to program properly v.2
+|  
+* commit ae77adf76481fc3c3673fbbde0b6f5e2f8ed07b2
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 19:42:41 2017 +0200
+| 
+|     trying to end to program properly
+|  
+* commit a0cc0687ad0627ef47e6a2015b601e91427b418c
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 19:35:14 2017 +0200
+| 
+|     }
+|  
+* commit ccb21f3e644e8bdd95bd7b1af035cd53af0a71cc
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 19:34:15 2017 +0200
+| 
+|     }
+|  
+* commit 9cf53a79004f5144115aa7eb224658e0ae22e733
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 19:32:04 2017 +0200
+| 
+|     Comments...(at client)
+|  
+* commit 560f30887280a4383963e4ba76ce6e34ed893630
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 19:30:07 2017 +0200
+| 
+|     Comments...
+|  
+* commit 02d94d9bb5deec3a2ecb934f41e41311def3cb0a
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 19:20:04 2017 +0200
+| 
+|     Less mutexes
+|  
+* commit 435da676ac93878eb1d8535903eb7dbdc53baa96
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 18:56:52 2017 +0200
+| 
+|     Insert all the input together.partly works
+|  
+* commit 5fdb3f1d727939f706e654d6496720b2074efe18
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 18:54:24 2017 +0200
+| 
+|     Insert all the input together.partly works
+|  
+* commit 3c7c0f688bb81b033ee4b35f268edee92f5c30c4
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 18:49:16 2017 +0200
+| 
+|     Insert all the input together.partly works
+|  
+* commit 13436446addb91992decfffa2829075714308379
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 18:43:51 2017 +0200
+| 
+|     Insert all the input together.partly works
+|  
+* commit fe6ffa0dd803fdb1a577f0efd23ef87a72b21958
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 18:40:57 2017 +0200
+| 
+|     changing every client finished vrsion 2
+|  
+* commit 048696341d09a4a4b07f7a3890360b98731d5b33
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 18:39:22 2017 +0200
+| 
+|     changing every client finished
+|  
+* commit e4ce6e821add553ce49564307a9004d7b43590b4
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 18:31:38 2017 +0200
+| 
+|     Insert all the input together.partly works
+|  
+* commit 6a19fd7f0f34771ff9562c05b8c6d83284b2e4f7
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 15:48:19 2017 +0200
+| 
+|     mutex
+|    
+*   commit 3f29505dd27f2fba7345c7dc042f431f1289d80f
+|\  Merge: 66b326c d6583b6
+| | Author: galh8 <galhuta@gmail.com>
+| | Date:   Tue Jan 17 15:11:46 2017 +0200
+| | 
+| |     Merge remote-tracking branch 'origin/master'
+| |   
+| * commit d6583b6138e1da098b30aadc86d9297e41f8f41c
+| | Author: amirhalfon1 <halfonamir1@gmail.com>
+| | Date:   Tue Jan 17 15:10:41 2017 +0200
+| | 
+| |     new mutex
+| |     
+* |   commit 66b326c39956ff37e98298faae8f55386867a377
+|\ \  Merge: d3e1572 87539f3
+| |/  Author: galh8 <galhuta@gmail.com>
+| |   Date:   Tue Jan 17 14:15:52 2017 +0200
+| |   
+| |       Merge remote-tracking branch 'origin/master'
+| |   
+| * commit 87539f3c54986667a058485a241d88778951c679
+| | Author: amirhalfon1 <halfonamir1@gmail.com>
+| | Date:   Tue Jan 17 14:15:34 2017 +0200
+| | 
+| |     Problems with printing location..more mutex removed
+| |     
+* |   commit d3e15721fd01aa18fcf7017cda23ea185cb809c8
+|\ \  Merge: 3f8c751 b5737af
+| |/  Author: galh8 <galhuta@gmail.com>
+| |   Date:   Tue Jan 17 14:07:36 2017 +0200
+| |   
+| |       Merge remote-tracking branch 'origin/master'
+| |       
+| |       # Conflicts:
+| |       #	server.cpp
+| |   
+| * commit b5737af70fe60c0b6e12f055779989b512e96937
+| | Author: amirhalfon1 <halfonamir1@gmail.com>
+| | Date:   Tue Jan 17 14:07:20 2017 +0200
+| | 
+| |     Problems with printing location..more mutex removed
+| |     
+* |   commit 3f8c751bee48b653be2e497724511b79683e3f5b
+|\ \  Merge: c56e923 47b8dd3
+| |/  Author: galh8 <galhuta@gmail.com>
+| |   Date:   Tue Jan 17 14:04:28 2017 +0200
+| |   
+| |       Merge remote-tracking branch 'origin/master'
+| |   
+| * commit 47b8dd346ab5a5fe756962df6ca608fd93bbc072
+| | Author: amirhalfon1 <halfonamir1@gmail.com>
+| | Date:   Tue Jan 17 14:04:10 2017 +0200
+| | 
+| |     Problems with printing location..more mutex removed
+| |   
+| * commit 2bd302d85180acdbb29c48e301da99e9db965e18
+| | Author: amirhalfon1 <halfonamir1@gmail.com>
+| | Date:   Tue Jan 17 13:56:59 2017 +0200
+| | 
+| |     Problems with printing location..more mutex removed
+| |     
+| *   commit 83de0bd8fd54e4c87c06087899d77a99fd2f3cc9
+| |\  Merge: 16fdc5a 6260a94
+| | | Author: amirhalfon1 <halfonamir1@gmail.com>
+| | | Date:   Tue Jan 17 13:53:41 2017 +0200
+| | | 
+| | |     Merge remote-tracking branch 'origin/master'
+| | |    
+| * | commit 16fdc5a25bf8e9a0c637f13ba71a9fd62567ae52
+| | | Author: amirhalfon1 <halfonamir1@gmail.com>
+| | | Date:   Tue Jan 17 13:53:24 2017 +0200
+| | | 
+| | |     Problems with printing location..more mutex added
+| | |    
+* | | commit c56e9233579dab40dfeb7b4665f452999161dc46
+| |/  Author: galh8 <galhuta@gmail.com>
+|/|   Date:   Tue Jan 17 14:02:35 2017 +0200
+| |   
+| |       trying to print properly
+| |   
+* | commit 6260a94aba045d2e0348e454ba3dfcaf600b6ac0
+|/  Author: galh8 <galhuta@gmail.com>
+|   Date:   Tue Jan 17 13:49:40 2017 +0200
+|   
+|       meaningful name for the printing flg
+|  
+* commit cbb293541b5a1463ad1e4d42ac0b5ec1dc13ff04
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 13:45:25 2017 +0200
+| 
+|     trying to print good
+|  
+* commit 506267f3250c960b7634e17649444db0455b077d
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 13:33:48 2017 +0200
+| 
+|     poping just after finishing the operation
+|  
+* commit 9d7d5d46c9676a51db79390407ea08960fccaca6
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 13:30:36 2017 +0200
+| 
+|     print driver location works comments
+|  
+* commit c6dde871850d2763dbdf308c4d8ab9977e8aed27
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 13:27:38 2017 +0200
+| 
+|     print driver location works
+|  
+* commit 185ab67d21520bde10a6986d79934e23b804205a
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 13:21:25 2017 +0200
+| 
+|     Problems with printing location
+|  
+* commit f1c877b3f4a10343dc5b5dcaa2ce154e45ea156c
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 12:55:01 2017 +0200
+| 
+|     print from the thread
+|  
+* commit 9fe0fde27cadf0230b6a9707a6b6612930ca52c3
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Tue Jan 17 12:00:16 2017 +0200
+| 
+|     all the sleep was removed... controlling tcp receiving and sending with dummys
+|  
+* commit 5cc8445649b7d2d3d746e25ec2435a33b1865f02
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 00:54:07 2017 +0200
+| 
+|     Adding mutexes. last push, good night
+|  
+* commit 589325d3766c0427ca4f75af3e34edee08d5d1da
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 00:48:49 2017 +0200
+| 
+|     canceled part of the node serialization, and now it works also for big grids...Halleluyah!!!!!
+|  
+* commit 28d67bf17e9a72778255c318c937f9a07b91237b
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Tue Jan 17 00:27:32 2017 +0200
+| 
+|     canceled part of the node serialization, and now it works also for big grids...Halleluyah!!!!!
+|  
+* commit 484f7d777209e005a8667c8315f6d23210000e7f
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Sun Jan 15 02:11:36 2017 +0200
+| 
+|     last try of big grid. its still doesnt work :(
+|  
+* commit 91e1c1fcb4e76987cd0b0cc2eb0d53c2bca92464
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Sat Jan 14 23:21:14 2017 +0200
+| 
+|     External thread for bfs calculating.
+|  
+* commit 00b693fd472b5bf4b55132e7444bf5ed551345a3
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Sat Jan 14 23:16:45 2017 +0200
+| 
+|     mutex locks...
+|  
+* commit 9f3163cf32379f5bdb53a5a06e73c97fc9899af8
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Sat Jan 14 19:58:35 2017 +0200
+| 
+|     mutex locks...
+|  
+* commit 241d4a4e53814de5b50673f6b1ea8483edeab092
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Sat Jan 14 19:47:56 2017 +0200
+| 
+|     trying mutex
+|  
+* commit cfbad57d9400ab4f20e66307694308407840cff9
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Sat Jan 14 19:24:54 2017 +0200
+| 
+|     the new one, after gal changes
+|  
+* commit c87670cf8ea8070a7e158c8e1d9c1910b5ed5bb7
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Fri Jan 13 14:19:25 2017 +0200
+| 
+|     going back
+|  
+* commit ef075cd5bef89b88de9e641dbbe0153e315e6970
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Fri Jan 13 14:16:34 2017 +0200
+| 
+|     receive after send..
+|    
+*   commit 4148f3f83e79a2b9e8c8da616ee0f169e7cfea4f
+|\  Merge: e043607 680bacb
+| | Author: amirhalfon1 <halfonamir1@gmail.com>
+| | Date:   Fri Jan 13 14:09:05 2017 +0200
+| | 
+| |     Merge remote-tracking branch 'origin/master'
+| |   
+| * commit 680bacb290b7b613be9828066220df90207d0ebc
+| | Author: galh8 <galhuta@gmail.com>
+| | Date:   Fri Jan 13 14:07:15 2017 +0200
+| | 
+| |     try again to syncronnize
+| |   
+* | commit e04360752a7011d536fe593c076ea42109be9ebf
+|/  Author: amirhalfon1 <halfonamir1@gmail.com>
+|   Date:   Fri Jan 13 14:08:57 2017 +0200
+|   
+|       receive after send..
+|    
+*   commit 276dc1f12053f045ebb05d72d28d9091036c52f3
+|\  Merge: 5f20f2a 5aaf381
+| | Author: amirhalfon1 <halfonamir1@gmail.com>
+| | Date:   Fri Jan 13 14:03:58 2017 +0200
+| | 
+| |     Merge remote-tracking branch 'origin/master'
+| |   
+| * commit 5aaf3811693015b36a37b7e2901e61d5e736f489
+| | Author: galh8 <galhuta@gmail.com>
+| | Date:   Fri Jan 13 14:03:38 2017 +0200
+| | 
+| |     try
+| |   
+* | commit 5f20f2a29dcd5bf37516d2242ef38a18f9462d8b
+|/  Author: amirhalfon1 <halfonamir1@gmail.com>
+|   Date:   Fri Jan 13 14:03:44 2017 +0200
+|   
+|       receive after send..
+|  
+* commit 6af1e00453bf98ce496ac4f4fbcad219c585f182
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Fri Jan 13 13:52:26 2017 +0200
+| 
+|     receive after send..
+|    
+*   commit 9bf8ad451a1f0d594ff69c29cc34729bbd823166
+|\  Merge: 2f6ef4f 5f5d152
+| | Author: amirhalfon1 <halfonamir1@gmail.com>
+| | Date:   Fri Jan 13 13:47:41 2017 +0200
+| | 
+| |     Merge remote-tracking branch 'origin/master'
+| |   
+| * commit 5f5d15268f7849f60e81e9197811a69f1f5b96bc
+| | Author: galh8 <galhuta@gmail.com>
+| | Date:   Fri Jan 13 13:45:28 2017 +0200
+| | 
+| |     try
+| |   
+* | commit 2f6ef4fe49e8dfefb7bb09fc4c37316f81ef74b2
+|/  Author: amirhalfon1 <halfonamir1@gmail.com>
+|   Date:   Fri Jan 13 13:47:22 2017 +0200
+|   
+|       receive after send..
+|  
+* commit 16fcb4e7abe8dedd8c0183debcf06cf186a66925
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Fri Jan 13 13:24:25 2017 +0200
+| 
+|     trying to understand whats going on with the timing
+|  
+* commit c0b50a4ee3a38d0f075cd89b3998b0ce013cb9b3
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Fri Jan 13 13:22:42 2017 +0200
+| 
+|     trying to understand whats going on with the timing
+|  
+* commit 09f8a95eeaf72e4c2cfa08a570b9dc04f1ea2c5e
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Fri Jan 13 13:17:41 2017 +0200
+| 
+|     Sleep after every send/receive..
+|  
+* commit b592da88e15892e535ccab76ef15e4d04cc531bd
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Fri Jan 13 13:07:43 2017 +0200
+| 
+|     updating number of clients
+|  
+* commit a1c255c8a8b2567a03354dc2f9f7b5e2118eaa6c
+| Author: amirhalfon1 <halfonamir1@gmail.com>
+| Date:   Fri Jan 13 12:12:05 2017 +0200
+| 
+|     Sleep after every send/receive..
+|  
+* commit 2934930ebc4fdddd34798cdecffb85c395477e77
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Fri Jan 13 11:37:37 2017 +0200
+| 
+|     updating ClientThreadArgs
+|  
+* commit 3e3fc67f5597825d1db6f26895873caf7cd5a023
+| Author: galh8 <galhuta@gmail.com>
+| Date:   Fri Jan 13 11:25:59 2017 +0200
+| 
+|     optimization to runAllTrips. Kaminka style
+|  
+* commit 51acc72a86e1b70c10316d10c861509b18cb3963
+  Author: galh8 <galhuta@gmail.com>
+  Date:   Fri Jan 13 11:08:46 2017 +0200
+  
+      Initial commit
