@@ -156,9 +156,10 @@ int main(int argc, char *argv[])  {
                     s6.flush();
                     //sending the location of the driver after moving
                     client->sendData(serial_str3,dummyNum);
-;
+
                 }else {
                     delete(driver->getCurrentTrip());
+
                     driver->setOccupied(false);
                     driver->setTripInfo(NULL);
                 }
@@ -183,6 +184,7 @@ int main(int argc, char *argv[])  {
                 driver->setOccupied(true);
                 //setting trip info to the driver.
                 driver->setTripInfo(tripInfo);
+                driver->setTripRoute(tripInfo->gettripRoute());
             }
 
         }else if(serverOperation == 4) {

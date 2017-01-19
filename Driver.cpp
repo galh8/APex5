@@ -218,4 +218,12 @@ void Driver::move() {
 
 }
 
+vector<Node *> &Driver::getTripRoute() {
+    return tripRoute;
+}
+
+void Driver::setTripRoute(const vector<Node *> &tripRoute) {
+    Driver::tripRoute = tripRoute;
+}
+
 

@@ -33,6 +33,7 @@ private:
     int age;
     int yearsExperience;
     TripInfo *currentTrip;
+    vector<Node*> tripRoute;
     char driverMartialStatus;
     DriverSatisfaction *averageSatisfaction;
     TaxiCab* taxiCabInfo;
@@ -78,6 +79,10 @@ public:
     bool isOccupied();
     TripInfo* getCurrentTrip();
     void move();
+
+    vector<Node *> &getTripRoute();
+
+    void setTripRoute(const vector<Node *> &tripRoute);
 
 };
 

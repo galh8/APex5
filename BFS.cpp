@@ -9,8 +9,7 @@ using namespace std;
 
 vector<Node*> BFS::BFS_Navigate(Node *startNode, Node *destNode) {
     //vector that saves the node we've changed. to change it back when finish.
-    vector<Node*>backupChangedNodes;
-    vector<Node*> route ;
+    vector<Node*>backupChangedNodes;    vector<Node*> route ;
     //if one of the locations is null, there is no route.
     if((startNode == NULL)||(destNode== NULL)){
         return route;
