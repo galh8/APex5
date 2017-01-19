@@ -160,21 +160,27 @@ int main(int argc,char* argv[]) {
 
                 //deletes the taxiCenter.
                 delete(taxiCenter);
+                LINFO<<"Texi center released successfuly ";
                 //deletes the server.
                 delete(server);
+                LINFO<<"server released successfuly ";
                 //deletes clientArgs.
                 delete(cArgs);
-
+                LINFO<<"cArgs released successfuly ";
                 for(int i=0;i<globalOperation.size();i++){
                     queue<int> *queueToDel = globalOperation.at(i);
                     delete(queueToDel);
                 }
+                LINFO<<"All the queues released successfuly from the global map ";
                 LINFO<<"All the memory released ";
                 return 0;
             }
             case 9: {
                 mtx.lock();
+                LINFO<<"Start linking trips to drivers. ";
                 taxiCenter->linkDriversTrips(timePassed);
+                LINFO<<"Finished link trips to drivers.";
+                LINFO<<"Start running all the trips. ";
                 taxiCenter->runAllTrips(timePassed);
                 mtx.unlock();
                 ++timePassed;
@@ -188,6 +194,7 @@ int main(int argc,char* argv[]) {
                         }
                     }
                 }
+                LINFO<<"All the trips finished to run (also in client) ";
                 break;
             }
 
