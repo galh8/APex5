@@ -87,12 +87,16 @@ int main(int argc, char *argv[])  {
     //sending the driver
     client->sendData(serial_str1,dummyNum);
 
+    LINFO<<"sending the driver " << driver->getID();
+
     //getting the dummy - needed in order to solve TCP problems
     client->reciveData(dummyBuffer, sizeof(dummyBuffer),dummyNum);
     //after receiving the dummy we can send our vehicleId
 
     //sending the vehicleID
     client->sendData(std::to_string(driverVehicleID),dummyNum);
+
+    LINFO<<"sending the vehicleId " <<  driver->getID() << "and his vehicle id " << driverVehicleID;
 
     //expecting a location
     client->reciveData(emptyBuffer, sizeof(emptyBuffer),dummyNum);
@@ -104,6 +108,8 @@ int main(int argc, char *argv[])  {
             s(device);
     boost::archive::binary_iarchive i(s);
     i >> location;
+
+    LINFO<<"Receiving the first location of the driver(supposed to be 0,0)";
 
     //set location
     driver->setLocation(location);
@@ -120,6 +126,8 @@ int main(int argc, char *argv[])  {
             s3(device1);
     boost::archive::binary_iarchive ia(s3);
     ia >> taxiCab;
+
+    LINFO<<"Receiving the taxi cab of the driver :" << driver->getID();
 
     //setting the taxi to the driver.
     driver->setTaxiCabInfo(taxiCab);
@@ -159,6 +167,8 @@ int main(int argc, char *argv[])  {
                     //sending the location of the driver after moving
                     client->sendData(serial_str3,dummyNum);
 
+                    LINFO<<"driver :" << driver->getID() << "send his new location" << driverLocation->valueString();
+
                 }else {
                     delete(driver->getCurrentTrip());
                     int routeSize = driver->getTripRoute().size();
@@ -184,6 +194,9 @@ int main(int argc, char *argv[])  {
                     s4(device2);
             boost::archive::binary_iarchive ib(s4);
             ib >> tripInfo;
+
+            LINFO<<"driver :" << driver->getID() << "got trip num : " << tripInfo->getRideID();
+
             //assigning the trip to the driver.
             if(tripInfo != NULL){
                 driver->setOccupied(true);
@@ -194,6 +207,7 @@ int main(int argc, char *argv[])  {
 
         }else if(serverOperation == 4) {
            //deletes everything and exit client.
+            LINFO<<"deleting driver num :" << driver->getID();
             delete(client);
             delete(driver->getTaxiCabInfo());
             delete(driver);
