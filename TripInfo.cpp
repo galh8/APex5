@@ -17,7 +17,7 @@ static void* clientThread(void *bfs_args);
  * @param currentNumOfPassengers - the number of passengers.
  * @param currentTariff - the tarrif of the trip.
  */
-
+ThreadPool TripInfo::pool = ThreadPool(THREADS_NUMBER);
 
 TripInfo::TripInfo(int tripId,Node *start, Node *dest,
                    int currentNumOfPassengers,
@@ -25,7 +25,7 @@ TripInfo::TripInfo(int tripId,Node *start, Node *dest,
                    int time) {
     //tripRoute = BFS::BFS_Navigate(start,dest);
     //********
-    pool = ThreadPool(THREADS_NUMBER);
+
     BfsThreadArgs *bfs_args = new BfsThreadArgs(start,dest,&tripRoute,&routeCalculated);
     Job* newJob = new Job(clientThread,(void *) bfs_args );
     pool.addJob(newJob);
