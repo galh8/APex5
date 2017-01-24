@@ -21,8 +21,7 @@ private:
 	bool stop;
 	pthread_mutex_t lock;
 public:
-	void intiallizeThreadPool(int threads_num);
-	ThreadPool();
+	ThreadPool(int threads_num);
 	void doJobs();
 	void addJob(Job *job);
 	void terminate();

@@ -5,6 +5,7 @@
 #include "TripInfo.h"
 #include "BfsThreadArgs.h"
 #include "BFS.h"
+#define THREADS_NUMBER 5
 static void* clientThread(void *bfs_args);
 
 
@@ -24,6 +25,7 @@ TripInfo::TripInfo(int tripId,Node *start, Node *dest,
                    int time) {
     //tripRoute = BFS::BFS_Navigate(start,dest);
     //********
+    pool = ThreadPool(THREADS_NUMBER);
     BfsThreadArgs *bfs_args = new BfsThreadArgs(start,dest,&tripRoute,&routeCalculated);
     Job* newJob = new Job(clientThread,(void *) bfs_args );
     pool.addJob(newJob);
