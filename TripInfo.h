@@ -46,7 +46,7 @@ private:
     int driverId;
     int timeOfTrip;
     bool firstTime;
-    bool isRouteCalculated;
+    bool routeCalculated;
 
 public:
     bool IsAssigned() const;
@@ -100,7 +100,7 @@ public:
     void setDriverId(int driverId);
     int getTimeOfTrip();
 
-    void setIsRouteCalculated(bool isRouteCalculated);
+    bool isRouteCalculated();
 };
 
 

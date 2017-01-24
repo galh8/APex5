@@ -180,7 +180,8 @@ void TripInfo::setIsAssigned(bool isAssigned) {
     TripInfo::isAssigned = isAssigned;
 }
 
-void TripInfo::setIsRouteCalculated(bool isRouteCalculated) {
-    TripInfo::isRouteCalculated = isRouteCalculated;
+bool TripInfo::isRouteCalculated(){
+    return routeCalculated;
 }
+
 
