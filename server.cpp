@@ -15,15 +15,18 @@
 #include "StandardCab.h"
 #include "ClientThreadArgs.h"
 #include <mutex>
+#include "Job.h"
+#include "ThreadPool.h"
 #include "easylogging++.h"
 std::mutex mtx;           // mutex for critical section
 
 
-//declerations:
+
 
 //declerations:
 void* getNewClients(void* port);
 void* clientThread(void *clientSocketID);
+ThreadPool pool(5);
 
 BOOST_CLASS_EXPORT_GUID(LuxuryCab,"LuxuryCab")
 BOOST_CLASS_EXPORT_GUID(GridNode,"GridNode")

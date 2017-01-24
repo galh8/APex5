@@ -26,7 +26,8 @@
 #include <boost/iostreams/stream.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
-
+#include "Job.h"
+#include "ThreadPool.h"
 
 //#include "Driver.h"
 
@@ -45,6 +46,8 @@ private:
     int driverId;
     int timeOfTrip;
     bool firstTime;
+    bool isRouteCalculated;
+
 public:
     bool IsAssigned() const;
     pthread_t getBfsThread();
