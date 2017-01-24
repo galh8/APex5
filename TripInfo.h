@@ -99,6 +99,8 @@ public:
     int getDriverId();
     void setDriverId(int driverId);
     int getTimeOfTrip();
+
+    void setIsRouteCalculated(bool isRouteCalculated);
 };
 
 
