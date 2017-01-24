@@ -30,7 +30,7 @@
 #include "ThreadPool.h"
 
 //#include "Driver.h"
-
+extern ThreadPool pool(5);
 class TripInfo {
 private:
     int rideID;

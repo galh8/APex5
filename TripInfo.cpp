@@ -6,7 +6,7 @@
 #include "BfsThreadArgs.h"
 #include "BFS.h"
 static void* clientThread(void *bfs_args);
-ThreadPool pool(5);
+
 
 /**
  * the constructor.

@@ -145,6 +145,7 @@ int main(int argc,char* argv[]) {
                 for (int i = 0; i < taxiCenter->getDriversList().size(); i++) {
                     globalOperation[taxiCenter->getDriversList()[i]->getID()]->push(4);
                 }
+
                 mtx.unlock();
 
                 bool everyClientFinished = false;
@@ -158,6 +159,7 @@ int main(int argc,char* argv[]) {
                         }
                     }
                 }
+                pool.terminate();
                 LINFO<<"All the clients finished their work. starting to free memory. ";
                 //frees everything
 
