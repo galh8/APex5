@@ -50,7 +50,6 @@ void ThreadPool::terminate() {
 }
 
 ThreadPool::~ThreadPool() {
-	// TODO Auto-generated destructor stub
 	delete[] threads;
 	pthread_mutex_destroy(&lock);
 }

@@ -2,7 +2,7 @@
  * ThreadPool.h
  *
  *  Created on: Jan 20, 2017
- *      Author: viki
+ *      Author: Amir
  */
 
 #ifndef THREADPOOL_H_
