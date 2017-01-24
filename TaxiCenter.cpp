@@ -7,9 +7,11 @@
 #include "BFS.h"
 
 
+
 #include <cstdlib>
 map<int,TripInfo*> globalTripsMap;
 map<int, queue<int>* > globalOperation;
+
 
 /**
  * the consturctor.
@@ -27,24 +29,28 @@ TaxiCenter::~TaxiCenter() {
 
     int i=0;
     delete(map);
+    cout<<"Map released successfuly "<<endl;
     for (i=0;i < driversList.size();i++) {
         if(driversList[i]!=NULL) {
             delete (driversList[i]);
             driversList[i]=NULL;
         }
     }
+    cout<<"DriversList released successfuly "<<endl;
     for (i=0;i < taxisList.size();i++) {
         if(taxisList[i]!=NULL) {
             delete (taxisList[i]);
             taxisList[i]=NULL;
         }
     }
+    cout<<"TaxisList released successfuly "<<endl;
     for (i=0;i < listOfTrips.size();i++) {
         if(listOfTrips[i]!=NULL) {
             delete (listOfTrips[i]);
             listOfTrips[i]=NULL;
         }
     }
+    cout<<"TripsList released successfuly "<<endl;
 };
 
 void TaxiCenter::sendTaxi(Node *location) {
