@@ -22,13 +22,16 @@ static void* clientThread(void *bfs_args);
 TripInfo::TripInfo(int tripId,Node *start, Node *dest,
                    int currentNumOfPassengers,
                    double currentTariff,
-                   int time) {
+                   int time,
+                   ThreadPool* threadPool) {
     //tripRoute = BFS::BFS_Navigate(start,dest);
     //********
-
-    BfsThreadArgs *bfs_args = new BfsThreadArgs(start,dest,&tripRoute,&routeCalculated);
-    Job* newJob = new Job(clientThread,(void *) bfs_args );
-    pool.addJob(newJob);
+    routeCalculated = false;
+    pool = threadPool;
+    BfsThreadArgs *bfs_args = new BfsThreadArgs(start, dest, &tripRoute,
+                                                &routeCalculated);
+    Job *newJob = new Job(clientThread, (void *) bfs_args);
+    pool->addJob(newJob);
     //int status = pthread_create(&Bfs_thread, NULL, clientThread, (void *) bfs_args);
 //    if(status) {
 //        cout<<"ERROR! ";
@@ -47,9 +50,7 @@ TripInfo::TripInfo(int tripId,Node *start, Node *dest,
     timeOfTrip = time;
     firstTime = true;
     isAssigned = false;
-    routeCalculated = false;
 }
-
 
 void* clientThread(void *bfs_args) {
     BfsThreadArgs* args = ((BfsThreadArgs*)bfs_args);

@@ -161,6 +161,7 @@ int main(int argc,char* argv[]) {
                 }
                 LINFO<<"All the clients finished their work. starting to free memory. ";
                 //frees everything
+                taxiCenter->destroyPool();
 
                 //deletes the taxiCenter.
                 delete(taxiCenter);

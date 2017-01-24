@@ -32,11 +32,14 @@ void ThreadPool::doJobs() {
 }
 
 void ThreadPool::addJob(Job *job) {
-	jobs_queue.push(job);
+    pthread_mutex_lock(&lock);
+    jobs_queue.push(job);
+    pthread_mutex_unlock(&lock);
 }
 
-ThreadPool::ThreadPool(int threads_num) : threads_num(threads_num), stop(false) {
-	// TODO Auto-generated constructor stub
+void ThreadPool::initiallizeThreadPool(int threads_nu) {
+	threads_num = threads_nu;
+    stop = false;
 	threads = new pthread_t[threads_num];
 
 	pthread_mutex_init(&lock, NULL);
@@ -57,6 +60,10 @@ ThreadPool::~ThreadPool() {
 }
 
 bool ThreadPool::isEmpty() {
+
+}
+
+ThreadPool::ThreadPool() {
 
 }
 

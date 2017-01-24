@@ -16,6 +16,7 @@
 #include "sockets/Tcp.h"
 #include <map>
 #include <queue>
+#include "ThreadPool.h"
 
 //The global variable containing the trips.
 extern map<int,TripInfo*> globalTripsMap;
@@ -29,6 +30,7 @@ private:
     vector<TaxiCab*> taxisList;
     vector<TripInfo*> listOfTrips;
     void sendTaxi(Node* location);
+    ThreadPool pool;
 
 public:
     vector<Driver *> &getDriversList();
@@ -64,6 +66,8 @@ public:
     void runAllTrips(int currentTime);
 
     void addMapObstacles(Point obsPoint);
+
+    void destroyPool();
 
 };
 

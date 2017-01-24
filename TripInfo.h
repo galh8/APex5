@@ -34,7 +34,6 @@
 
 class TripInfo {
 private:
-    static ThreadPool pool;
     int rideID;
     //Driver* tripDriver;
     double totalMeters;
@@ -49,6 +48,7 @@ private:
     int timeOfTrip;
     bool firstTime;
     bool routeCalculated;
+    ThreadPool* pool;
 
 public:
     bool IsAssigned() const;
@@ -84,7 +84,7 @@ private:
     }
 public:
     TripInfo(int driverId,Node *start, Node *dest, int currentNumOfPassengers,
-             double currentTariff,int time);
+             double currentTariff,int time,ThreadPool* threadPool);
     TripInfo();
     int getRideID();
     double getTotalMeters();

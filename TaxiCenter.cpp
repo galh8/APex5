@@ -11,7 +11,7 @@
 #include <cstdlib>
 map<int,TripInfo*> globalTripsMap;
 map<int, queue<int>* > globalOperation;
-ThreadPool TripInfo::pool = ThreadPool(THREADS_NUMBER);
+
 
 /**
  * the consturctor.
@@ -20,6 +20,7 @@ ThreadPool TripInfo::pool = ThreadPool(THREADS_NUMBER);
  */
 TaxiCenter::TaxiCenter(int rows,int columns) {
     map = new Grid(rows,columns);
+    pool.initiallizeThreadPool(5);
 }
 
 /**
@@ -173,7 +174,7 @@ void TaxiCenter::receiveTripInfo(int tripId, int xStart, int yStart, int xEnd,
      TripInfo* newTrip = new TripInfo(tripId,
                                       map->getGridNode(Point(xStart,yStart)),
                                       map->getGridNode(Point(xEnd,yEnd)),
-                    numPassengers, tariff,timeOfTrip);
+                    numPassengers, tariff,timeOfTrip,&pool);
 //    newTrip->calculateRoute();
     listOfTrips.push_back(newTrip);
 }
@@ -253,5 +254,11 @@ void TaxiCenter::runAllTrips(int currentTime) {
 Grid *TaxiCenter::getMap() {
     return map;
 }
+
+void TaxiCenter::destroyPool() {
+    pool.terminate();
+}
+
+
 
 
