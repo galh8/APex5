@@ -45,7 +45,7 @@ TripInfo::TripInfo(int tripId,Node *start, Node *dest,
     timeOfTrip = time;
     firstTime = true;
     isAssigned = false;
-    isRouteCalculated = false;
+    routeCalculated = false;
 }
 
 
