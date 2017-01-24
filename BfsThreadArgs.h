@@ -15,6 +15,7 @@ private:
     Node *dest;
     vector<Node*> *tripRoute;
     bool *isRouteCalculated;
+
 public:
     BfsThreadArgs(Node *start,Node *dest,vector<Node*> *tripRoute);
     Node* getStart();
@@ -22,6 +23,7 @@ public:
     vector<Node*> *getTripRoute();
     void setTripRoute(vector<Node* > &route);
     void setRouteCalculated(bool calculated);
+    bool *isRouteCalculated() ;
 };
 
 

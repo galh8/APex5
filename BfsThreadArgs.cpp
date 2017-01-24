@@ -24,3 +24,7 @@ vector<Node* >*BfsThreadArgs::getTripRoute() {
 void BfsThreadArgs::setRouteCalculated(bool calculated) {
     *isRouteCalculated = calculated;
 }
+
+bool *BfsThreadArgs::isRouteCalculated()  {
+    return isRouteCalculated;
+}
