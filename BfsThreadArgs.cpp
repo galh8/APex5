@@ -20,3 +20,7 @@ Node *BfsThreadArgs::getDest()  {
 vector<Node* >*BfsThreadArgs::getTripRoute() {
     return tripRoute;
 }
+
+void BfsThreadArgs::setRouteCalculated(bool calculated) {
+    *isRouteCalculated = calculated;
+}
