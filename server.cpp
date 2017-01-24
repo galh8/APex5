@@ -26,7 +26,7 @@ std::mutex mtx;           // mutex for critical section
 //declerations:
 void* getNewClients(void* port);
 void* clientThread(void *clientSocketID);
-ThreadPool pool(5);
+
 
 BOOST_CLASS_EXPORT_GUID(LuxuryCab,"LuxuryCab")
 BOOST_CLASS_EXPORT_GUID(GridNode,"GridNode")

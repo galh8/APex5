@@ -6,6 +6,7 @@
 #include "BfsThreadArgs.h"
 #include "BFS.h"
 static void* clientThread(void *bfs_args);
+ThreadPool pool(5);
 
 /**
  * the constructor.
@@ -25,10 +26,11 @@ TripInfo::TripInfo(int tripId,Node *start, Node *dest,
     //********
     BfsThreadArgs *bfs_args = new BfsThreadArgs(start,dest,&tripRoute);
     Job* newJob = new Job(clientThread,(void *) bfs_args );
-    int status = pthread_create(&Bfs_thread, NULL, clientThread, (void *) bfs_args);
-    if(status) {
-        cout<<"ERROR! ";
-    }
+    pool.addJob(newJob);
+    //int status = pthread_create(&Bfs_thread, NULL, clientThread, (void *) bfs_args);
+//    if(status) {
+//        cout<<"ERROR! ";
+//    }
     //**********
 
     totalMeters = tripRoute.size();
