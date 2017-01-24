@@ -24,7 +24,7 @@ TripInfo::TripInfo(int tripId,Node *start, Node *dest,
                    int time) {
     //tripRoute = BFS::BFS_Navigate(start,dest);
     //********
-    BfsThreadArgs *bfs_args = new BfsThreadArgs(start,dest,&tripRoute);
+    BfsThreadArgs *bfs_args = new BfsThreadArgs(start,dest,&tripRoute,&routeCalculated);
     Job* newJob = new Job(clientThread,(void *) bfs_args );
     pool.addJob(newJob);
     //int status = pthread_create(&Bfs_thread, NULL, clientThread, (void *) bfs_args);
@@ -45,7 +45,7 @@ TripInfo::TripInfo(int tripId,Node *start, Node *dest,
     timeOfTrip = time;
     firstTime = true;
     isAssigned = false;
-    isRouteCalculated = false;
+    routeCalculated = false;
 }
 
 
@@ -53,6 +53,7 @@ void* clientThread(void *bfs_args) {
     BfsThreadArgs* args = ((BfsThreadArgs*)bfs_args);
     vector<Node*> route = BFS::BFS_Navigate(args->getStart(),args->getDest());
     args->setTripRoute(route);
+    args->setRouteCalculated(true);
     delete(args);
 }
 
