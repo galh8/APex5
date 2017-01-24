@@ -5,13 +5,13 @@
 #include "TaxiCenter.h"
 #include "TaxiFactory.h"
 #include "BFS.h"
-
+#define THREADS_NUMBER 5
 
 
 #include <cstdlib>
 map<int,TripInfo*> globalTripsMap;
 map<int, queue<int>* > globalOperation;
-
+ThreadPool TripInfo::pool = ThreadPool(THREADS_NUMBER);
 
 /**
  * the consturctor.

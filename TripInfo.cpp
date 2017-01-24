@@ -5,7 +5,7 @@
 #include "TripInfo.h"
 #include "BfsThreadArgs.h"
 #include "BFS.h"
-#define THREADS_NUMBER 5
+
 static void* clientThread(void *bfs_args);
 
 
@@ -17,7 +17,7 @@ static void* clientThread(void *bfs_args);
  * @param currentNumOfPassengers - the number of passengers.
  * @param currentTariff - the tarrif of the trip.
  */
-ThreadPool TripInfo::pool = ThreadPool(THREADS_NUMBER);
+
 
 TripInfo::TripInfo(int tripId,Node *start, Node *dest,
                    int currentNumOfPassengers,
