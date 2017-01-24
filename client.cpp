@@ -96,7 +96,7 @@ int main(int argc, char *argv[])  {
     //sending the vehicleID
     client->sendData(std::to_string(driverVehicleID),dummyNum);
 
-    LINFO<<"sending the vehicleId " <<  driver->getID() << "and his vehicle id " << driverVehicleID;
+    LINFO<<"sending the vehicleId " <<  driver->getID() << " and his vehicle id " << driverVehicleID;
 
     //expecting a location
     client->reciveData(emptyBuffer, sizeof(emptyBuffer),dummyNum);
@@ -127,7 +127,7 @@ int main(int argc, char *argv[])  {
     boost::archive::binary_iarchive ia(s3);
     ia >> taxiCab;
 
-    LINFO<<"Receiving the taxi cab of the driver :" << driver->getID();
+    LINFO<<"Receiving the taxi cab of the driver : " << driver->getID();
 
     //setting the taxi to the driver.
     driver->setTaxiCabInfo(taxiCab);
@@ -167,7 +167,7 @@ int main(int argc, char *argv[])  {
                     //sending the location of the driver after moving
                     client->sendData(serial_str3,dummyNum);
 
-                    LINFO<<"driver :" << driver->getID() << "send his new location" << driverLocation->valueString();
+                    LINFO<<"driver : " << driver->getID() << "send his new location" << driverLocation->valueString();
 
                 }else {
                     delete(driver->getCurrentTrip());
@@ -195,7 +195,7 @@ int main(int argc, char *argv[])  {
             boost::archive::binary_iarchive ib(s4);
             ib >> tripInfo;
 
-            LINFO<<"driver :" << driver->getID() << "got trip num : " << tripInfo->getRideID();
+            LINFO<<"driver : " << driver->getID() << " got trip num : " << tripInfo->getRideID();
 
             //assigning the trip to the driver.
             if(tripInfo != NULL){
@@ -207,7 +207,7 @@ int main(int argc, char *argv[])  {
 
         }else if(serverOperation == 4) {
            //deletes everything and exit client.
-            LINFO<<"deleting driver num :" << driver->getID();
+            LINFO<<"deleting driver num : " << driver->getID();
             delete(client);
             delete(driver->getTaxiCabInfo());
             delete(driver);
