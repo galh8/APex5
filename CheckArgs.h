@@ -13,11 +13,12 @@
 
 class CheckArgs {
 public:
-    static std::vector<std::string> SeperateArgs(std::string args,std::string seprator);
+    static std::vector<std::string> SeperateArgs(std::string args,std::string seprator,int argsNum);
     static bool isMartialStatus(std::string martialInput);
     static bool isCarManufacturer(std::string manufacturerInput);
     static bool isColor(std::string colorInput);
-    static bool checkClient(std::string input);
+    static std::vector<std::string> checkClient(std::string input);
+    static int countChar(std::string args,char whatToCount);
 };
 
 

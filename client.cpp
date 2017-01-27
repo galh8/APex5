@@ -23,6 +23,7 @@
 #include <boost/serialization/export.hpp>
 #include "sockets/Tcp.h"
 #include "easylogging++.h"
+#include "CheckArgs.h"
 
 using namespace std;
 
@@ -36,6 +37,8 @@ int main(int argc, char *argv[])  {
     //setting the desired ip address
     client->setIp_address(argv[1]);
     int dummyNum = 0;
+    std::vector<std::string> argsAfterSeparation;
+    bool goodInput = false;
     client->initialize();
 
     //Dummy variable for getting the ',' and '_'
@@ -55,17 +58,27 @@ int main(int argc, char *argv[])  {
 
     //indicates if the drivers needs to move
     int serverOperation;
+    string input;
 
-    //insert new driver
-    cin >> driverID;
-    cin >> dummy;
-    cin >> driverAge;
-    cin >> dummy;
-    cin >> driverStatus;
-    cin >> dummy;
-    cin >> driverExperience;
-    cin >> dummy;
-    cin >> driverVehicleID;
+    //waiting for good input
+    while (!(goodInput)) {
+        getline(std::cin, input);
+
+        argsAfterSeparation = CheckArgs::checkClient(input);
+
+        if (argsAfterSeparation.size() != 0) {
+            goodInput = true;
+        } else {
+            LINFO<<"problem with client args, need to type args again ";
+        }
+    }
+
+    //putting the input into the desired variables.
+    driverID = stoi(argsAfterSeparation.at(0));
+    driverAge = stoi(argsAfterSeparation.at(1));
+    driverStatus = argsAfterSeparation.at(2)[0];
+    driverExperience = stoi(argsAfterSeparation.at(3));
+    driverVehicleID = stoi(argsAfterSeparation.at(4));
 
     //creating new driver
     Driver *driver = new Driver(driverID, driverAge, driverStatus,
