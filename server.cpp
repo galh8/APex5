@@ -157,7 +157,7 @@ int main(int argc,char* argv[]) {
                 }
                 LINFO<<"All the clients finished their work. starting to free memory. ";
                 //frees everything
-
+                taxiCenter->getBfsPool()->terminate();
                 //deletes the taxiCenter.
                 delete(taxiCenter);
                 LINFO<<"Texi center released successfuly ";

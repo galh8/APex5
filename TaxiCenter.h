@@ -31,6 +31,8 @@ private:
     vector<TripInfo*> listOfTrips;
     void sendTaxi(Node* location);
     ThreadPool *BfsPool;
+public:
+    ThreadPool *getBfsPool() ;
 
 
 public:

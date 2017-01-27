@@ -250,4 +250,8 @@ Grid *TaxiCenter::getMap() {
     return map;
 }
 
+ThreadPool *TaxiCenter::getBfsPool()  {
+    return BfsPool;
+}
+
 
