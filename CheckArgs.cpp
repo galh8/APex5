@@ -197,7 +197,7 @@ std::vector<std::string> CheckArgs::checkTaxiArguments(std::string input) {
         return std::vector<std::string>();
     }
 
-    i++;
+    ++i;
 
     //checks if the third argument is Color.
     if (!(isColor(argsAfterSeperation.at(i)))) {
