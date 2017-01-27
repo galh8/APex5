@@ -12,7 +12,9 @@
 class CheckArgs {
 public:
     static std::vector<std::string> SeperateArgs(std::string args);
-
+    static bool isMartialStatus(std::string martialInput);
+    static bool isCarManufacturer(std::string manufacturerInput);
+    static bool isColor(std::string colorInput);
 };
 
 
