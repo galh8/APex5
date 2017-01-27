@@ -76,4 +76,35 @@ static bool isNonNegativeInteger(std::string s) {
         return false;
     }
     return(atoi(s)>=0);
-}//
+}
+
+bool CheckArgs::checkClient(std::string input) {
+    std::vector<std::string> argsAfterSeperation = SeperateArgs(input,",");
+    int i;
+    int tempNumberToCheck;
+    std::string tempCharToCheck;
+    unsigned long size = argsAfterSeperation.size();
+    //checks if there are the supposed number of args.
+    if (size != CLIENT_ARGS_NUMBER) {
+        return false;
+    }
+    //checks if the first two arguments are integers
+    for (i = 0; i < 2; i++) {
+        if (!(isIntger(argsAfterSeperation.at(i)))) {
+            return false;
+        }
+    }
+    //checks if the third argument is martial status.
+    if (!(isMartialStatus(argsAfterSeperation.at(i)))) {
+        return false;
+    }
+
+    //checks if the last two arguments are integers
+    for (i = 3; i < size; i++) {
+        if (!(isIntger(argsAfterSeperation.at(i)))) {
+            return false;
+        }
+    }
+
+    return true;
+}
