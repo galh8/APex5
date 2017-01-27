@@ -9,6 +9,7 @@
 #include <vector>
 #include <cstring>
 #include <string>
+#define CLIENT_ARGS_NUMBER 5
 
 class CheckArgs {
 public:
@@ -16,6 +17,7 @@ public:
     static bool isMartialStatus(std::string martialInput);
     static bool isCarManufacturer(std::string manufacturerInput);
     static bool isColor(std::string colorInput);
+    static bool checkClient(std::string input);
 };
 
 
