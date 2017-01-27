@@ -64,4 +64,16 @@ bool CheckArgs::isColor(std::string colorInput) {
     }
     return false;
 }
+static bool is_number(const std::string& s)
+{
+    std::string::const_iterator it = s.begin();
+    while (it != s.end() && std::isdigit(*it)) ++it;
+    return !s.empty() && it == s.end();
+}
 
+static bool isNonNegativeInteger(std::string s) {
+    if(!is_number(s)) {
+        return false;
+    }
+    return(atoi(s)>=0);
+}
