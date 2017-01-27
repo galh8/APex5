@@ -15,18 +15,15 @@
 #include "StandardCab.h"
 #include "ClientThreadArgs.h"
 #include <mutex>
-#include "Job.h"
-#include "ThreadPool.h"
 #include "easylogging++.h"
 std::mutex mtx;           // mutex for critical section
 
 
-
+//declerations:
 
 //declerations:
 void* getNewClients(void* port);
 void* clientThread(void *clientSocketID);
-
 
 BOOST_CLASS_EXPORT_GUID(LuxuryCab,"LuxuryCab")
 BOOST_CLASS_EXPORT_GUID(GridNode,"GridNode")
@@ -145,7 +142,6 @@ int main(int argc,char* argv[]) {
                 for (int i = 0; i < taxiCenter->getDriversList().size(); i++) {
                     globalOperation[taxiCenter->getDriversList()[i]->getID()]->push(4);
                 }
-
                 mtx.unlock();
 
                 bool everyClientFinished = false;
@@ -161,7 +157,6 @@ int main(int argc,char* argv[]) {
                 }
                 LINFO<<"All the clients finished their work. starting to free memory. ";
                 //frees everything
-                taxiCenter->destroyPool();
 
                 //deletes the taxiCenter.
                 delete(taxiCenter);

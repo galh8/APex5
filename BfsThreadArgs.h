@@ -14,16 +14,13 @@ private:
     Node *start;
     Node *dest;
     vector<Node*> *tripRoute;
-    bool *routeCalculated;
-
 public:
-    BfsThreadArgs(Node *start,Node *dest,vector<Node*> *tripRoute,bool *routeCalc);
+    BfsThreadArgs(Node *start,Node *dest,vector<Node*> *tripRoute);
     Node* getStart();
     Node* getDest();
     vector<Node*> *getTripRoute();
     void setTripRoute(vector<Node* > &route);
-    void setRouteCalculated(bool calculated);
-    bool *isRouteCalculated() ;
+
 };
 
 

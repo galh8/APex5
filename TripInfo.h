@@ -26,11 +26,9 @@
 #include <boost/iostreams/stream.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
-#include "Job.h"
-#include "ThreadPool.h"
+
 
 //#include "Driver.h"
-
 
 class TripInfo {
 private:
@@ -47,9 +45,6 @@ private:
     int driverId;
     int timeOfTrip;
     bool firstTime;
-    bool routeCalculated;
-    ThreadPool* pool;
-
 public:
     bool IsAssigned() const;
     pthread_t getBfsThread();
@@ -84,7 +79,7 @@ private:
     }
 public:
     TripInfo(int driverId,Node *start, Node *dest, int currentNumOfPassengers,
-             double currentTariff,int time,ThreadPool* threadPool);
+             double currentTariff,int time);
     TripInfo();
     int getRideID();
     double getTotalMeters();
@@ -101,8 +96,6 @@ public:
     int getDriverId();
     void setDriverId(int driverId);
     int getTimeOfTrip();
-
-    bool isRouteCalculated();
 };
 
 

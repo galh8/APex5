@@ -5,9 +5,7 @@
 #include "TripInfo.h"
 #include "BfsThreadArgs.h"
 #include "BFS.h"
-
 static void* clientThread(void *bfs_args);
-
 
 /**
  * the constructor.
@@ -22,20 +20,14 @@ static void* clientThread(void *bfs_args);
 TripInfo::TripInfo(int tripId,Node *start, Node *dest,
                    int currentNumOfPassengers,
                    double currentTariff,
-                   int time,
-                   ThreadPool* threadPool) {
+                   int time) {
     //tripRoute = BFS::BFS_Navigate(start,dest);
     //********
-    routeCalculated = false;
-    pool = threadPool;
-    BfsThreadArgs *bfs_args = new BfsThreadArgs(start, dest, &tripRoute,
-                                                &routeCalculated);
-    Job *newJob = new Job(clientThread, (void *) bfs_args);
-    pool->addJob(newJob);
-    //int status = pthread_create(&Bfs_thread, NULL, clientThread, (void *) bfs_args);
-//    if(status) {
-//        cout<<"ERROR! ";
-//    }
+    BfsThreadArgs *bfs_args = new BfsThreadArgs(start,dest,&tripRoute);
+    int status = pthread_create(&Bfs_thread, NULL, clientThread, (void *) bfs_args);
+    if(status) {
+        cout<<"ERROR! ";
+    }
     //**********
 
     totalMeters = tripRoute.size();
@@ -52,11 +44,11 @@ TripInfo::TripInfo(int tripId,Node *start, Node *dest,
     isAssigned = false;
 }
 
+
 void* clientThread(void *bfs_args) {
     BfsThreadArgs* args = ((BfsThreadArgs*)bfs_args);
     vector<Node*> route = BFS::BFS_Navigate(args->getStart(),args->getDest());
     args->setTripRoute(route);
-    args->setRouteCalculated(true);
     delete(args);
 }
 
@@ -64,7 +56,7 @@ pthread_t TripInfo::getBfsThread(){
     return Bfs_thread;
 }
 
-TripInfo::TripInfo(){};
+TripInfo::TripInfo(){}
 
 /**
  * @return the ride id.
@@ -183,9 +175,4 @@ bool TripInfo::IsAssigned() const {
 void TripInfo::setIsAssigned(bool isAssigned) {
     TripInfo::isAssigned = isAssigned;
 }
-
-bool TripInfo::isRouteCalculated(){
-    return routeCalculated;
-}
-
 

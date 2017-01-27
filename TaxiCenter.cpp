@@ -5,13 +5,11 @@
 #include "TaxiCenter.h"
 #include "TaxiFactory.h"
 #include "BFS.h"
-#define THREADS_NUMBER 5
 
 
 #include <cstdlib>
 map<int,TripInfo*> globalTripsMap;
 map<int, queue<int>* > globalOperation;
-
 
 /**
  * the consturctor.
@@ -20,7 +18,6 @@ map<int, queue<int>* > globalOperation;
  */
 TaxiCenter::TaxiCenter(int rows,int columns) {
     map = new Grid(rows,columns);
-    pool.initiallizeThreadPool(5);
 }
 
 /**
@@ -30,29 +27,25 @@ TaxiCenter::~TaxiCenter() {
 
     int i=0;
     delete(map);
-    cout<<"Map released successfuly "<<endl;
     for (i=0;i < driversList.size();i++) {
         if(driversList[i]!=NULL) {
             delete (driversList[i]);
             driversList[i]=NULL;
         }
     }
-    cout<<"DriversList released successfuly "<<endl;
     for (i=0;i < taxisList.size();i++) {
         if(taxisList[i]!=NULL) {
             delete (taxisList[i]);
             taxisList[i]=NULL;
         }
     }
-    cout<<"TaxisList released successfuly "<<endl;
     for (i=0;i < listOfTrips.size();i++) {
         if(listOfTrips[i]!=NULL) {
             delete (listOfTrips[i]);
             listOfTrips[i]=NULL;
         }
     }
-    cout<<"TripsList released successfuly "<<endl;
-};
+}
 
 void TaxiCenter::sendTaxi(Node *location) {
 
@@ -174,7 +167,7 @@ void TaxiCenter::receiveTripInfo(int tripId, int xStart, int yStart, int xEnd,
      TripInfo* newTrip = new TripInfo(tripId,
                                       map->getGridNode(Point(xStart,yStart)),
                                       map->getGridNode(Point(xEnd,yEnd)),
-                    numPassengers, tariff,timeOfTrip,&pool);
+                    numPassengers, tariff,timeOfTrip);
 //    newTrip->calculateRoute();
     listOfTrips.push_back(newTrip);
 }
@@ -205,8 +198,7 @@ void TaxiCenter::linkDriversTrips(int currentTime) {
 
     for (i = 0; i < listOfTrips.size(); i++) {
         if(listOfTrips[i]!=NULL) {
-                    //pthread_join(listOfTrips[i]->getBfsThread(),NULL);
-                    while(!listOfTrips[i]->isRouteCalculated()){}
+                    pthread_join(listOfTrips[i]->getBfsThread(),NULL);
                     if (((listOfTrips[i]->getTimeOfTrip() == currentTime)) && (!(listOfTrips[i]->IsAssigned()))) {
                         currentDriver = findClosestDriver(listOfTrips[i]);
                         if(currentDriver==NULL) {
@@ -254,11 +246,5 @@ void TaxiCenter::runAllTrips(int currentTime) {
 Grid *TaxiCenter::getMap() {
     return map;
 }
-
-void TaxiCenter::destroyPool() {
-    pool.terminate();
-}
-
-
 
 

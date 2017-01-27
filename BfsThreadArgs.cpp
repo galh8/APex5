@@ -4,8 +4,8 @@
 
 #include "BfsThreadArgs.h"
 
-BfsThreadArgs::BfsThreadArgs(Node *start,Node *dest,vector<Node*> *tripRoute,bool *routeCalc):
-    start(start) , dest(dest), tripRoute(tripRoute),routeCalculated(routeCalc){}
+BfsThreadArgs::BfsThreadArgs(Node *start,Node *dest,vector<Node*> *tripRoute):
+    start(start) , dest(dest), tripRoute(tripRoute){}
 
 void BfsThreadArgs::setTripRoute(vector<Node* > &route) {
     *tripRoute = route;
@@ -19,12 +19,4 @@ Node *BfsThreadArgs::getDest()  {
 }
 vector<Node* >*BfsThreadArgs::getTripRoute() {
     return tripRoute;
-}
-
-void BfsThreadArgs::setRouteCalculated(bool calculated) {
-    *routeCalculated = calculated;
-}
-
-bool *BfsThreadArgs::isRouteCalculated()  {
-    return routeCalculated;
 }
