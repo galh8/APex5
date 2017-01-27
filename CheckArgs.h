@@ -21,8 +21,8 @@ public:
     static bool isCarManufacturer(std::string manufacturerInput);
     static bool isColor(std::string colorInput);
     static int countChar(std::string args,char whatToCount);
-    static std::vector<std::string> checkClient(std::string input);
     static std::vector<std::string> checkIntgerInput(std::string input,int numberOfArgs);
+    static std::vector<std::string> checkClient(std::string input);
     static std::vector<std::string> checkTaxiArguments(std::string input);
     static std::vector<std::string> checkObstacleArguments(std::string input);
     static std::vector<std::string> checkTripInfoArguments(std::string input);

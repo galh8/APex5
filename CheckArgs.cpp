@@ -237,14 +237,6 @@ std::vector<std::string> CheckArgs::checkIntgerInput(std::string input,int argsN
     return argsAfterSeperation;
 }
 
-/**
- *
- * @param input - the input.
- * @return - a vector of the input - if the input is correct.
- */
-std::vector<std::string> CheckArgs::checkObstacleArguments(std::string input) {
-    return checkIntgerInput(input,OBSTACLE_ARGS_NUMBER);
-}
 
 /**
  *
@@ -254,6 +246,17 @@ std::vector<std::string> CheckArgs::checkObstacleArguments(std::string input) {
 std::vector<std::string> CheckArgs::checkTripInfoArguments(std::string input) {
     return checkIntgerInput(input,TRIP_ARGS_NUMBER);
 }
+
+/**
+ *
+ * @param input - the input.
+ * @return - a vector of the input - if the input is correct.
+ */
+std::vector<std::string> CheckArgs::checkObstacleArguments(std::string input) {
+    return checkIntgerInput(input,OBSTACLE_ARGS_NUMBER);
+}
+
+
 
 
 
