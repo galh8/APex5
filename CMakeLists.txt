@@ -23,7 +23,7 @@ set(SOURCE_FILES Driver.cpp Driver.h DriverSatisfaction.cpp DriverSatisfaction.h
         Passenger.cpp Passenger.h Point.cpp Point.h StandardCab.cpp StandardCab.h TaxiCenter.cpp TaxiCenter.h
         BFS.cpp BFS.h LuxuryCabFactory.cpp LuxuryCabFactory.h StandardCabFactory.cpp StandardCabFactory.h TaxiFactory.cpp
         TaxiFactory.h TaxiFac.cpp TaxiFac.h sockets/Socket.cpp sockets/Socket.h sockets/Tcp.cpp sockets/Tcp.h Job.cpp Job.h
-       ThreadPool.cpp ThreadPool.h )
+       ThreadPool.cpp ThreadPool.h CheckArgs.cpp CheckArgs.h)
 
 
 
