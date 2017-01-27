@@ -11,7 +11,7 @@
 
 class CheckArgs {
 public:
-    static vector<std::string> SeperateArgs(std::string args);
+    static std::vector<std::string> SeperateArgs(std::string args);
 
     //static vector<Node*> BFS_Navigate(Node* startNode,Node* destNode);
 };
