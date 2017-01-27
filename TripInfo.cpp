@@ -23,7 +23,8 @@ TripInfo::TripInfo(int tripId,Node *start, Node *dest,
                    int time,ThreadPool *BfsPool) {
     //tripRoute = BFS::BFS_Navigate(start,dest);
     //********
-    BfsThreadArgs *bfs_args = new BfsThreadArgs(start,dest,&tripRoute);
+    routeCalculated = false;
+    BfsThreadArgs *bfs_args = new BfsThreadArgs(start,dest,&tripRoute,&routeCalculated);
 //    int status = pthread_create(&Bfs_thread, NULL, clientThread, (void *) bfs_args);
 //    if(status) {
 //        cout<<"ERROR! ";
@@ -50,6 +51,7 @@ void* clientThread(void *bfs_args) {
     BfsThreadArgs* args = ((BfsThreadArgs*)bfs_args);
     vector<Node*> route = BFS::BFS_Navigate(args->getStart(),args->getDest());
     args->setTripRoute(route);
+    args->setRouteCalculated();
     delete(args);
 }
 
@@ -175,5 +177,9 @@ bool TripInfo::IsAssigned() const {
 
 void TripInfo::setIsAssigned(bool isAssigned) {
     TripInfo::isAssigned = isAssigned;
+}
+
+bool TripInfo::isRouteCalculated() {
+    return routeCalculated;
 }
 

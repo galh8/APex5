@@ -46,11 +46,12 @@ private:
     int driverId;
     int timeOfTrip;
     bool firstTime;
+    bool routeCalculated;
 public:
     bool IsAssigned() const;
     pthread_t getBfsThread();
     void setIsAssigned(bool isAssigned);
-//    void calculateRoute();
+    bool isRouteCalculated();
 
 private:
 //    void* clientThread(void *bfs_args);
