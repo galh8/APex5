@@ -23,12 +23,12 @@ set(SOURCE_FILES Driver.cpp Driver.h DriverSatisfaction.cpp DriverSatisfaction.h
         Passenger.cpp Passenger.h Point.cpp Point.h StandardCab.cpp StandardCab.h TaxiCenter.cpp TaxiCenter.h
         BFS.cpp BFS.h LuxuryCabFactory.cpp LuxuryCabFactory.h StandardCabFactory.cpp StandardCabFactory.h TaxiFactory.cpp
         TaxiFactory.h TaxiFac.cpp TaxiFac.h sockets/Socket.cpp sockets/Socket.h sockets/Tcp.cpp sockets/Tcp.h Job.cpp Job.h
-       ThreadPool.cpp ThreadPool.h CheckArgs1.cpp CheckArgs1.h)
+       ThreadPool.cpp ThreadPool.h CheckArgs.cpp CheckArgs.h)
 
 
 
-add_executable(server  server.cpp ${SOURCE_FILES} ClientThreadArgs.cpp ClientThreadArgs.h BfsThreadArgs.cpp BfsThreadArgs.h CheckArgs.cpp CheckArgs.h)
-add_executable(client client.cpp ${SOURCE_FILES}  ClientThreadArgs.cpp ClientThreadArgs.h BfsThreadArgs.cpp BfsThreadArgs.h CheckArgs.cpp CheckArgs.h)
+add_executable(server  server.cpp ${SOURCE_FILES} ClientThreadArgs.cpp ClientThreadArgs.h BfsThreadArgs.cpp BfsThreadArgs.h)
+add_executable(client client.cpp ${SOURCE_FILES}  ClientThreadArgs.cpp ClientThreadArgs.h BfsThreadArgs.cpp BfsThreadArgs.h)
 target_link_libraries(server ${Boost_LIBRARIES})
 target_link_libraries(client ${Boost_LIBRARIES})
 target_link_libraries(server Threads::Threads)
