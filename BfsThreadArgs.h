@@ -20,6 +20,7 @@ public:
     Node* getDest();
     vector<Node*> *getTripRoute();
     void setTripRoute(vector<Node* > &route);
+    void setRouteCalculated(bool &isCalculated);
 
 };
 

@@ -26,6 +26,7 @@
 #include <boost/iostreams/stream.hpp>
 #include <boost/archive/binary_oarchive.hpp>
 #include <boost/archive/binary_iarchive.hpp>
+#include "ThreadPool.h"
 
 
 //#include "Driver.h"
@@ -79,7 +80,7 @@ private:
     }
 public:
     TripInfo(int driverId,Node *start, Node *dest, int currentNumOfPassengers,
-             double currentTariff,int time);
+             double currentTariff,int time,ThreadPool *BfsPool);
     TripInfo();
     int getRideID();
     double getTotalMeters();

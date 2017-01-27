@@ -11,8 +11,6 @@
 #include "Job.h"
 #include <queue>
 #include <pthread.h>
-
-
 using namespace std;
 
 class ThreadPool {
@@ -23,8 +21,7 @@ private:
 	bool stop;
 	pthread_mutex_t lock;
 public:
-	void initiallizeThreadPool(int threads_num);
-    ThreadPool();
+	ThreadPool(int threads_num);
 	void doJobs();
 	void addJob(Job *job);
 	void terminate();

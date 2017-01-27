@@ -18,6 +18,7 @@ map<int, queue<int>* > globalOperation;
  */
 TaxiCenter::TaxiCenter(int rows,int columns) {
     map = new Grid(rows,columns);
+    BfsPool = new ThreadPool(5);
 }
 
 /**
@@ -167,7 +168,7 @@ void TaxiCenter::receiveTripInfo(int tripId, int xStart, int yStart, int xEnd,
      TripInfo* newTrip = new TripInfo(tripId,
                                       map->getGridNode(Point(xStart,yStart)),
                                       map->getGridNode(Point(xEnd,yEnd)),
-                    numPassengers, tariff,timeOfTrip);
+                    numPassengers, tariff,timeOfTrip,BfsPool);
 //    newTrip->calculateRoute();
     listOfTrips.push_back(newTrip);
 }

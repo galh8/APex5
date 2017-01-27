@@ -11,6 +11,10 @@ void BfsThreadArgs::setTripRoute(vector<Node* > &route) {
     *tripRoute = route;
 }
 
+void BfsThreadArgs::setRouteCalculated(bool &isCalculated) {
+    *isCalculated = true;
+}
+
 Node *BfsThreadArgs::getStart()  {
     return start;
 }

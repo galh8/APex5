@@ -20,16 +20,17 @@ static void* clientThread(void *bfs_args);
 TripInfo::TripInfo(int tripId,Node *start, Node *dest,
                    int currentNumOfPassengers,
                    double currentTariff,
-                   int time) {
+                   int time,ThreadPool *BfsPool) {
     //tripRoute = BFS::BFS_Navigate(start,dest);
     //********
     BfsThreadArgs *bfs_args = new BfsThreadArgs(start,dest,&tripRoute);
-    int status = pthread_create(&Bfs_thread, NULL, clientThread, (void *) bfs_args);
-    if(status) {
-        cout<<"ERROR! ";
-    }
+//    int status = pthread_create(&Bfs_thread, NULL, clientThread, (void *) bfs_args);
+//    if(status) {
+//        cout<<"ERROR! ";
+//    }
     //**********
-
+    Job *bfsJob = new Job(clientThread,bfs_args);
+    BfsPool->addJob(bfsJob);
     totalMeters = tripRoute.size();
     ratesReceived = 0;
     rideID = tripId;
