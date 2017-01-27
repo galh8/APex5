@@ -5,9 +5,10 @@
 #ifndef PLAYWITHSOCKETS_CHECKARGS_H
 #define PLAYWITHSOCKETS_CHECKARGS_H
 
-#include <string.h>
 #include <iostream>
 #include <vector>
+#include <cstring>
+#include <string>
 
 class CheckArgs {
 public:

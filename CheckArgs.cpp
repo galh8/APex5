@@ -5,8 +5,19 @@
 #include "CheckArgs.h"
 
 std::vector<std::string> CheckArgs::SeperateArgs(std::string args) {
+    char *str = new char[args.length()+1];
+    std::strcpy (str, args.c_str());
+    std::vector<std::string> argsAfterSeperation;
+    char* part = std::strtok (str,",");
+    argsAfterSeperation.push_back(part);
+    while (part != NULL)
+    {
+        part = strtok (NULL,",");
+        argsAfterSeperation.push_back(part);
+    }
 
-    return std::vector<std::string>();
+    delete[] str;
+    return argsAfterSeperation;
 }
 
 bool CheckArgs::isMartialStatus(std::string martialInput) {
