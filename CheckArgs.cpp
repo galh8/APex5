@@ -5,7 +5,7 @@
 #include "CheckArgs.h"
 
 
-std::vector<std::string> CheckArgs::SeperateArgs(std::string args,std::string separator,int argsNumber) {
+std::vector<std::string> CheckArgs::SeperateArgs(std::string args,std::string separator) {
     char *str = new char[args.length()+1];
     char *currentSeparator = new char[separator.length()+1];
     std::strcpy (currentSeparator, separator.c_str());
@@ -81,7 +81,7 @@ static bool isNonNegativeInteger(std::string s) {
 }
 
 std::vector<std::string> CheckArgs::checkClient(std::string input) {
-    std::vector<std::string> argsAfterSeperation = SeperateArgs(input,",",CLIENT_ARGS_NUMBER);
+    std::vector<std::string> argsAfterSeperation = SeperateArgs(input,",");
     int i;
     unsigned long size = argsAfterSeperation.size();
     //checks if there are the supposed number of args.
