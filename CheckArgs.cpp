@@ -76,4 +76,4 @@ static bool isNonNegativeInteger(std::string s) {
         return false;
     }
     return(atoi(s)>=0);
-}
+}//
