@@ -4,19 +4,22 @@
 
 #include "CheckArgs.h"
 
-std::vector<std::string> CheckArgs::SeperateArgs(std::string args) {
+std::vector<std::string> CheckArgs::SeperateArgs(std::string args,std::string separator) {
     char *str = new char[args.length()+1];
+    char *currentSeparator = new char[separator.length()+1];
+    std::strcpy (currentSeparator, separator.c_str());
     std::strcpy (str, args.c_str());
     std::vector<std::string> argsAfterSeperation;
-    char* part = std::strtok (str,",");
+    char* part = std::strtok (str,currentSeparator);
     argsAfterSeperation.push_back(part);
     while (part != NULL)
     {
-        part = strtok (NULL,",");
+        part = strtok (NULL,currentSeparator);
         argsAfterSeperation.push_back(part);
     }
 
     delete[] str;
+    delete[] currentSeparator;
     return argsAfterSeperation;
 }
 
