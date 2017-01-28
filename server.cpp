@@ -117,7 +117,18 @@ int main(int argc,char* argv[]) {
 
     char buffer[1024];
     do {
-        cin>>command;
+        bool goodCommandInput = false;
+        while (!(goodCommandInput)) {
+            getline(std::cin, input);
+
+            if (!(CheckArgs::isNonNegativeInteger(input))) {
+                LINFO << "problem with command number ";
+                continue;
+            }
+            goodCommandInput = true;
+        }
+
+        command = stoi(input);
 
         switch (command) {
             case 1: {
@@ -137,8 +148,8 @@ int main(int argc,char* argv[]) {
             }
             case 2: {
                 mtx.lock();
-                cin.clear();
-                cin.ignore(10000,'\n');
+//                cin.clear();
+//                cin.ignore(10000,'\n');
                 bool goodTripInfoInput = false;
                 std::vector<std::string> TripArgsAfterSeparation;
                 string tripInput;
