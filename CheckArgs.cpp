@@ -248,7 +248,7 @@ std::vector<std::string> CheckArgs::checkTripInfoArguments(std::string input) {
     std::vector<std::string> TripArgsAfterSeperation =  checkIntgerInput(input,TRIP_ARGS_NUMBER);
 
     if (TripArgsAfterSeperation.size() != 0) {
-        if (! (stoi(TripArgsAfterSeperation.at(6))).isDouble) {
+        if (!isDouble(TripArgsAfterSeperation.at(6))) {
             return std::vector<std::string>();
         }
     }
