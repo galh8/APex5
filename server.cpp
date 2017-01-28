@@ -165,7 +165,6 @@ int main(int argc,char* argv[]) {
                 std::vector<std::string> TripArgsAfterSeparation;
                 string tripInput;
                 getline(std::cin, tripInput);
-                cout<<tripInput<<endl;
                 TripArgsAfterSeparation = CheckArgs::checkTripInfoArguments(tripInput);
                 if (TripArgsAfterSeparation.size() == 0) {
                     LINFO<<"problem with trip args arguments ";
