@@ -145,7 +145,7 @@ int main(int argc,char* argv[]) {
                 while (!(goodTripInfoInput)) {
                     getline(std::cin, tripInput);
 
-                    TripArgsAfterSeparation = CheckArgs::checkClient(tripInput);
+                    TripArgsAfterSeparation = CheckArgs::checkTripInfoArguments(tripInput);
 
                     if (TripArgsAfterSeparation.size() != 0) {
                         goodTripInfoInput = true;
