@@ -60,17 +60,17 @@ int main(int argc, char *argv[])  {
     string input;
 
 
-    //waiting for good input
-    while (!(goodInput)) {
-        getline(std::cin, input);
 
-        argsAfterSeparation = CheckArgs::checkClient(input);
+    getline(std::cin, input);
 
-        if (argsAfterSeparation.size() != 0) {
-            goodInput = true;
-        } else {
-            LINFO<<"problem with client args, need to type args again ";
-        }
+    argsAfterSeparation = CheckArgs::checkClient(input);
+
+    //checks if there is any problem with the client arguments. if there is
+    // exiting the program.
+    if (argsAfterSeparation.size() == 0) {
+        LINFO<<"problem with client args, exiting program ";
+        delete(client);
+        return 0;
     }
 
     //putting the input into the desired variables.
