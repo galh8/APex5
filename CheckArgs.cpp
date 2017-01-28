@@ -310,7 +310,7 @@ std::vector<std::string> CheckArgs::checkGridArguments(std::string input) {
  */
 bool CheckArgs::isDouble(std::string str) {
     char* endptr = 0;
-    strtod(str, &endptr);
+    strtod(str.c_str(), &endptr);
     if(*endptr != '\0' || endptr == str)
         return false;
     return true;
