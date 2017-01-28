@@ -19,7 +19,7 @@
 std::mutex mtx;           // mutex for critical section
 
 
-//declerations:
+
 
 //declerations:
 void* getNewClients(void* port);

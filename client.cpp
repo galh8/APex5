@@ -55,10 +55,10 @@ int main(int argc, char *argv[])  {
     char emptyBuffer2[42000] = "";
     char dummyBuffer[42000] = "";
     long long dummyInteger = 1;
-
     //indicates if the drivers needs to move
     int serverOperation;
     string input;
+
 
     //waiting for good input
     while (!(goodInput)) {
