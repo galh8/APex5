@@ -213,20 +213,14 @@ int main(int argc,char* argv[]) {
             }
             case 4: {
                 //the id of the driver we want to find.
-                bool goodDriverIDInput = false;
-                while (!(goodDriverIDInput)) {
                     getline(std::cin, input);
 
                     if (!(CheckArgs::isNonNegativeInteger(input))) {
                         LINFO << "problem with number of clients  ";
-                        continue;
+                        cout<<"-1"<<endl;
+                        break;
                     }
-                    goodDriverIDInput = true;
-                }
                 driverID_toFind = stoi(input);
-
-
-
                 LINFO<<"Waiting that the driver will finish all his steps before printing his location. ";
                 //printing the driver location just when the driver finished to move
                 while (true) {
