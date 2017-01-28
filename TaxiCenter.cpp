@@ -202,10 +202,12 @@ void TaxiCenter::linkDriversTrips(int currentTime) {
 //                    pthread_join(listOfTrips[i]->getBfsThread(),NULL);
                     //Waits for the route calculating.
                     while(!listOfTrips[i]->isRouteCalculated()) {}
-                    if( (listOfTrips[i]->gettripRoute().size() < 2) &&(listOfTrips[i]->getTimeOfTrip() == currentTime)) {
+                    if( (listOfTrips[i]->gettripRoute().size() < 2) &&
+                        (listOfTrips[i]->getTimeOfTrip() == currentTime)) {
                         listOfTrips[i]->setIsAssigned(true);
                     }
-                    if (((listOfTrips[i]->getTimeOfTrip() == currentTime)) && (!(listOfTrips[i]->IsAssigned()))) {
+                    if (((listOfTrips[i]->getTimeOfTrip() == currentTime)) &&
+                        (!(listOfTrips[i]->IsAssigned()))) {
                         currentDriver = findClosestDriver(listOfTrips[i]);
                         if(currentDriver==NULL) {
                             break;

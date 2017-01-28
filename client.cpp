@@ -112,7 +112,8 @@ int main(int argc, char *argv[])  {
     //sending the vehicleID
     client->sendData(std::to_string(driverVehicleID),dummyNum);
 
-    LINFO<<"sending the vehicleId " <<  driver->getID() << " and his vehicle id " << driverVehicleID;
+    LINFO<<"sending the vehicleId " <<  driver->getID() << " and his vehicle id "
+         << driverVehicleID;
 
     //expecting a location
     client->reciveData(emptyBuffer, sizeof(emptyBuffer),dummyNum);
@@ -183,7 +184,8 @@ int main(int argc, char *argv[])  {
                     //sending the location of the driver after moving
                     client->sendData(serial_str3,dummyNum);
 
-                    LINFO<<"driver : " << driver->getID() << "send his new location" << driverLocation->valueString();
+                    LINFO<<"driver : " << driver->getID() << "send his new location"
+                         << driverLocation->valueString();
 
                 }else {
                     delete(driver->getCurrentTrip());

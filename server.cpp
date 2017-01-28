@@ -80,14 +80,16 @@ int main(int argc,char* argv[]) {
         //getting all the obstacles
         for (i = 0; i < numOfObstacles; i++) {
             getline(std::cin, input);
-            std::vector<std::string> ObsArgsAfterSeparation = CheckArgs::checkObstacleArguments(input);
+            std::vector<std::string> ObsArgsAfterSeparation =
+                    CheckArgs::checkObstacleArguments(input);
             if (ObsArgsAfterSeparation.size() == 0) {
                 goodObsInput = false;
                 LINFO<<"problem with obs args, need to type all args again ";
                 cout <<"-1"<<endl;
                 break;
             }
-            ObstaclesBeforeAdding.push_back(Point(stoi(ObsArgsAfterSeparation.at(0)),stoi(ObsArgsAfterSeparation.at(1))));
+            ObstaclesBeforeAdding.push_back(Point(stoi(ObsArgsAfterSeparation.at(0)),
+                                                  stoi(ObsArgsAfterSeparation.at(1))));
         }
 
         if (!(goodObsInput)) {
@@ -150,7 +152,8 @@ int main(int argc,char* argv[]) {
                 int numberOfClients = stoi(input);
                 cArgs = new ClientThreadArgs(taxiCenter, server,numberOfClients);
                 LINFO<<"Creating the thread for getting new clients! ";
-                int status = pthread_create(&clientsReceiver, NULL, getNewClients, (void *) cArgs);
+                int status = pthread_create(&clientsReceiver, NULL, getNewClients,
+                                            (void *) cArgs);
                 pthread_join(clientsReceiver,NULL);
                 LINFO<<"Finished to accept clients, waiting for receiving all the drivers! ";
                 while (true) {
@@ -185,7 +188,8 @@ int main(int argc,char* argv[]) {
                 tripStartTime = stoi(TripArgsAfterSeparation.at(7));
 
                 taxiCenter->receiveTripInfo(tripID, tripStart_x, tripStart_y, tripEnd_x,
-                                            tripEnd_y, tripNumPassengers, tripTariff, tripStartTime);
+                                            tripEnd_y, tripNumPassengers, tripTariff,
+                                            tripStartTime);
                 mtx.unlock();
                 break;
             }
@@ -227,14 +231,16 @@ int main(int argc,char* argv[]) {
                         break;
                     }
                 driverID_toFind = stoi(input);
-                LINFO<<"Waiting that the driver will finish all his steps before printing his location. ";
+                LINFO<<"Waiting that the driver will finish all his"
+                        " steps before printing his location. ";
                 //printing the driver location just when the driver finished to move
                 while (true) {
                     if(taxiCenter->getDriverLocation(driverID_toFind) == NULL) {
                         cout <<"-1"<<endl;
                         break;
                     }else if ((globalOperation[driverID_toFind]->size() == 0)) {
-                        cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
+                        cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString()
+                             << endl;
                         break;
                     }
                 }
@@ -426,7 +432,8 @@ void* clientThread(void *cArgs) {
                     //after receiving the dummy we can send the operToDo
                     //sends the client what to do
                     server->sendData(std::to_string(operToDo),socketDes);
-                    LINFO<<"The operation "<<operToDo<<" sent to client (DriverID "<<driver->getID()<<")";
+                    LINFO<<"The operation "<<operToDo<<" sent to client (DriverID "
+                         <<driver->getID()<<")";
                     //receiving the new location of the driver.
                     server->reciveData(buffer, sizeof(buffer),socketDes);
                     string str(buffer, sizeof(buffer));
@@ -439,7 +446,8 @@ void* clientThread(void *cArgs) {
                     ia >> newLocation;
                     //Setting the new location of the driver.
                     mtx.lock();
-                    LINFO<<"The new location of driver "<<driver->getID()<< " is "<< newLocation->valueString();
+                    LINFO<<"The new location of driver "<<driver->getID()<< " is "
+                         << newLocation->valueString();
                     Point newPoint = (*((Point *) newLocation->getValue()));
                     driver->setLocation(taxiCenter->getMap()->getGridNode(newPoint));
 
@@ -462,7 +470,8 @@ void* clientThread(void *cArgs) {
 
                     //sends the client what to do
                     server->sendData(std::to_string(operToDo),socketDes);
-                    LINFO<<"The operation "<<operToDo<<" sent to client (DriverID "<<driver->getID()<<")";
+                    LINFO<<"The operation "<<operToDo<<" sent to client (DriverID "
+                         <<driver->getID()<<")";
                     //getting the dummy - needed in order to solve TCP problems
                     server->reciveData(dummyBuffer, sizeof(dummyBuffer),socketDes);
                     //after receiving the dummy we can send the tripToSend
@@ -478,7 +487,8 @@ void* clientThread(void *cArgs) {
                     //sending the trip info
                     server->sendData(serial_str1,socketDes);
                     LINFO<<"The trip from "<<tripToSend->getStartingPoint()->valueString() <<
-                                               " to "<<tripToSend->getEndingPoint()->valueString()<<" sent to driver "<<
+                         " to "<<tripToSend->getEndingPoint()->valueString()
+                         <<" sent to driver "<<
                             driver->getID();
                     mtx.lock();
                     globalOperation[driver->getID()]->pop();
@@ -493,7 +503,8 @@ void* clientThread(void *cArgs) {
 
                     //sends the client what to do
                     server->sendData(std::to_string(operToDo),socketDes);
-                    LINFO<<"The operation "<<operToDo<<" sent to client (DriverID "<<driver->getID()<<")";
+                    LINFO<<"The operation "<<operToDo<<" sent to client (DriverID "
+                         <<driver->getID()<<")";
 
 
                     //deleting the clientsArgs of this specific client.
