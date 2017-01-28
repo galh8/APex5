@@ -181,7 +181,7 @@ int main(int argc,char* argv[]) {
                 tripEnd_x = stoi(TripArgsAfterSeparation.at(3));
                 tripEnd_y = stoi(TripArgsAfterSeparation.at(4));
                 tripNumPassengers = stoi(TripArgsAfterSeparation.at(5));
-                tripTariff = stoi(TripArgsAfterSeparation.at(6));
+                tripTariff = stod(TripArgsAfterSeparation.at(6));
                 tripStartTime = stoi(TripArgsAfterSeparation.at(7));
 
                 taxiCenter->receiveTripInfo(tripID, tripStart_x, tripStart_y, tripEnd_x,
