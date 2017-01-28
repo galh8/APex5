@@ -16,6 +16,7 @@
 #include "ClientThreadArgs.h"
 #include <mutex>
 #include "easylogging++.h"
+#include "CheckArgs.h"
 std::mutex mtx;           // mutex for critical section
 
 
@@ -45,26 +46,72 @@ int main(int argc,char* argv[]) {
     double tripTariff;
     int command;
     char dummy;
-    //The input
-    cin >> sizeX;
-    cin >> sizeY;
+    string input;
+    bool goodInputOfGridAndObs = false;
+    bool goodObsInput = true;
+    int i;
+    std::vector<std::string> GridArgsAfterSeparation;
+    std::vector<Point> ObstaclesBeforeAdding;
+
+    //waiting for good input
+    while (!(goodInputOfGridAndObs)) {
+        getline(std::cin, input);
+
+        GridArgsAfterSeparation = CheckArgs::checkGridArguments(input);
+
+        if (GridArgsAfterSeparation.size() == 0) {
+            LINFO<<"problem with grid args, need to type all args again ";
+            GridArgsAfterSeparation.clear();
+            continue;
+        }
+
+        getline(std::cin, input);
+
+        if (CheckArgs::isNonNegativeInteger(input)) {
+            LINFO<<"problem with number of obs args, need to type all args again ";
+            GridArgsAfterSeparation.clear();
+            continue;
+        }
+
+        numOfObstacles = stoi(input);
+
+        //getting all the obstacles
+        for (i = 0; i < numOfObstacles; i++) {
+            getline(std::cin, input);
+            std::vector<std::string> ObsArgsAfterSeparation = CheckArgs::checkObstacleArguments(input);
+            if (ObsArgsAfterSeparation.size() == 0) {
+                goodObsInput = false;
+                LINFO<<"problem with obs args, need to type all args again ";
+                break;
+            }
+            ObstaclesBeforeAdding.push_back(Point(stoi(ObsArgsAfterSeparation.at(0)),stoi(ObsArgsAfterSeparation.at(1))));
+        }
+
+        if (!(goodObsInput)) {
+            goodObsInput = true;
+            ObstaclesBeforeAdding.clear();
+            GridArgsAfterSeparation.clear();
+            continue;
+        }
+
+        goodInputOfGridAndObs = true;
+
+    }
     //creating the taxi center with it's grid.
-    TaxiCenter *taxiCenter = new TaxiCenter(sizeX, sizeY);
+    TaxiCenter *taxiCenter = new TaxiCenter(stoi(GridArgsAfterSeparation.at(0)),
+                                            stoi(GridArgsAfterSeparation.at(1)));
+
+    for (i = 0; i < ObstaclesBeforeAdding.size(); i++) {
+        taxiCenter->addMapObstacles(ObstaclesBeforeAdding.at(i));
+    }
+
+
     //initializing the server
     int port = atoi(argv[1]);
     Socket *server = new Tcp(1,port);
     //defining ClientThreadArgs
     ClientThreadArgs *cArgs;
 
-
-    cin >> numOfObstacles;
-    //for loop for getting and setting the obstacles.
-    for (int i = 0; i < numOfObstacles; i++) {
-        cin >> obs_x;
-        cin >> dummy;
-        cin >> obs_y;
-        taxiCenter->addMapObstacles(Point(obs_x, obs_y));
-    }
 
 
     char buffer[1024];

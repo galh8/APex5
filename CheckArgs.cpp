@@ -90,8 +90,7 @@ bool CheckArgs::isColor(std::string colorInput) {
  * @param s  - string.
  * @return - if the string is a number.
  */
-static bool is_number(const std::string& s)
-{
+bool CheckArgs::is_number(const std::string &s) {
     std::string::const_iterator it = s.begin();
     while (it != s.end() && std::isdigit(*it)) ++it;
     return !s.empty() && it == s.end();
@@ -102,13 +101,15 @@ static bool is_number(const std::string& s)
  * @param s - a number.
  * @return - if the number is non negative.
  */
-static bool isNonNegativeInteger(std::string s) {
+
+bool CheckArgs::isNonNegativeInteger(std::string s) {
     if(!is_number(s)) {
         return false;
     }
     int input = stoi(s);
     return(input >= 0);
 }
+
 
 /**
  * @param args - the string we want to count in.
@@ -255,6 +256,34 @@ std::vector<std::string> CheckArgs::checkTripInfoArguments(std::string input) {
 std::vector<std::string> CheckArgs::checkObstacleArguments(std::string input) {
     return checkIntgerInput(input,OBSTACLE_ARGS_NUMBER);
 }
+
+/**
+ *
+ * @param input - the input.
+ * @return - a vector of the input - if the input is correct.
+ */
+std::vector<std::string> CheckArgs::checkGridArguments(std::string input) {
+    std::vector<std::string> argsAfterSeperation = SeperateArgs(input," ");
+    unsigned long size = argsAfterSeperation.size();
+
+    if (size != GRID_ARGS_NUMBER) {
+        return std::vector<std::string>();
+    }
+
+    int i;
+
+    //checks if the first two arguments are integers
+    for (i = 0; i < GRID_ARGS_NUMBER; i++) {
+        if (!(isNonNegativeInteger(argsAfterSeperation.at(i)))) {
+            return std::vector<std::string>();
+        }
+    }
+
+    return argsAfterSeperation;
+}
+
+
+
 
 
 
