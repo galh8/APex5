@@ -303,6 +303,7 @@ int main(int argc,char* argv[]) {
             }
 
             default:{
+                cout <<"-1"<<endl;
                 break;
             }
         }
