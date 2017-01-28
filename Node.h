@@ -29,7 +29,8 @@ using namespace std;
 #include <boost/archive/binary_iarchive.hpp>
 /**
  * An abstract class representing a node of data structure, allowing to
- * perform some activities on it. The activities make it possible to search inside the data structure.
+ * perform some activities on it. The activities make it possible to search inside the
+ * data structure.
  */
 class Node  {
 protected:
