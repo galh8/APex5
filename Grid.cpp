@@ -85,8 +85,9 @@ int Grid::getColumns() const {
 }
 
 bool Grid::isOnGrid(Point point) {
-    return (point.getX() <= columns) && (point.getX() >= 0) && (point.getY() <= rows) && (point.getY() >= 0) ? true
-                                                                                                             : false;
+    return (point.getX() <= columns) && (point.getX() >= 0) &&
+                   (point.getY() <= rows) && (point.getY() >= 0) ? true : false;
+
 }
 
 void Grid::addObstacle(Point obsLocation) {
