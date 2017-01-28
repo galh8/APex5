@@ -197,6 +197,7 @@ int main(int argc,char* argv[]) {
 
                 if (TaxiCabArgsAfterSeparation.size() == 0) {
                     LINFO<<"problem with taxi args arguments ";
+                    mtx.unlock();
                     break;
                 }
 
