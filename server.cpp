@@ -67,7 +67,7 @@ int main(int argc,char* argv[]) {
 
         getline(std::cin, input);
 
-        if (CheckArgs::isNonNegativeInteger(input)) {
+        if (!(CheckArgs::isNonNegativeInteger(input))) {
             LINFO<<"problem with number of obs args, need to type all args again ";
             GridArgsAfterSeparation.clear();
             continue;
