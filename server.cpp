@@ -148,23 +148,17 @@ int main(int argc,char* argv[]) {
             }
             case 2: {
                 mtx.lock();
-//                cin.clear();
-//                cin.ignore(10000,'\n');
-                bool goodTripInfoInput = false;
                 std::vector<std::string> TripArgsAfterSeparation;
                 string tripInput;
 
-                //getting the tripInfo Input
-                while (!(goodTripInfoInput)) {
-                    getline(std::cin, tripInput);
 
-                    TripArgsAfterSeparation = CheckArgs::checkTripInfoArguments(tripInput);
+                getline(std::cin, tripInput);
 
-                    if (TripArgsAfterSeparation.size() != 0) {
-                        goodTripInfoInput = true;
-                    } else {
-                        LINFO<<"problem with trip args, need to type args again ";
-                    }
+                TripArgsAfterSeparation = CheckArgs::checkTripInfoArguments(tripInput);
+
+                if (TripArgsAfterSeparation.size() == 0) {
+                    LINFO<<"problem with trip args arguments ";
+                    break;
                 }
 
                 //putting the input into the desired variables.
@@ -176,7 +170,6 @@ int main(int argc,char* argv[]) {
                 tripNumPassengers = stoi(TripArgsAfterSeparation.at(5));
                 tripTariff = stoi(TripArgsAfterSeparation.at(6));
                 tripStartTime = stoi(TripArgsAfterSeparation.at(7));
-
 
                 taxiCenter->receiveTripInfo(tripID, tripStart_x, tripStart_y, tripEnd_x,
                                             tripEnd_y, tripNumPassengers, tripTariff, tripStartTime);
