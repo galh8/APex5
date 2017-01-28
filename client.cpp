@@ -33,11 +33,25 @@ BOOST_CLASS_EXPORT_GUID(StandardCab,"StandardCab")
 _INITIALIZE_EASYLOGGINGPP
 
 int main(int argc, char *argv[])  {
+
+    std::vector<std::string> argsAfterSeparation;
+    string input;
+    getline(std::cin, input);
+
+    argsAfterSeparation = CheckArgs::checkClient(input);
+
+    //checks if there is any problem with the client arguments. if there is
+    // exiting the program.
+    if (argsAfterSeparation.size() == 0) {
+        LINFO<<"problem with client args, exiting program ";
+        return 0;
+    }
+
     Socket* client = new Tcp(0, atoi(argv[2]));
     //setting the desired ip address
     client->setIp_address(argv[1]);
     int dummyNum = 0;
-    std::vector<std::string> argsAfterSeparation;
+
     bool goodInput = false;
     client->initialize();
 
@@ -57,21 +71,10 @@ int main(int argc, char *argv[])  {
     long long dummyInteger = 1;
     //indicates if the drivers needs to move
     int serverOperation;
-    string input;
 
 
 
-    getline(std::cin, input);
 
-    argsAfterSeparation = CheckArgs::checkClient(input);
-
-    //checks if there is any problem with the client arguments. if there is
-    // exiting the program.
-    if (argsAfterSeparation.size() == 0) {
-        LINFO<<"problem with client args, exiting program ";
-        delete(client);
-        return 0;
-    }
 
     //putting the input into the desired variables.
     driverID = stoi(argsAfterSeparation.at(0));
