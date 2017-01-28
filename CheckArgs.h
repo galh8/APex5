@@ -30,6 +30,7 @@ public:
     static std::vector<std::string> checkObstacleArguments(std::string input);
     static std::vector<std::string> checkTripInfoArguments(std::string input);
     static std::vector<std::string> checkGridArguments(std::string input);
+    static bool isDouble(std::string str);
 
 };
 

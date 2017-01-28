@@ -283,6 +283,19 @@ std::vector<std::string> CheckArgs::checkGridArguments(std::string input) {
 }
 
 
+/**
+ *
+ * @param str - the string to check its double.
+ * @return - true if its double, else false.
+ */
+bool CheckArgs::isDouble(std::string str) {
+    char* endptr = 0;
+    strtod(str, &endptr);
+    if(*endptr != '\0' || endptr == str)
+        return false;
+    return true;
+}
+
 
 
 
