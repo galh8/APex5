@@ -213,7 +213,9 @@ std::vector<std::string> CheckArgs::checkTaxiArguments(std::string input) {
  * @param input - integer arguments(Trip or obstacle for now).
  * @return - a vector of the input - if the input is correct.
  */
-std::vector<std::string> CheckArgs::checkIntgerInput(std::string input,int argsNum,bool isTrip) {
+std::vector<std::string> CheckArgs::checkAllArgsNumbers(std::string input,
+                                                        int argsNum,
+                                                        bool isTrip) {
     std::vector<std::string> argsAfterSeperation = SeperateArgs(input,",");
     int i;
     unsigned long size = argsAfterSeperation.size();
@@ -263,7 +265,7 @@ std::vector<std::string> CheckArgs::checkIntgerInput(std::string input,int argsN
  * @return - a vector of the input - if the input is correct.
  */
 std::vector<std::string> CheckArgs::checkTripInfoArguments(std::string input) {
-    return checkIntgerInput(input,TRIP_ARGS_NUMBER,true);
+    return checkAllArgsNumbers(input, TRIP_ARGS_NUMBER, true);
 }
 
 /**
@@ -272,7 +274,7 @@ std::vector<std::string> CheckArgs::checkTripInfoArguments(std::string input) {
  * @return - a vector of the input - if the input is correct.
  */
 std::vector<std::string> CheckArgs::checkObstacleArguments(std::string input) {
-    return checkIntgerInput(input,OBSTACLE_ARGS_NUMBER, false);
+    return checkAllArgsNumbers(input, OBSTACLE_ARGS_NUMBER, false);
 }
 
 /**
