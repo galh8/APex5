@@ -159,19 +159,18 @@ int main(int argc,char* argv[]) {
                 mtx.lock();
                 std::vector<std::string> TripArgsAfterSeparation;
                 string tripInput;
-
-
                 getline(std::cin, tripInput);
-
+                cout<<tripInput<<endl;
                 TripArgsAfterSeparation = CheckArgs::checkTripInfoArguments(tripInput);
-
                 if (TripArgsAfterSeparation.size() == 0) {
                     LINFO<<"problem with trip args arguments ";
+                    mtx.unlock();
                     break;
                 }
 
                 //putting the input into the desired variables.
                 tripID = stoi(TripArgsAfterSeparation.at(0));
+
                 tripStart_x = stoi(TripArgsAfterSeparation.at(1));
                 tripStart_y = stoi(TripArgsAfterSeparation.at(2));
                 tripEnd_x = stoi(TripArgsAfterSeparation.at(3));
