@@ -137,6 +137,8 @@ int main(int argc,char* argv[]) {
             }
             case 2: {
                 mtx.lock();
+                cin.clear();
+                cin.ignore(10000,'\n');
                 bool goodTripInfoInput = false;
                 std::vector<std::string> TripArgsAfterSeparation;
                 string tripInput;
