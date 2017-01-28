@@ -61,6 +61,7 @@ int main(int argc,char* argv[]) {
 
         if (GridArgsAfterSeparation.size() == 0) {
             LINFO<<"problem with grid args, need to type all args again ";
+            cout <<"-1"<<endl;
             GridArgsAfterSeparation.clear();
             continue;
         }
@@ -69,6 +70,7 @@ int main(int argc,char* argv[]) {
 
         if (!(CheckArgs::isNonNegativeInteger(input))) {
             LINFO<<"problem with number of obs args, need to type all args again ";
+            cout <<"-1"<<endl;
             GridArgsAfterSeparation.clear();
             continue;
         }
@@ -82,6 +84,7 @@ int main(int argc,char* argv[]) {
             if (ObsArgsAfterSeparation.size() == 0) {
                 goodObsInput = false;
                 LINFO<<"problem with obs args, need to type all args again ";
+                cout <<"-1"<<endl;
                 break;
             }
             ObstaclesBeforeAdding.push_back(Point(stoi(ObsArgsAfterSeparation.at(0)),stoi(ObsArgsAfterSeparation.at(1))));
@@ -123,6 +126,7 @@ int main(int argc,char* argv[]) {
 
             if (!(CheckArgs::isNonNegativeInteger(input))) {
                 LINFO << "problem with command number ";
+                cout <<"-1"<<endl;
                 continue;
             }
             goodCommandInput = true;
@@ -138,6 +142,7 @@ int main(int argc,char* argv[]) {
 
                     if (!(CheckArgs::isNonNegativeInteger(input))) {
                         LINFO << "problem with number of clients  ";
+                        cout <<"-1"<<endl;
                         continue;
                     }
                     goodClientsNumInput = true;
@@ -164,6 +169,7 @@ int main(int argc,char* argv[]) {
                 TripArgsAfterSeparation = CheckArgs::checkTripInfoArguments(tripInput);
                 if (TripArgsAfterSeparation.size() == 0) {
                     LINFO<<"problem with trip args arguments ";
+                    cout <<"-1"<<endl;
                     mtx.unlock();
                     break;
                 }
@@ -197,6 +203,7 @@ int main(int argc,char* argv[]) {
 
                 if (TaxiCabArgsAfterSeparation.size() == 0) {
                     LINFO<<"problem with taxi args arguments ";
+                    cout <<"-1"<<endl;
                     mtx.unlock();
                     break;
                 }
