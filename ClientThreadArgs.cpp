@@ -12,7 +12,8 @@ Socket *ClientThreadArgs::getServer()  {
     return server;
 }
 
-ClientThreadArgs::ClientThreadArgs(TaxiCenter *taxiCenter,Socket* serverSocket,int numberOfClients) :
+ClientThreadArgs::ClientThreadArgs(TaxiCenter *taxiCenter,Socket* serverSocket,
+                                   int numberOfClients):
         taxiCenter(taxiCenter),
         server(serverSocket),
         numberOfClients(numberOfClients){}
