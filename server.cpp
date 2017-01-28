@@ -178,13 +178,26 @@ int main(int argc,char* argv[]) {
             }
             case 3: {
                 mtx.lock();
-                cin >> vehicleID;
-                cin >> dummy;
-                cin >> vehicleType;
-                cin >> dummy;
-                cin >> vehicleManufacturer;
-                cin >> dummy;
-                cin >> vehicleColor;
+
+                std::vector<std::string> TaxiCabArgsAfterSeparation;
+                string tripInput;
+
+
+                getline(std::cin, tripInput);
+
+                TaxiCabArgsAfterSeparation = CheckArgs::checkTaxiArguments(tripInput);
+
+                if (TaxiCabArgsAfterSeparation.size() == 0) {
+                    LINFO<<"problem with taxi args arguments ";
+                    break;
+                }
+
+                //putting the input into the desired variables.
+                vehicleID = stoi(TaxiCabArgsAfterSeparation.at(0));
+                vehicleType = stoi(TaxiCabArgsAfterSeparation.at(1));
+                vehicleManufacturer = TaxiCabArgsAfterSeparation.at(2)[0];
+                vehicleColor = TaxiCabArgsAfterSeparation.at(3)[0];
+
                 taxiCenter->addTaxi(vehicleID, vehicleType, vehicleManufacturer, vehicleColor);
                 mtx.unlock();
                 break;
