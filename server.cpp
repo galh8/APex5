@@ -230,15 +230,12 @@ int main(int argc,char* argv[]) {
                 LINFO<<"Waiting that the driver will finish all his steps before printing his location. ";
                 //printing the driver location just when the driver finished to move
                 while (true) {
-                    //can print just if the printing flg is true.
-                    if ((globalOperation[driverID_toFind]->size() == 0)) {
-                        if(taxiCenter->getDriverLocation(driverID_toFind) == NULL) {
-                            cout <<"-1"<<endl;
-                            break;
-                        }else {
-                            cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
-                            break;
-                        }
+                    if(taxiCenter->getDriverLocation(driverID_toFind) == NULL) {
+                        cout <<"-1"<<endl;
+                        break;
+                    }else if ((globalOperation[driverID_toFind]->size() == 0)) {
+                        cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
+                        break;
                     }
                 }
                 break;
