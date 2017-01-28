@@ -53,7 +53,7 @@ int main(int argc,char* argv[]) {
     std::vector<std::string> GridArgsAfterSeparation;
     std::vector<Point> ObstaclesBeforeAdding;
 
-    //waiting for good input
+    //getting input of the grid and the obstacles.
     while (!(goodInputOfGridAndObs)) {
         getline(std::cin, input);
 
@@ -97,6 +97,7 @@ int main(int argc,char* argv[]) {
         goodInputOfGridAndObs = true;
 
     }
+
     //creating the taxi center with it's grid.
     TaxiCenter *taxiCenter = new TaxiCenter(stoi(GridArgsAfterSeparation.at(0)),
                                             stoi(GridArgsAfterSeparation.at(1)));
@@ -136,21 +137,34 @@ int main(int argc,char* argv[]) {
             }
             case 2: {
                 mtx.lock();
-                cin >> tripID;
-                cin >> dummy;
-                cin >> tripStart_x;
-                cin >> dummy;
-                cin >> tripStart_y;
-                cin >> dummy;
-                cin >> tripEnd_x;
-                cin >> dummy;
-                cin >> tripEnd_y;
-                cin >> dummy;
-                cin >> tripNumPassengers;
-                cin >> dummy;
-                cin >> tripTariff;
-                cin >> dummy;
-                cin >> tripStartTime;
+                bool goodTripInfoInput = false;
+                std::vector<std::string> TripArgsAfterSeparation;
+                string tripInput;
+
+                //getting the tripInfo Input
+                while (!(goodTripInfoInput)) {
+                    getline(std::cin, tripInput);
+
+                    TripArgsAfterSeparation = CheckArgs::checkClient(tripInput);
+
+                    if (TripArgsAfterSeparation.size() != 0) {
+                        goodTripInfoInput = true;
+                    } else {
+                        LINFO<<"problem with trip args, need to type args again ";
+                    }
+                }
+
+                //putting the input into the desired variables.
+                tripID = stoi(TripArgsAfterSeparation.at(0));
+                tripStart_x = stoi(TripArgsAfterSeparation.at(1));
+                tripStart_y = stoi(TripArgsAfterSeparation.at(2));
+                tripEnd_x = stoi(TripArgsAfterSeparation.at(3));
+                tripEnd_y = stoi(TripArgsAfterSeparation.at(4));
+                tripNumPassengers = stoi(TripArgsAfterSeparation.at(5));
+                tripTariff = stoi(TripArgsAfterSeparation.at(6));
+                tripStartTime = stoi(TripArgsAfterSeparation.at(7));
+
+
                 taxiCenter->receiveTripInfo(tripID, tripStart_x, tripStart_y, tripEnd_x,
                                             tripEnd_y, tripNumPassengers, tripTariff, tripStartTime);
                 mtx.unlock();

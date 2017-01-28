@@ -245,7 +245,15 @@ std::vector<std::string> CheckArgs::checkIntgerInput(std::string input,int argsN
  * @return - a vector of the input - if the input is correct.
  */
 std::vector<std::string> CheckArgs::checkTripInfoArguments(std::string input) {
-    return checkIntgerInput(input,TRIP_ARGS_NUMBER);
+    std::vector<std::string> TripArgsAfterSeperation =  checkIntgerInput(input,TRIP_ARGS_NUMBER);
+
+    if (TripArgsAfterSeperation.size() != 0) {
+        if (! (stoi(TripArgsAfterSeperation.at(6))).isDouble) {
+            return std::vector<std::string>();
+        }
+    }
+
+    return TripArgsAfterSeperation;
 }
 
 /**
