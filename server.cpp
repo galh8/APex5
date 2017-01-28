@@ -132,8 +132,17 @@ int main(int argc,char* argv[]) {
 
         switch (command) {
             case 1: {
-                int numberOfClients;
-                cin>>numberOfClients;
+                bool goodClientsNumInput = false;
+                while (!(goodClientsNumInput)) {
+                    getline(std::cin, input);
+
+                    if (!(CheckArgs::isNonNegativeInteger(input))) {
+                        LINFO << "problem with number of clients  ";
+                        continue;
+                    }
+                    goodClientsNumInput = true;
+                }
+                int numberOfClients = stoi(input);
                 cArgs = new ClientThreadArgs(taxiCenter, server,numberOfClients);
                 LINFO<<"Creating the thread for getting new clients! ";
                 int status = pthread_create(&clientsReceiver, NULL, getNewClients, (void *) cArgs);
@@ -204,14 +213,32 @@ int main(int argc,char* argv[]) {
             }
             case 4: {
                 //the id of the driver we want to find.
-                cin >> driverID_toFind;
+                bool goodDriverIDInput = false;
+                while (!(goodDriverIDInput)) {
+                    getline(std::cin, input);
+
+                    if (!(CheckArgs::isNonNegativeInteger(input))) {
+                        LINFO << "problem with number of clients  ";
+                        continue;
+                    }
+                    goodDriverIDInput = true;
+                }
+                driverID_toFind = stoi(input);
+
+
+
                 LINFO<<"Waiting that the driver will finish all his steps before printing his location. ";
                 //printing the driver location just when the driver finished to move
                 while (true) {
                     //can print just if the printing flg is true.
                     if ((globalOperation[driverID_toFind]->size() == 0)) {
-                        cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
-                        break;
+                        if(taxiCenter->getDriverLocation(driverID_toFind) == NULL) {
+                            cout <<"-1"<<endl;
+                            break;
+                        }else {
+                            cout << taxiCenter->getDriverLocation(driverID_toFind)->valueString() << endl;
+                            break;
+                        }
                     }
                 }
                 break;
